@@ -1,0 +1,33 @@
+import { createBrowserRouter } from "react-router";
+import RootLayout from "../layouts/RootLayout";
+import Home from "../pages/Home/Home";
+import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
+
+const router = createBrowserRouter([
+{
+    path: "/",
+    Component: RootLayout,
+    children:[
+        {
+            path: "/",
+            index: true,
+            Component: Home
+        },
+      
+
+    ]
+},
+{
+    path: '/dashboard',
+    Component: DashboardLayout,
+    children:[
+        {
+            path: '/dashboard',
+            index: true,
+            Component: DashboardHome
+        }
+    ]
+}
+])
+export default router;

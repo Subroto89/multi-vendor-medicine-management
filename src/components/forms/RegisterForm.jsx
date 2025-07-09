@@ -14,6 +14,7 @@ import {
 // ---------------------------------------------------------------------------
 import InputField from "./InputField";
 import { PuffLoader, BounceLoader } from "react-spinners";
+import { GiArchiveRegister } from "react-icons/gi";
 
 // ---------------------------------------------------------------------------
 // Register Form Component - Used In the Register Page  **********************
@@ -50,7 +51,7 @@ const RegisterForm = ({
             )}
           </div>
 
-          <div className="w-10/12"> 
+          <div className="w-9/12 md:w-10/12"> 
 {/*-----------------------------------------------------------------------------------
             User Name Field
             ----------------------------------------------------------------------------------- */}
@@ -221,7 +222,7 @@ const RegisterForm = ({
               disabled={isSubmitting}
               className="btn btn-outline flex-1 hover:bg-green-500 hover:text-white"
             >
-              {isSubmitting ? <BounceLoader /> : "Register"}
+              {isSubmitting ? <BounceLoader /> : <p className="flex items-center gap-2"><GiArchiveRegister size={32}/> Register</p>}
             </button>
           </div>
         </div>

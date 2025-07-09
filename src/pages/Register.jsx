@@ -2,7 +2,9 @@ import { useForm } from "react-hook-form";
 import RegisterForm from "../components/forms/RegisterForm";
 import { useEffect, useState } from "react";
 import { imageUpload } from "../utilities/utilities";
-import { FaGoogle, FaUserPlus } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa";
+import { Link } from "react-router";
+import GoogleLogin from "../components/shared/GoogleLogin";
 
 const Register = () => {
   //--------------------------------------------------------------
@@ -59,7 +61,7 @@ const Register = () => {
   return (
     <div className="border border-white rounded-lg shadowlg m-4 p-4 bg-gradient-to-bl from-[#1F5591] to-[#80A5AB] opacity-70">
       <div className="flex gap-3">
-        <FaUserPlus size={60}/>
+        <FaUserPlus size={60} />
         <h2 className="text-4xl font-bold mb-8 pt-2">Register</h2>
       </div>
       {/* -----------------------------------------------------------
@@ -83,16 +85,15 @@ const Register = () => {
       {/* -----------------------------------------------------------
       Google Login Button
       ----------------------------------------------------------- */}
-      <button className="btn bg-white text-black border-[#e5e5e5] shadow-lg w-full">
-        <FaGoogle className="text-blue-800" />
-        Login with Google
-      </button>
+      <GoogleLogin/>
       {/* -----------------------------------------------------------
       Already Account Exist Section
       ----------------------------------------------------------- */}
       <p className="text-center mt-1">
         Already have an account?
-        <span className="text-blue-500 font-medium link"> Login</span>
+        <Link to="/auth/joinUs">
+          <span className="text-blue-500 font-medium link"> Login</span>
+        </Link>
       </p>
     </div>
   );

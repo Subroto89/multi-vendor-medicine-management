@@ -9,7 +9,7 @@ const NavMenu = ({ toggleLanguage }) => {
       <NavMenuButton address="/shop" label="Shop" />
       <NavMenuButton address="/cart" label="" icon={FaCartArrowDown} />
       <NavMenuButton label="Languages" onClick={toggleLanguage} />
-      <NavMenuButton address="/auth/joinUs" label="Join Us" />
+      <NavMenuButton address="/auth/register" label="Join Us" />
       <div className="md:hidden">
         <hr className="border-1 border-gray-300 mx-8 my-2" />
         <NavMenuButton address="/updateProfile" label="Update Profile" />

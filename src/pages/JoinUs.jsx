@@ -25,7 +25,7 @@ const JoinUs = () => {
         await Swal.fire({
           icon: "success",
           title: "Login Successful",
-          text: `Welcome back, ${user.displayName || "User"}!`,
+          text: `Welcome back, ${user?.displayName || "User"}!`,
           showConfirmButton: false,
           timer: 1500,
         });
@@ -126,7 +126,7 @@ const JoinUs = () => {
         Google Sign In Section
         ----------------------------------------------------------- */}
         <GoogleLogin />
-        
+
         {/* -----------------------------------------------------------
         Don't Have Account Suggestion Section
         ----------------------------------------------------------- */}

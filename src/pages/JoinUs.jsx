@@ -2,19 +2,49 @@ import InputField from "../components/forms/InputField";
 import { useForm } from "react-hook-form";
 import { GoPasskeyFill } from "react-icons/go";
 import { FaEnvelope, FaGoogle, FaLock, FaSignInAlt } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { BounceLoader } from "react-spinners";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
+import GoogleLogin from "../components/shared/GoogleLogin";
 
 const JoinUs = () => {
+  const { signInUser } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const { user } = await signInUser(data.userEmail, data.password);
+
+      if (user?.uid) {
+        await Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          text: `Welcome back, ${user.displayName || "User"}!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        // Redirect after confirmation
+        navigate("/");
+      } else {
+        throw new Error("Invalid credentials!");
+      }
+    } catch (error) {
+      console.error("Login error:", error.message || error);
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.message || "Please check your credentials.",
+      });
+    }
   };
+
   return (
     <div>
       <div className="border border-white rounded-lg shadowlg m-4 p-4 bg-gradient-to-bl from-[#1F5591] to-[#80A5AB] opacity-70">
@@ -72,23 +102,34 @@ const JoinUs = () => {
               }}
             />
           </div>
+
           {/* -----------------------------------------------------------
-      SignIn Button Section
-      ----------------------------------------------------------- */}
+            SignIn Button Section
+            ----------------------------------------------------------- */}
           <button
             type="submit"
             disabled={isSubmitting}
             className="btn btn-outline hover:bg-green-500 hover:text-white w-full mt-2"
           >
-            {isSubmitting ? <BounceLoader /> : <span className="flex items-center gap-4"><FaSignInAlt size={20}/> SignIn</span>}
+            {isSubmitting ? (
+              <BounceLoader size={20} />
+            ) : (
+              <span className="flex items-center gap-4">
+                <FaSignInAlt size={20} /> SignIn
+              </span>
+            )}
           </button>
         </form>
         <div className="divider px-20">OR</div>
-        <button className="btn bg-white text-black border-[#e5e5e5] shadow-lg w-full">
-          <FaGoogle className="text-blue-800" />
-          Login with Google
-        </button>
 
+        {/* -----------------------------------------------------------
+        Google Sign In Section
+        ----------------------------------------------------------- */}
+        <GoogleLogin />
+        
+        {/* -----------------------------------------------------------
+        Don't Have Account Suggestion Section
+        ----------------------------------------------------------- */}
         <p className="text-center mt-1">
           Don't have an account?
           <Link to="/auth/register">

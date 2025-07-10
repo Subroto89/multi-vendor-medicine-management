@@ -7,8 +7,8 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut,
   updateProfile,
+  signOut,
 } from "firebase/auth";
 
 const provider = new GoogleAuthProvider();

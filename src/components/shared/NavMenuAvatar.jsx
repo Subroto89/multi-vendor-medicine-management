@@ -7,7 +7,7 @@ const NavMenuAvatar = () => {
       <div className=" bg-teal-50 rounded-lg">
         <NavMenuButton address="/updateProfile" label="Update Profile" />
         <NavMenuButton address="/dashboard" label="Dashboard" />
-        <NavMenuButton address="/logOut" label="LogOut" />
+        {/* <NavMenuButton address="/logOut" label="LogOut" /> */}
       </div>
     </div>
   );

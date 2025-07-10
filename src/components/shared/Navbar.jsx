@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import NavMenu from "./NavMenu";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import Logo from "./Logo";
 import NavMenuAvatar from "./NavMenuAvatar";
 import LanguageMenu from "../LanguageMenu";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user } = useAuth();
+  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
@@ -48,18 +52,29 @@ const Navbar = () => {
 
           {/* Avatar/User Photo on Desktop Mode Section --------------------------------------*/}
           <div
-            onClick={closeLanguageMenu}
-            className="border-1 border-blue-400 rounded-full p-2 hidden md:block"
+            onClick={()=>{closeLanguageMenu(), toggleMenu()}}
+            className="border-1 border-blue-400 rounded-full hidden md:block"
           >
-            <FaUserCircle onClick={toggleMenu} size={32} />
+            {user?.photoURL ? (
+              <div className="w-12 h-12 rounded-full overflow-hidden"><img src={user?.photoURL} alt="user photo" className="w-full h-full object-cover"/></div>
+            ) : (
+              <FaUserCircle  size={32} />
+            )}
           </div>
 
           {/* -------------------------------------------------------------------------
           Small Screen Hamburger Section
           --------------------------------------------------------------------- */}
           <div className="flex items-center justify-around w-24 border border-gray-200 p-2 rounded-full md:hidden">
-            <FaBars onClick={toggleMenu} size={24} />
-            <FaUserCircle size={24} />
+            {
+              isMenuOpen ? <FaTimes onClick={toggleMenu} size={24}/> : <FaBars onClick={toggleMenu} size={24} />
+            }
+                        
+            {user?.photoURL ? (
+              <div className="w-8 h-8 rounded-full overflow-hidden"><img src={user?.photoURL} alt="user photo" className="w-full h-full object-cover"/></div>
+            ) : (
+              <FaUserCircle  size={24} />
+            )}
           </div>
         </div>
       </div>

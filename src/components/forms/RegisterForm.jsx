@@ -52,7 +52,7 @@ const RegisterForm = ({
           </div>
 
           <div className="w-9/12 md:w-10/12"> 
-{/*-----------------------------------------------------------------------------------
+        {/*-----------------------------------------------------------------------------------
             User Name Field
             ----------------------------------------------------------------------------------- */}
 
@@ -219,10 +219,10 @@ const RegisterForm = ({
             ----------------------------------------------------------------------------------- */}
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || uploadingPhoto}
               className="btn btn-outline flex-1 hover:bg-green-500 hover:text-white"
             >
-              {isSubmitting ? <BounceLoader /> : <p className="flex items-center gap-2">Register <GiArchiveRegister size={26}/> </p>}
+              {isSubmitting ? <BounceLoader size={24}/> : <p className="flex items-center gap-2">Register <GiArchiveRegister size={26}/> </p>}
             </button>
           </div>
         </div>

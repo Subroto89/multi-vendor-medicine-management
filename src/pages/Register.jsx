@@ -5,6 +5,7 @@ import { imageUpload } from "../utilities/utilities";
 import { FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router";
 import GoogleLogin from "../components/shared/GoogleLogin";
+import useAuth from "../hooks/useAuth";
 
 const Register = () => {
   //--------------------------------------------------------------
@@ -13,6 +14,9 @@ const Register = () => {
   const [uploadedUserPhoto, setUploadedUserPhoto] = useState(null);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [photoUploadError, setPhotoUploadError] = useState(null);
+
+
+  const {createUser, updateUserProfile} = useAuth();
   //--------------------------------------------------------------
   //  React Hook Form Handling
   // --------------------------------------------------------------
@@ -54,8 +58,21 @@ const Register = () => {
   //-------------------------------------------------------------------------
   //   Form Submit Function
   //--------------------------------------------------------------------------
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     console.log("Form Data Submitted:", data);
+    
+    try{
+        const result = await createUser(data.userEmail, data.password);
+        const userData = {
+            displayName: data.name,
+            photoURL: uploadedUserPhoto
+        }
+        await updateUserProfile(userData)
+        console.log(result)
+    }catch(err){
+        console.log(err)
+    }
+    
   };
   // ###########################################################################
   return (
@@ -92,7 +109,7 @@ const Register = () => {
       <p className="text-center mt-1">
         Already have an account?
         <Link to="/auth/joinUs">
-          <span className="text-blue-500 font-medium link"> Login</span>
+          <span className="text-white font-sm link"> Login</span>
         </Link>
       </p>
     </div>

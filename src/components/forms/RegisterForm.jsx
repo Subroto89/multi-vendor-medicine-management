@@ -222,7 +222,7 @@ const RegisterForm = ({
               disabled={isSubmitting}
               className="btn btn-outline flex-1 hover:bg-green-500 hover:text-white"
             >
-              {isSubmitting ? <BounceLoader /> : <p className="flex items-center gap-2"><GiArchiveRegister size={32}/> Register</p>}
+              {isSubmitting ? <BounceLoader /> : <p className="flex items-center gap-2">Register <GiArchiveRegister size={26}/> </p>}
             </button>
           </div>
         </div>

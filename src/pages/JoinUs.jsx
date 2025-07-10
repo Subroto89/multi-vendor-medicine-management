@@ -92,7 +92,7 @@ const JoinUs = () => {
         <p className="text-center mt-1">
           Don't have an account?
           <Link to="/auth/register">
-            <span className="text-blue-500 font-medium link"> Register</span>
+            <span className="font-medium link text-white"> Register</span>
           </Link>
         </p>
       </div>

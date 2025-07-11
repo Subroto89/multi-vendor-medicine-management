@@ -1,12 +1,12 @@
-import InputField from "../components/forms/InputField";
+import InputField from "../../components/forms/InputField";
 import { useForm } from "react-hook-form";
 import { GoPasskeyFill } from "react-icons/go";
 import { FaEnvelope, FaGoogle, FaLock, FaSignInAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import { BounceLoader } from "react-spinners";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import GoogleLogin from "../components/shared/GoogleLogin";
+import GoogleLogin from "../../components/shared/GoogleLogin";
 
 const JoinUs = () => {
   const { signInUser } = useAuth();

@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-import RegisterForm from "../components/forms/RegisterForm";
 import { useEffect, useState } from "react";
-import { imageUpload } from "../utilities/utilities";
 import { FaUserPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
-import GoogleLogin from "../components/shared/GoogleLogin";
-import useAuth from "../hooks/useAuth";
+import GoogleLogin from "../../components/shared/GoogleLogin";
+import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import RegisterForm from "../../components/forms/RegisterForm";
+import { imageUpload } from "../../utilities/utilities";
 
 const Register = () => {
   //--------------------------------------------------------------

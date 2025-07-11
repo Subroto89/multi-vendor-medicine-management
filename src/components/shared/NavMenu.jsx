@@ -1,4 +1,3 @@
-import React from "react";
 import NavMenuButton from "./NavMenuButton";
 import { FaCartArrowDown } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
@@ -9,7 +8,7 @@ const NavMenu = ({ toggleLanguage }) => {
     <div className="flex flex-col md:flex-row  gap:3 md:gap-4 bg-teal-50 md:bg-transparent rounded-lg">
       <NavMenuButton address="/" label="Home" />
       <NavMenuButton address="/shop" label="Shop" />
-      <NavMenuButton address="/cart" label="" icon={FaCartArrowDown} />
+      <NavMenuButton address="/cart" label="Cart" icon={FaCartArrowDown} />
       <NavMenuButton label="Languages" onClick={toggleLanguage} />
 
       <div className="hidden md:block">

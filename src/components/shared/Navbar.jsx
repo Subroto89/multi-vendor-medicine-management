@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import NavMenuAvatar from "./NavMenuAvatar";
 import LanguageMenu from "../LanguageMenu";
 import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router";
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -40,7 +41,7 @@ const Navbar = () => {
           Logo Section
           --------------------------------------------------------------------- */}
           <div className="w-40 rounded-lg overflow-hidden">
-             <Logo></Logo>
+             <Link to="/"><Logo/></Link>
           </div>
 
         {/* -------------------------------------------------------------------------

@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/Home/Home";
+import Shop from "../pages/Home/Shop";
+import Cart from "../pages/Home/Cart";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import AuthLayout from "../layouts/AuthLayout";
-import Register from "../pages/Register";
-import JoinUs from "../pages/JoinUs";
+import Register from "../pages/Home/Register";
+import JoinUs from "../pages/Home/JoinUs";
 import ManageUsers from "../pages/Dashboard/AdminPages/ManageUsers";
 import ManageCategories from "../pages/Dashboard/AdminPages/ManageCategories";
 import PaymentManagement from "../pages/Dashboard/AdminPages/PaymentManagement";
@@ -15,6 +17,7 @@ import ManageMedicines from "../pages/Dashboard/SellerPages/ManageMedicines";
 import SellerPaymentHistory from "../pages/Dashboard/SellerPages/SellerPaymentHistory";
 import AskForAdvertisement from "../pages/Dashboard/SellerPages/AskForAdvertisements";
 import UserPaymentHistory from "../pages/Dashboard/UserPages/UserPaymentHistory";
+
 
 const router = createBrowserRouter([
   // ---------------------------------
@@ -29,6 +32,14 @@ const router = createBrowserRouter([
         index: true,
         Component: Home,
       },
+      {
+        path: "/shop",
+        Component: Shop
+      },
+      {
+        path: "/cart",
+        Component: Cart
+      }
     ],
   },
   // ---------------------------------

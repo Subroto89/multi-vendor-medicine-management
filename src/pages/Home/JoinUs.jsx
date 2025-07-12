@@ -7,6 +7,7 @@ import { BounceLoader } from "react-spinners";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import GoogleLogin from "../../components/shared/GoogleLogin";
+import { saveUserToDatabase } from "../../utilities/utilities";
 
 const JoinUs = () => {
   const { signInUser } = useAuth();
@@ -19,8 +20,9 @@ const JoinUs = () => {
 
   const onSubmit = async (data) => {
     try {
+      // Step 1: SignIn -----------------------------------------------
       const { user } = await signInUser(data.userEmail, data.password);
-
+      
       if (user?.uid) {
         await Swal.fire({
           icon: "success",
@@ -29,8 +31,14 @@ const JoinUs = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        // Step 2: Update User Data In The Database --------------------
+        const userData = {
+          userEmail : user?.email
+        }
+        saveUserToDatabase(userData);
 
-        // Redirect after confirmation
+
+        // Step 3: Redirect after confirmation -------------------------
         navigate("/");
       } else {
         throw new Error("Invalid credentials!");

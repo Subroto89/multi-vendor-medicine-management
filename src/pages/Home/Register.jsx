@@ -6,7 +6,8 @@ import GoogleLogin from "../../components/shared/GoogleLogin";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import RegisterForm from "../../components/forms/RegisterForm";
-import { imageUpload } from "../../utilities/utilities";
+import { imageUpload, saveUserToDatabase } from "../../utilities/utilities";
+import axios from "axios";
 
 const Register = () => {
   //--------------------------------------------------------------
@@ -85,8 +86,25 @@ const Register = () => {
       });
       }
 
-      //   Step 4: Navigate User to Home Page
+      // Step 4: Save User Data To Database -------------------------
+      const userDataToDb = {
+        userName: data?.userName,
+        userEmail: data?.userEmail,
+        userPhoto: uploadedUserPhoto,
+        userRole: data?.role
+      }
+      
+
+      saveUserToDatabase(userDataToDb)
+
+
+
+
+
+
+      //   Step 5: Navigate User to Home Page
       navigate("/");
+      
     } catch (err) {
       Swal.fire({
         icon: "error",

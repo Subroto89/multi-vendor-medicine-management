@@ -14,7 +14,7 @@ const DashboardLayout = () => {
 {/* ------------------------------------------------------------
     Dashboard Navbar For Small Screen Only Section
     ------------------------------------------------------------ */}
-        <div className="md:hidden absolute top-0 z-20 inset-x-0">
+        <div className="absolute md:hidden top-0 z-20 inset-x-0">
           <DashNavbar toggleMenu={toggleMenu} isSideBarOpen={isSideBarOpen}></DashNavbar>
         </div>
         
@@ -28,7 +28,7 @@ const DashboardLayout = () => {
 {/* ------------------------------------------------------------
     Outlet Section
     ------------------------------------------------------------ */}
-          <div className="w-10/12 md:pl-64">
+          <div className="w-1/2 md:w-full md:pl-64">
             <Outlet />
           </div>
 {/* ------------------------------------------------------------ */}

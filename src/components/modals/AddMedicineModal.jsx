@@ -8,9 +8,9 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
 const AddMedicineModal = ({ handleAddMedicineModal }) => {
-    const axiosSecure = useAxiosSecure();
-    const {user} = useAuth();
-    console.log(user)
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  console.log(user);
   //--------------------------------------------------------------
   //  Necessary State Variables For Medicine Photo Upload
   // --------------------------------------------------------------
@@ -61,44 +61,45 @@ const AddMedicineModal = ({ handleAddMedicineModal }) => {
   //   Form Submition Function
   //--------------------------------------------------------------------------
   const onSubmit = async (data) => {
-      data.mediPhoto = uploadedMedicinePhoto;
-      data.seller = {
-          sellerId : user?.uid,
-          sellerEmail : user?.email,
-          sellerName : user?.displayName,
-          sellerPhoto: user?.photoURL
-      }
+    data.mediPhoto = uploadedMedicinePhoto;
+    data.seller = {
+      sellerId: user?.uid,
+      sellerEmail: user?.email,
+      sellerName: user?.displayName,
+      sellerPhoto: user?.photoURL,
+    };
 
-    
-        const {data: response} = await axiosSecure.post('/add-medicine', data);
-        if(response.insertedId){
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Medicine Added Successfully',
-                timer: 1500
-            });
-            handleAddMedicineModal();
-        }else{
-             Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Something Wrong!',
-                timer: 1500
-            })
-        }
+    const { data: response } = await axiosSecure.post("/add-medicine", data);
+    if (response.insertedId) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Medicine Added Successfully",
+        timer: 1500,
+      });
+      handleAddMedicineModal();
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Something Wrong!",
+        timer: 1500,
+      });
+    }
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-      <div className="relative w-[500px] h-[600px] overflow-scroll text-gray-700  bg-gray-100 rounded-lg p-8 border-t-32 border-green-700">
-        <IoCloseSharp
-          onClick={handleAddMedicineModal}
-          size={20}
-          className="absolute right-2 top-2 border border-gray-400 rounded-full hover:bg-red-500 hover:text-white"
-        />
-        <h2 className="text-2xl font-bold mb-8">Add New Medicine</h2>
-        <div className="text-gray-800 flex flex-col gap-3">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center pt-16">
+      <div className="relative w-[500px] h-[500px] overflow-scroll text-gray-700  bg-gray-100 rounded-lg  ">
+        <div className="sticky top-0 inset-x-0 z-1000 flex items-center justify-between bg-green-500 px-4 py-2">
+            <h2 className="text-xl font-bold text-white">Add New Medicine</h2>
+          <IoCloseSharp
+            onClick={handleAddMedicineModal}
+            size={26}
+            className="border border-white rounded-md hover:bg-red-500 hover:text-white"
+          />
+        </div>
+        <div className="text-gray-800 flex flex-col gap-3 px-8 py-4">
           {/* -------------------------------------------------------------------------
       AddMedicineForm Component
       This Component Contains All the Input Fields & Submit Button

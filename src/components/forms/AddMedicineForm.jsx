@@ -42,28 +42,9 @@ const AddMedicineForm = ({
 
   return (
     <div className="flex flex-col gap-2">
-      {/* --------------------------------------------------------------------------
-    Photo Viewer Field
-    -------------------------------------------------------------------------- */}
-      <div className="absolute right-8 top-92 w-12 h-10 rounded-md overflow-hidden border-2 border-gray-300 mb-1 flex items-center justify-end">
-        {uploadedMedicinePhoto ? (
-          <img
-            src={uploadedMedicinePhoto}
-            alt="User Photo"
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="flex items-center pr-3">
-            {uploadingMedicinePhoto ? (
-              <PuffLoader size={36} />
-            ) : (
-              <GiMedicines size={26} />
-            )}
-          </div>
-        )}
-      </div>
+    
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
         {/* --------------------------------------------------------------------------
     M.Item Name Field
     -------------------------------------------------------------------------- */}
@@ -128,7 +109,8 @@ const AddMedicineForm = ({
           }}
         />
 
-        {/* --------------------------------------------------------------------------
+      <div className="flex items-center justify-between gap-2">
+          {/* --------------------------------------------------------------------------
      Medicine Photo Upload Field
     -------------------------------------------------------------------------- */}
 
@@ -156,6 +138,28 @@ const AddMedicineForm = ({
             },
           }}
         />
+
+          {/* --------------------------------------------------------------------------
+    Photo Viewer Field
+    -------------------------------------------------------------------------- */}
+      <div className=" w-12 h-10 rounded-md overflow-hidden border-2 border-gray-300 mb-1 flex items-center justify-end">
+        {uploadedMedicinePhoto ? (
+          <img
+            src={uploadedMedicinePhoto}
+            alt="User Photo"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="flex items-center pr-3">
+            {uploadingMedicinePhoto ? (
+              <PuffLoader size={36} />
+            ) : (
+              <GiMedicines size={26} />
+            )}
+          </div>
+        )}
+      </div>
+      </div>
 
         {/* --------------------------------------------------------------------------
      Medicine Category Dropdown Selection Field

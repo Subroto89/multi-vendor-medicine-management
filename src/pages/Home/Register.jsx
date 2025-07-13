@@ -20,7 +20,7 @@ const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
   //--------------------------------------------------------------
-  //  React Hook Form Handling
+  //  React Hook Form Handler
   // --------------------------------------------------------------
   const {
     register,
@@ -58,7 +58,7 @@ const Register = () => {
   }, [profilePhotoFile]);
 
   //-------------------------------------------------------------------------
-  //   Form Submit Function
+  //   Form Submition Function
   //--------------------------------------------------------------------------
   const onSubmit = async (data) => {
     console.log("Form Data Submitted:", data);

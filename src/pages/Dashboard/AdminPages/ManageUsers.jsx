@@ -11,16 +11,19 @@ const ManageUsers = () => {
   // -------------------------------------------------------------
   //   RoleUpdating Modal State Management
   // -------------------------------------------------------------
+  const [role, setRole] = useState("");
+  const [userEmail, setUserEmail] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleRoleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
+ 
 
   // -------------------------------------------------------------
   // Getting Users Using Tanstack & axios
   // -------------------------------------------------------------
   const axiosSecure = useAxiosSecure();
-  const { data: users = [], isLoading } = useQuery({
+  const { data: users = [], isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const { data } = await axiosSecure("/get-users");
@@ -74,7 +77,7 @@ const ManageUsers = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {users.map((user) => (
-                <UserRow key={user._id} user={user} handleRoleModal={handleRoleModal}/>
+                <UserRow key={user._id} user={user} handleRoleModal={handleRoleModal} setRole={setRole} setUserEmail={setUserEmail}/>
               ))}
             </tbody>
           </table>
@@ -86,7 +89,7 @@ const ManageUsers = () => {
       {/* ------------------------------------------------------------------
       Modal To Update Role
       ------------------------------------------------------------------- */}
-      {isModalOpen && <RoleUpdateModal />}
+      {isModalOpen && <RoleUpdateModal handleRoleModal={handleRoleModal} role={role} setRole={setRole} userEmail={userEmail} refetch={refetch}/>}
     </div>
   );
 };

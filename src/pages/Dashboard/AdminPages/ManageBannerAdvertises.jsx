@@ -1,9 +1,91 @@
-import React from 'react';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import LoadingSpinner from '../../../components/shared/LoadingSpinner';
+import Container from '../../../components/shared/Container';
+import DataNotFound from "../../../components/shared/DataNotFound";
+import { GrUpdate } from 'react-icons/gr';
+import AdvertisementRow from '../../../components/shared/Dashboard/AdvertisementRow';
 
 const ManageBannerAdvertises = () => {
+    const axiosSecure = useAxiosSecure();
+
+
+    const {data: advertisements, isLoading, refetch} = useQuery({
+        queryKey: ["advertisements"], 
+        queryFn: async () => {
+            const {data} = await axiosSecure(`/get-advertisements/status`);
+            return data;
+        }
+    })
+    
+    if(isLoading) return <LoadingSpinner/>
     return (
-        <div className='text-red-800 text-7xl'>
-            Manage Banner Advertises page
+        <div>
+           <Container>
+            {
+                advertisements.length > 0 ? (
+                    <div>
+                        <table className="w-8/12 md:min-w-full divide-y divide-gray-200 overflow-scroll text-gray-800">
+            <thead className="bg-gray-200 shadow-lg text-sm">
+              <tr>
+                <th
+                  scope="col"
+                  className="w-34 text-gray-800 font-bold uppercase text-center px-5 py-2"
+                >
+                  Photo
+                </th>
+                <th
+                  scope="col"
+                  className="text-gray-800 font-bold uppercase text-center px-3 py-2"
+                >
+                  Advertisement Description
+                </th>
+                <th
+                  scope="col"
+                  className="text-gray-800 font-bold uppercase text-center px-5 py-2"
+                >
+                  Medicine Name
+                </th>
+                <th
+                  scope="col"
+                  className="text-gray-800 font-bold uppercase text-center px-5 py-2"
+                >
+                  Seller Email
+                </th>
+                <th
+                  scope="col"
+                  className="text-gray-800 font-bold uppercase text-center px-5 py-2"
+                >
+                  Status
+                </th>
+                <th
+                  scope="col"
+                  className="text-gray-800 font-bold uppercase text-center px-5 py-2"
+                >
+                  Created Date
+                </th>
+                <th
+                  scope="col"
+                  className="text-gray-800 font-bold uppercase flex items-center justify-center  gap-3 px-5 py-2"
+                >
+                  <GrUpdate size={18} />
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-blue-400 ">
+              {advertisements.map((advertisement) => (
+                <AdvertisementRow key={advertisement._id} advertisement={advertisement}/>
+              ))}
+            </tbody>
+          </table>                        
+                    </div>
+
+                ):(
+                    <DataNotFound message={"No advertisement is available to for approval"}/>
+                )
+            }
+           </Container>
         </div>
     );
 };

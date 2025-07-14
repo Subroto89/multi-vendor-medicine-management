@@ -38,7 +38,7 @@ const ManageBannerAdvertises = () => {
                   scope="col"
                   className="text-gray-800 font-bold uppercase text-center px-3 py-2"
                 >
-                  Advertisement Description
+                  Ad Description
                 </th>
                 <th
                   scope="col"
@@ -75,7 +75,7 @@ const ManageBannerAdvertises = () => {
             </thead>
             <tbody className="bg-white divide-y divide-blue-400 ">
               {advertisements.map((advertisement) => (
-                <AdvertisementRow key={advertisement._id} advertisement={advertisement}/>
+                <AdvertisementRow key={advertisement._id} advertisement={advertisement} refetch={refetch}/>
               ))}
             </tbody>
           </table>                        

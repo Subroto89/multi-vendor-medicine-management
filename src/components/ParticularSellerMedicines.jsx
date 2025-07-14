@@ -75,7 +75,7 @@ const ParticularSellerMedicines = () => {
                 </th>
                 <th
                   scope="col"
-                  className="w-3/12 text-gray-800 font-bold uppercase text-center px-5 py-3 sticky right-0 bg-gray-200 z-10" 
+                  className="w-3/12 text-gray-800 font-bold uppercase text-center px-5 py-3" 
                 >
                   Actions
                 </th>

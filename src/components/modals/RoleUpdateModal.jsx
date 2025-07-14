@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const RoleUpdateModal = ({ handleRoleModal, role, setRole, userEmail, refetch }) => {
+  // 
   const handleSelectOption = (e) => {
     e.preventDefault();
     setRole(e.target.value);

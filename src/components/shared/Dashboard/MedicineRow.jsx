@@ -21,7 +21,7 @@ const MedicineRow = ({medicine}) => {
         </span>
                 </td>
                 <td className="px-5 py-2 text-center">
-                    <div className='flex items-center gap-3'>
+                    <div className='flex items-center gap-3 '>
                         <button className='btn'>Edit</button>
                         <button className='btn'>Re-stock</button>
                         <button className='btn'>Details</button>

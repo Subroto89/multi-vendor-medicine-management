@@ -3,6 +3,7 @@ import Container from "../../../components/shared/Container";
 import AskForAdvertisementModal from "../../../components/modals/AskForAdvertisementModal";
 import { Link } from "react-router";
 import { FaPlus } from "react-icons/fa";
+import MyMedicineAdvertisements from "../../../components/shared/Dashboard/MyMedicineAdvertisements";
 
 const AskForAdvertisements = () => {
   const [isAdModalOpen, setIsAdModalOpen] = useState(false);
@@ -35,7 +36,7 @@ Table of Medicine Ask For Advertisement and Status
 --------------------------------------------------------------------------- */}
         <div>
 
-
+        <MyMedicineAdvertisements></MyMedicineAdvertisements>
         </div>
 
         {/* -------------------------------------------------------------

@@ -1,7 +1,7 @@
 import { IoCloseSharp } from "react-icons/io5";
 import AddCategoryForm from "../forms/AddCategoryForm";
 
-const CategoryModal = ({ handleCategoryModal }) => {
+const CategoryModal = ({ handleCategoryModal, refetch }) => {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
       <div className="relative w-[400px] h-[300px] overflow-hidden rounded-lg bg-gray-200 text-blue-500">
@@ -20,7 +20,7 @@ const CategoryModal = ({ handleCategoryModal }) => {
         {/* --------------------------------------------------------------
                 Add Category Form
                 -------------------------------------------------------------- */}
-        <AddCategoryForm />
+        <AddCategoryForm handleCategoryModal={handleCategoryModal} refetch={refetch}/>
 
        
         

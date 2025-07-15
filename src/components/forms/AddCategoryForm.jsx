@@ -9,7 +9,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
-const AddCategoryForm = ({ handleCategoryModal }) => {
+const AddCategoryForm = ({ handleCategoryModal, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
@@ -63,6 +63,7 @@ const AddCategoryForm = ({ handleCategoryModal }) => {
           text: "Category Added Successfully",
           timer: 1500,
         });
+        refetch();
         handleCategoryModal();
       } else {
         Swal.fire("Category Addition Failed!");

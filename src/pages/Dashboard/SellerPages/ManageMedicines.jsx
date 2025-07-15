@@ -4,8 +4,14 @@ import { Link } from 'react-router';
 import AddMedicineModal from '../../../components/modals/AddMedicineModal';
 import Container from '../../../components/shared/Container';
 import ParticularSellerMedicines from '../../../components/ParticularSellerMedicines';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import useAuth from '../../../hooks/useAuth';
+import LoadingSpinner from '../../../components/shared/LoadingSpinner';
 
 const ManageMedicines = () => {
+    const axiosSecure = useAxiosSecure();
+    const {user} = useAuth();
     // ---------------------------------------------------------------------------------------
     // Add Medicine Modal Opening State
     // ---------------------------------------------------------------------------------------
@@ -13,6 +19,27 @@ const ManageMedicines = () => {
     const handleAddMedicineModal = ()=> {
         setIsAddMedicineModal(!isAddMedicineModal);
     }
+
+
+
+
+
+
+
+     const {
+        data: medicines = [],
+        isLoading,
+        refetch,
+      } = useQuery({
+        queryKey: ["particularSellerMedicines", user?.email],
+        queryFn: async () => {
+          const { data } = await axiosSecure(`/get-medicines/${user.email}`);
+          return data;
+        },
+         enabled: !!user?.email
+      });
+    
+      if (isLoading) return <LoadingSpinner />;
     
     return (
         <div className='relative'>
@@ -29,7 +56,8 @@ const ManageMedicines = () => {
             All the Added Medicine Display Table
             -------------------------------------------------------------------------------- */}
             <div className='my-4'>
-                <ParticularSellerMedicines/>
+                
+                <ParticularSellerMedicines medicines={medicines} refetch={refetch}/>
             </div>
 
 
@@ -38,7 +66,7 @@ const ManageMedicines = () => {
             Add New Medicine Modal
             -------------------------------------------------------------------------------- */}
             {
-                isAddMedicineModal && <AddMedicineModal handleAddMedicineModal={handleAddMedicineModal} />
+                isAddMedicineModal && <AddMedicineModal handleAddMedicineModal={handleAddMedicineModal} refetch={refetch}/>
             }
            </Container>
         </div>

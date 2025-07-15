@@ -35,7 +35,7 @@ const AddMedicineForm = ({
 
 
   const categoryOptions = categories.map(cat => ({
-    value: cat._id,
+    value: cat.catName.toUpperCase(),
     label: cat.catName,
   }));
 

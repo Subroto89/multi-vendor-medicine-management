@@ -7,7 +7,8 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
-const AddMedicineModal = ({ handleAddMedicineModal }) => {
+const AddMedicineModal = ({ handleAddMedicineModal, refetch }) => {
+  console.log(refetch)
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   
@@ -61,7 +62,7 @@ const AddMedicineModal = ({ handleAddMedicineModal }) => {
   //   Form Submition Function
   //--------------------------------------------------------------------------
   const onSubmit = async (data) => {
-    console.log(data)
+    
     data.mediPhoto = uploadedMedicinePhoto;
     data.seller = {
       sellerId: user?.uid,
@@ -79,6 +80,7 @@ const AddMedicineModal = ({ handleAddMedicineModal }) => {
         timer: 1500,
       });
       handleAddMedicineModal();
+      refetch();
     } else {
       Swal.fire({
         position: "center",

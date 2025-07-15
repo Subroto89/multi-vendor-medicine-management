@@ -2,6 +2,9 @@ import { FaUser } from "react-icons/fa";
 import InputField from "./InputField";
 import { GiMedicines } from "react-icons/gi";
 import { PuffLoader } from "react-spinners";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../components/shared/LoadingSpinner";
 
 const AddMedicineForm = ({
   register,
@@ -14,15 +17,27 @@ const AddMedicineForm = ({
   photoUploadError,
   handleAddMedicineModal,
 }) => {
-  // Define the options for your category dropdown
-  const categoryOptions = [
-    { value: "painkiller", label: "Painkiller" },
-    { value: "antibiotic", label: "Antibiotic" },
-    { value: "vitamin", label: "Vitamin" },
-    { value: "allergy", label: "Allergy" },
-    { value: "digestive", label: "Digestive" },
-    // Add more categories as needed
-  ];
+  const axiosSecure = useAxiosSecure();
+
+  const { 
+    data: categories = [], 
+    isLoading: isLoadingCategories, 
+    error: categoriesError 
+  } = useQuery({
+    queryKey: ['medicineCategories'], 
+    queryFn: async () => {
+      
+      const { data } = await axiosSecure.get('/get-categories'); 
+      return data;
+    },
+    staleTime: 1000 * 60 * 5
+  });
+
+
+  const categoryOptions = categories.map(cat => ({
+    value: cat._id,
+    label: cat.catName,
+  }));
 
   const companyOptions = [
     { value: "johnson_johnson", label: "Johnson & Johnson" },
@@ -39,6 +54,8 @@ const AddMedicineForm = ({
     { value: "mg", label: "Mg (Milligram)" },
     { value: "ml", label: "ML (Milliliter)" },
   ];
+
+  if(isLoadingCategories) return <LoadingSpinner/>
 
   return (
     <div className="flex flex-col gap-2">

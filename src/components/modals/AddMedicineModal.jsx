@@ -10,7 +10,7 @@ import useAuth from "../../hooks/useAuth";
 const AddMedicineModal = ({ handleAddMedicineModal }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  console.log(user);
+  
   //--------------------------------------------------------------
   //  Necessary State Variables For Medicine Photo Upload
   // --------------------------------------------------------------
@@ -61,6 +61,7 @@ const AddMedicineModal = ({ handleAddMedicineModal }) => {
   //   Form Submition Function
   //--------------------------------------------------------------------------
   const onSubmit = async (data) => {
+    console.log(data)
     data.mediPhoto = uploadedMedicinePhoto;
     data.seller = {
       sellerId: user?.uid,

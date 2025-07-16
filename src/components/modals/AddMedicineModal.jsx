@@ -70,8 +70,8 @@ const AddMedicineModal = ({ handleAddMedicineModal, refetch }) => {
       sellerName: user?.displayName,
       sellerPhoto: user?.photoURL,
     };
-
-    const { data: response } = await axiosSecure.post("/add-medicine", data);
+    try{
+         const { data: response } = await axiosSecure.post("/add-medicine", data);
     if (response.insertedId) {
       Swal.fire({
         position: "center",
@@ -89,6 +89,11 @@ const AddMedicineModal = ({ handleAddMedicineModal, refetch }) => {
         timer: 1500,
       });
     }
+    }catch(error){
+      console.log(error)
+    }
+
+ 
   };
 
   return (

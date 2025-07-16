@@ -17,6 +17,7 @@ import ManageMedicines from "../pages/Dashboard/SellerPages/ManageMedicines";
 import SellerPaymentHistory from "../pages/Dashboard/SellerPages/SellerPaymentHistory";
 import AskForAdvertisement from "../pages/Dashboard/SellerPages/AskForAdvertisements";
 import UserPaymentHistory from "../pages/Dashboard/UserPages/UserPaymentHistory";
+import CategoryMedicines from "../pages/Home/CategoryMedicines";
 
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
         path: "/",
         index: true,
         Component: Home,
+      },
+      {
+        path:"/category-medicines/:catName",
+        Component: CategoryMedicines
       },
       {
         path: "/shop",

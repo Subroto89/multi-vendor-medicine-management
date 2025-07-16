@@ -18,7 +18,8 @@ const CategoryCardsContainer = () => {
             return data;
         }
     })
-    console.log(categories)
+
+    
     if(isLoading) return <LoadingSpinner/>
 
     return (

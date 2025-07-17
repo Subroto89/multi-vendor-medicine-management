@@ -1,31 +1,11 @@
-import axios from "axios";
 import Swal from "sweetalert2";
+import useAuth from "./useAuth";
+import useAxiosSecure from "./useAxiosSecure";
 
-export const imageUpload = async (imageFile) => {
-  const imageFormData = new FormData();
-  imageFormData.append("image", imageFile);
-
-  try {
-    const { data } = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_IMGBB_API_KEY
-      }`,
-      imageFormData
-    );
-    return data?.data?.display_url;
-  } catch (error) {
-    console.error("Image upload failed:", error);
-    // throw new Error("Image upload failed");
-  }
-};
-
-export const saveUserToDatabase = async(userData) => {
-  const {data} = await axios.post(`${import.meta.env.VITE_Server_API_KEY}/save-user`, userData);
-  console.log(data)
-};
-
-
- export const handleAddToCart = async (stockQuantity, _id) => {
+const useAddToCart = () => {
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const handleAddToCart = async (stockQuantity, _id) => {
     if (!user) {
       Swal.fire({
         icon: "warning",
@@ -91,3 +71,7 @@ export const saveUserToDatabase = async(userData) => {
       });
     }
   };
+  return handleAddToCart;
+};
+
+export default useAddToCart;

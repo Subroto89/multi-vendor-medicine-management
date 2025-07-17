@@ -1,10 +1,11 @@
 import { FaCartPlus } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import useAuth from "../../hooks/useAuth";
 
-const SingleMedicineModal = ({ handleModalView, singleMedicine, handleAddToCart }) => {
-    // const {user} = useAuth();
-
+const SingleMedicineModal = ({
+  handleModalView,
+  singleMedicine,
+  handleAddToCart,
+}) => {
   const {
     _id,
     mediPhoto,
@@ -19,14 +20,15 @@ const SingleMedicineModal = ({ handleModalView, singleMedicine, handleAddToCart 
     seller,
     stockQuantity,
     createdAt,
-  } = singleMedicine; 
-  const discountedPrice = perUnitPrice - (perUnitPrice * (discountPercentage / 100 || 0))
+  } = singleMedicine;
+  const discountedPrice =
+    perUnitPrice - perUnitPrice * (discountPercentage / 100 || 0);
 
   return (
     <div className="fixed bg-black/50 inset-0 flex items-center">
       <div
-        className="relative w-[800px] h-[500px] mx-auto bg-gradient-to-br from-blue-200 to-gray-50 rounded-lg 
-                            shadow-lg border-1 border-white"
+        className="relative w-[800px] h-[500px] mx-auto 
+                  bg-gradient-to-br from-blue-200 to-gray-50 rounded-lg shadow-lg border-1 border-white"
       >
         {/* ----------------------------------------------------------------------------------
         Modal Heading - Medicine Name 
@@ -34,9 +36,11 @@ const SingleMedicineModal = ({ handleModalView, singleMedicine, handleAddToCart 
         <div>
           <h2 className="flex items-center gap-6 text-2xl font-bold text-gray-700 pl-10 pt-10">
             {medicineName} Details
-            <button onClick={()=>handleAddToCart(stockQuantity, _id)} 
-                    className="btn btn-outline btn-sm hover:bg-green-500 hover:text-white">
-                    <FaCartPlus size={20}/>
+            <button
+              onClick={() => handleAddToCart(stockQuantity, _id)}
+              className="btn btn-outline btn-sm hover:bg-green-500 hover:text-white"
+            >
+              <FaCartPlus size={20} />
             </button>
           </h2>
         </div>
@@ -82,7 +86,14 @@ const SingleMedicineModal = ({ handleModalView, singleMedicine, handleAddToCart 
               <p>
                 <span className="font-semibold">Price:</span> ${perUnitPrice}
               </p>
-              <p><span className="font-semibold">Discounted Price:</span> ${discountedPrice} ({perUnitPrice === discountedPrice ? "0% discount" : `${discountPercentage}% discount`})</p>
+              <p>
+                <span className="font-semibold">Discounted Price:</span> $
+                {discountedPrice} (
+                {perUnitPrice === discountedPrice
+                  ? "0% discount"
+                  : `${discountPercentage}% discount`}
+                )
+              </p>
               <p>
                 <span className="font-semibold">Stock Available:</span>
                 {seller.sellerName}

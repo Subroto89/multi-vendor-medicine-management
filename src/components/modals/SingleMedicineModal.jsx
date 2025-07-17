@@ -1,8 +1,12 @@
-import React from "react";
+import { FaCartPlus } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import useAuth from "../../hooks/useAuth";
 
-const SingleMedicineModal = ({ handleModalView, singleMedicine }) => {
+const SingleMedicineModal = ({ handleModalView, singleMedicine, handleAddToCart }) => {
+    // const {user} = useAuth();
+
   const {
+    _id,
     mediPhoto,
     medicineName,
     categoryName,
@@ -13,7 +17,7 @@ const SingleMedicineModal = ({ handleModalView, singleMedicine }) => {
     perUnitPrice,
     discountPercentage,
     seller,
-    stock,
+    stockQuantity,
     createdAt,
   } = singleMedicine; 
   const discountedPrice = perUnitPrice - (perUnitPrice * (discountPercentage / 100 || 0))
@@ -28,8 +32,12 @@ const SingleMedicineModal = ({ handleModalView, singleMedicine }) => {
         Modal Heading - Medicine Name 
         -----------------------------------------------------------------------------------*/}
         <div>
-          <h2 className="text-2xl font-bold text-gray-700 pl-10 pt-10">
+          <h2 className="flex items-center gap-6 text-2xl font-bold text-gray-700 pl-10 pt-10">
             {medicineName} Details
+            <button onClick={()=>handleAddToCart(stockQuantity, _id)} 
+                    className="btn btn-outline btn-sm hover:bg-green-500 hover:text-white">
+                    <FaCartPlus size={20}/>
+            </button>
           </h2>
         </div>
         {/* ----------------------------------------------------------------------------------

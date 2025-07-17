@@ -19,22 +19,20 @@ const AddMedicineForm = ({
 }) => {
   const axiosSecure = useAxiosSecure();
 
-  const { 
-    data: categories = [], 
-    isLoading: isLoadingCategories, 
-    error: categoriesError 
+  const {
+    data: categories = [],
+    isLoading: isLoadingCategories,
+    error: categoriesError,
   } = useQuery({
-    queryKey: ['medicineCategories'], 
+    queryKey: ["medicineCategories"],
     queryFn: async () => {
-      
-      const { data } = await axiosSecure.get('/get-categories'); 
+      const { data } = await axiosSecure.get("/get-categories");
       return data;
     },
-    staleTime: 1000 * 60 * 5
+    staleTime: 1000 * 60 * 5,
   });
 
-
-  const categoryOptions = categories.map(cat => ({
+  const categoryOptions = categories.map((cat) => ({
     value: cat._id,
     label: cat.catName,
   }));
@@ -55,15 +53,13 @@ const AddMedicineForm = ({
     { value: "ml", label: "ML (Milliliter)" },
   ];
 
-  if(isLoadingCategories) return <LoadingSpinner/>
+  if (isLoadingCategories) return <LoadingSpinner />;
 
   return (
     <div className="flex flex-col gap-2">
-    
-
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
         {/* --------------------------------------------------------------------------
-    M.Item Name Field
+    Medicine Item Name Field
     -------------------------------------------------------------------------- */}
         <InputField
           label="Medicine Name"
@@ -126,57 +122,57 @@ const AddMedicineForm = ({
           }}
         />
 
-      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-2">
           {/* --------------------------------------------------------------------------
      Medicine Photo Upload Field
     -------------------------------------------------------------------------- */}
 
-        <InputField
-          label=""
-          name="medicinePhoto"
-          type="file"
-          placeholder="Select the medicine photo"
-          // icon={FaUpload}
-          register={register}
-          errors={errors}
-          validationRules={{
-            required: "Medicine photo is required",
-            validate: (value) => {
-              if (value.length === 0) return "Please upload a photo";
-              const file = value[0];
-              const validTypes = ["image/jpeg", "image/png", "image/gif"];
-              if (!validTypes.includes(file.type)) {
-                return "Only JPEG, PNG, and GIF files are allowed";
-              }
-              if (file.size > 2 * 1024 * 1024) {
-                return "File size must be less than 2MB";
-              }
-              return true;
-            },
-          }}
-        />
+          <InputField
+            label=""
+            name="medicinePhoto"
+            type="file"
+            placeholder="Select the medicine photo"
+            // icon={FaUpload}
+            register={register}
+            errors={errors}
+            validationRules={{
+              required: "Medicine photo is required",
+              validate: (value) => {
+                if (value.length === 0) return "Please upload a photo";
+                const file = value[0];
+                const validTypes = ["image/jpeg", "image/png", "image/gif"];
+                if (!validTypes.includes(file.type)) {
+                  return "Only JPEG, PNG, and GIF files are allowed";
+                }
+                if (file.size > 2 * 1024 * 1024) {
+                  return "File size must be less than 2MB";
+                }
+                return true;
+              },
+            }}
+          />
 
           {/* --------------------------------------------------------------------------
     Photo Viewer Field
     -------------------------------------------------------------------------- */}
-      <div className=" w-12 h-10 rounded-md overflow-hidden border-2 border-gray-300 mb-1 flex items-center justify-end">
-        {uploadedMedicinePhoto ? (
-          <img
-            src={uploadedMedicinePhoto}
-            alt="User Photo"
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="flex items-center pr-3">
-            {uploadingMedicinePhoto ? (
-              <PuffLoader size={36} />
+          <div className=" w-12 h-10 rounded-md overflow-hidden border-2 border-gray-300 mb-1 flex items-center justify-end">
+            {uploadedMedicinePhoto ? (
+              <img
+                src={uploadedMedicinePhoto}
+                alt="User Photo"
+                className="w-full h-full object-cover"
+              />
             ) : (
-              <GiMedicines size={26} />
+              <div className="flex items-center pr-3">
+                {uploadingMedicinePhoto ? (
+                  <PuffLoader size={36} />
+                ) : (
+                  <GiMedicines size={26} />
+                )}
+              </div>
             )}
           </div>
-        )}
-      </div>
-      </div>
+        </div>
 
         {/* --------------------------------------------------------------------------
      Medicine Category Dropdown Selection Field
@@ -226,6 +222,27 @@ const AddMedicineForm = ({
           errors={errors}
           validationRules={{
             required: "Item Mass Unit is required",
+          }}
+        />
+
+        {/* --------------------------------------------------------------------------
+     Stock Quantity Field
+    -------------------------------------------------------------------------- */}
+
+        <InputField
+          label="Stock Quantity"
+          name="stockQuantity"
+          type="number"
+          placeholder="e.g., 250"
+          register={register}
+          errors={errors}
+          validationRules={{
+            required: "Stock Quantity is required",
+            min: {
+              value: 1,
+              message: "Stock Quantity must be greater than 0",
+            },
+            valueAsNumber: true,
           }}
         />
 

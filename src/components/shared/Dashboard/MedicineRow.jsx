@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MedicineRow = ({medicine}) => {
-    const {mediPhoto, medicineName, category, genericName, company, status} = medicine;
+    const {mediPhoto, medicineName, category, genericName, company, stockQuantity, status} = medicine;
    
     return (
          <tr className="min-w-full divide-y divide-gray-200 text-gray-700 text-sm font-normal hover:bg-blue-50 transition-color duration-300">
@@ -10,7 +10,7 @@ const MedicineRow = ({medicine}) => {
                 <td className="px-5 py-2 text-left max-w-20 truncate">{category}</td>
                 <td className="px-5 py-2 text-left w-20">{genericName}</td>
                 <td className="px-5 py-2 text-left w-50 truncate">{company}</td>
-                <td className="px-5 py-2 text-left">Stk field nai</td>
+                <td className="px-5 py-2 text-left">{stockQuantity}</td>
                 <td className="px-5 py-2 text-left">
                     <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
           status === 'active' ? 'bg-green-100 text-green-800' : 

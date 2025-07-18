@@ -18,6 +18,7 @@ import SellerPaymentHistory from "../pages/Dashboard/SellerPages/SellerPaymentHi
 import AskForAdvertisement from "../pages/Dashboard/SellerPages/AskForAdvertisements";
 import UserPaymentHistory from "../pages/Dashboard/UserPages/UserPaymentHistory";
 import CategoryMedicines from "../pages/Home/CategoryMedicines";
+import CheckoutPage from "../pages/Home/CheckoutPage";
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         Component: Cart
+      },
+      {
+        path: "/checkout",
+        Component: CheckoutPage
       }
     ],
   },

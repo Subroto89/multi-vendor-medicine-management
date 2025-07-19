@@ -1,22 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import Swal from 'sweetalert2';
-import Container from '../../components/shared/Container';
-import DataNotFound from '../../components/shared/DataNotFound';
+import { CardElement, useElements, useStripe, } from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useState } from "react";
+import Swal from "sweetalert2";
 import { FaDollarSign, FaCreditCard, FaMapMarkerAlt, FaShoppingCart } from 'react-icons/fa'; // Icons for checkout form
-import { MdOutlineLocalShipping } from 'react-icons/md';
 
-// Stripe Imports
-import { Elements, useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import useAuth from '../../hooks/useAuth';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-// Replace with your actual Stripe Publishable Key
-// You should get this from your environment variables (e.g., process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY)
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTgbpRsm'); 
-
-// This component will contain the actual form and Stripe elements
 const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -30,11 +20,12 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
     addressLine2: '',
     city: '',
     zipCode: '',
-    country: ''
+    country: 'US'
   });
   const [paymentMethod, setPaymentMethod] = useState('credit_card'); // Default payment method
   const [processing, setProcessing] = useState(false); // State for payment processing
   const [cardError, setCardError] = useState(null); // State for Stripe CardElement errors
+
 
   // Handle form submission for checkout
   const handleSubmitCheckout = async (e) => {
@@ -69,7 +60,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
     setCardError(null);
 
     // 1. Create Payment Method (client-side)
-    const { error, paymentMethod: stripePaymentMethod } = await stripe.createPaymentMethod({
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card,
       billing_details: {
@@ -107,23 +98,26 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
       },
     });
 
-    // 2. Create Payment Intent on your Backend
-    // IMPORTANT: Amount should be calculated on the backend to prevent client-side tampering.
-    // Send itemsToCheckout IDs and quantities to backend for verification.
+   
+    // ---------------------------------------------------------------------------------------
+    // Calling API For Payment Intent Where There Will Be The Client Secret Key For Deduction
+    // ---------------------------------------------------------------------------------------
     try {
       const { data: clientSecretResponse } = await axiosSecure.post('/create-payment-intent', {
-        amount: totalAmount * 100, // Stripe expects amount in cents
-        currency: 'usd', // Or your currency
+        amount: totalAmount * 100, 
+        currency: 'usd', 
         items: itemsToCheckout.map(item => ({ 
             medicineId: item.medicineId, 
             quantity: item.quantity 
-        })), // Send necessary item details for backend verification
-        userId: user?.uid, // Send user ID for backend context
+        })), 
+        userId: user?.uid,
       });
-
+      
       const clientSecret = clientSecretResponse.clientSecret;
 
-      // 3. Confirm the payment on the client-side using the client_secret
+      // ------------------------------------------------------------------------------------
+      // 3. Confirm The Payment On The Client-Side Using The Client_Secret 
+      // ------------------------------------------------------------------------------------
       const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
         clientSecret,
         {
@@ -137,6 +131,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
         }
       );
 
+    //   If Error From confirmCardPayment ----------------------------------------------------
       if (confirmError) {
         console.error('[Stripe Confirm Error]', confirmError);
         setCardError(confirmError.message);
@@ -149,10 +144,14 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
         return;
       }
 
+    //   If Succeeded From confirmCardPayment ------------------------------------------------
       if (paymentIntent.status === 'succeeded') {
         console.log('Payment Succeeded:', paymentIntent);
 
-        // 4. Send Order Data to your Backend for Finalization
+
+      // ------------------------------------------------------------------------------------
+      //  Sending Order Data To Backend For Finalization
+      // ------------------------------------------------------------------------------------
         const orderData = {
           userId: user?.uid, // Use actual user ID
           userEmail: user?.email,
@@ -167,23 +166,25 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
           })),
           totalAmount: totalAmount,
           shippingAddress: shippingAddress,
-          paymentMethod: paymentMethod, // Will be 'credit_card' here
+          paymentMethod: "credit_card",
           checkoutType: checkoutType,
-          paymentIntentId: paymentIntent.id, // Store Stripe Payment Intent ID
-          transactionId: paymentIntent.id, // Often the same as paymentIntentId
+          paymentIntentId: paymentIntent.id, 
+          transactionId: paymentIntent.id, 
           orderDate: new Date().toISOString(),
-          status: 'pending', // Initial status, backend might update to 'processing'
+          status: 'pending',
         };
 
         // If payment method is Cash on Delivery, adjust status and payment details
-        if (paymentMethod === 'cash_on_delivery') {
-            orderData.status = 'pending_cod'; // A specific status for COD
-            orderData.paymentIntentId = 'N/A';
-            orderData.transactionId = 'N/A';
-        }
-
+        // if (paymentMethod === 'cash_on_delivery') {
+        //     orderData.status = 'pending_cod'; // A specific status for COD
+        //     orderData.paymentIntentId = 'N/A';
+        //     orderData.transactionId = 'N/A';
+        // }
+        
+        // API Call For Saving Order Data In The Database ----------------------------------
         const { data: orderResponse } = await axiosSecure.post('/process-order', orderData);
 
+        // Positive Feedback When Saving In Database Completed ----------------------------
         if (orderResponse.success) {
           Swal.fire({
             icon: 'success',
@@ -191,9 +192,9 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
             text: `Your order for ${checkoutType} items has been placed successfully. Transaction ID: ${paymentIntent.id}`,
             confirmButtonText: 'OK',
           }).then(() => {
-            navigate('/order-confirmation', { state: { orderData: orderResponse.order } }); // Pass confirmed order data
+            navigate('/invoice', { state: { orderData: orderResponse.order } }); // Pass confirmed order data
           });
-        } else {
+        } else {  // Negative Feedback When Saving In Databse Failed -----------------------
           Swal.fire({
             icon: 'error',
             title: 'Order Creation Failed',
@@ -201,8 +202,8 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
           });
         }
 
-      } else {
-        // Handle other paymentIntent statuses (e.g., requires_action) if needed
+      } else { // Negative Feedback When Payment Failed ------------------------------------
+        
         Swal.fire({
           icon: 'info',
           title: 'Payment Status',
@@ -210,7 +211,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
         });
       }
 
-    } catch (err) {
+    } catch (err) { // Negative Feedback When Payment Intent/Client Secret Key Not Generated 
       console.error('Checkout Error:', err.response?.data || err.message);
       setCardError(err.response?.data?.message || err.message || 'An unexpected error occurred during checkout.');
       Swal.fire({
@@ -218,7 +219,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
         title: 'Checkout Failed',
         text: err.response?.data?.message || 'An unexpected error occurred. Please try again.',
       });
-    } finally {
+    } finally { //Either Client Secret Key Got or Not Through Payment Intent ------------------ 
       setProcessing(false); // Stop processing in all cases
     }
   };
@@ -305,11 +306,15 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
 
   return (
     <form onSubmit={paymentMethod === 'credit_card' ? handleSubmitCheckout : handleCashOnDeliverySubmit}>
-      {/* Order Summary Section */}
+      
+        {/* ---------------------------------------------------------------------------------
+        Cart Items In Card View
+        --------------------------------------------------------------------------------- */}
       <div className="mb-8 border-b pb-6 border-gray-200">
         <h2 className="text-2xl font-semibold text-gray-700 mb-4 flex items-center gap-2">
           <FaShoppingCart className="text-blue-500" /> Order Summary ({checkoutType} items)
         </h2>
+        {/* Card of Items --------------------------------------------------------------- */}
         <div className="space-y-3 max-h-60 overflow-y-auto pr-2">
           {itemsToCheckout.map((item) => (
             <div key={item.medicineId} className="flex justify-between items-center bg-gray-50 p-3 rounded-md shadow-sm">
@@ -329,18 +334,25 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
             </div>
           ))}
         </div>
+        {/* Total Amount to Pay For Purchasing------------------------------------------- */}
         <div className="mt-6 pt-4 border-t border-gray-200 flex justify-between items-center">
           <span className="text-xl font-bold text-gray-800">Total Amount:</span>
           <span className="text-3xl font-extrabold text-green-700">${totalAmount.toFixed(2)}</span>
         </div>
       </div>
 
-      {/* Shipping Address Section */}
+
+       {/* ---------------------------------------------------------------------------------
+        Shipping Address Details
+        --------------------------------------------------------------------------------- */}
       <div className="mb-8 border-b pb-6 border-gray-200">
+        {/* Header ---------------------------------------------------------------------- */}
         <h2 className="text-2xl font-semibold text-gray-700 mb-4 flex items-center gap-2">
           <FaMapMarkerAlt className="text-blue-500" /> Shipping Address
         </h2>
+        {/* Input Fields For Address ---------------------------------------------------- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Full Name  */}
           <div>
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
             <input
@@ -352,6 +364,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
               required
             />
           </div>
+          {/* Address Line 1 */}
           <div>
             <label htmlFor="addressLine1" className="block text-sm font-medium text-gray-700">Address Line 1</label>
             <input
@@ -363,6 +376,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
               required
             />
           </div>
+          {/* Address Line 2 */}
           <div>
             <label htmlFor="addressLine2" className="block text-sm font-medium text-gray-700">Address Line 2 (Optional)</label>
             <input
@@ -373,6 +387,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
               onChange={(e) => setShippingAddress({ ...shippingAddress, addressLine2: e.target.value })}
             />
           </div>
+          {/* City Field */}
           <div>
             <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
             <input
@@ -384,6 +399,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
               required
             />
           </div>
+          {/* Zip Code Field */}
           <div>
             <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700">Zip Code</label>
             <input
@@ -395,6 +411,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
               required
             />
           </div>
+          {/* Country Field */}
           <div>
             <label htmlFor="country" className="block text-sm font-medium text-gray-700">Country</label>
             <input
@@ -409,7 +426,10 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
         </div>
       </div>
 
-      {/* Payment Method Section */}
+
+       {/* ---------------------------------------------------------------------------------
+        Payment Method Section
+        --------------------------------------------------------------------------------- */}
       <div className="mb-8">
         <h2 className="text-2xl font-semibold text-gray-700 mb-4 flex items-center gap-2">
           <FaCreditCard className="text-blue-500" /> Payment Method
@@ -444,7 +464,10 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
         </div>
       </div>
 
-      {/* Stripe Card Element (conditionally rendered) */}
+
+ {/* ---------------------------------------------------------------------------------
+        Stripe Card Element
+        --------------------------------------------------------------------------------- */}
       {paymentMethod === 'credit_card' && (
         <div className="mb-8 p-4 border border-gray-300 rounded-md shadow-sm">
           <label htmlFor="card-element" className="block text-sm font-medium text-gray-700 mb-2">
@@ -471,7 +494,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
         </div>
       )}
 
-      {/* Final Checkout Button */}
+      {/* Final Checkout Button ------------------------------------------------------------*/}
       <div className="flex justify-center mt-8">
         <button
           type="submit"
@@ -484,58 +507,4 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
     </form>
   );
 };
-
-
-const CheckoutPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const itemsToCheckout = location.state?.items || [];
-  const checkoutType = location.state?.checkoutType || 'unknown';
-
-  const [totalAmount, setTotalAmount] = useState(0);
-
-  useEffect(() => {
-    const calculatedTotal = itemsToCheckout.reduce((sum, item) => sum + item.totalPricePerItem, 0);
-    setTotalAmount(calculatedTotal);
-
-    if (itemsToCheckout.length === 0) {
-      Swal.fire({
-        icon: 'info',
-        title: 'No Items to Checkout',
-        text: 'Please select items from your cart to proceed to checkout.',
-        timer: 3000,
-        showConfirmButton: false,
-      }).then(() => {
-        navigate('/cart');
-      });
-    }
-  }, [itemsToCheckout, navigate]);
-
-  if (itemsToCheckout.length === 0 && !location.state) {
-    return <DataNotFound message="No items found for checkout. Please go back to your cart and select items." />;
-  }
-
-  return (
-    <div className="py-12 bg-gray-50 min-h-screen">
-      <Container>
-        <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-          Proceed to Checkout
-        </h1>
-
-        <div className="bg-white rounded-lg shadow-xl p-6 md:p-8 max-w-4xl mx-auto">
-          {/* Elements provider wraps the CheckoutFormContent */}
-          <Elements stripe={stripePromise}>
-            <CheckoutFormContent 
-              itemsToCheckout={itemsToCheckout} 
-              checkoutType={checkoutType} 
-              totalAmount={totalAmount} 
-            />
-          </Elements>
-        </div>
-      </Container>
-    </div>
-  );
-};
-
-export default CheckoutPage;
+export default CheckoutFormContent;

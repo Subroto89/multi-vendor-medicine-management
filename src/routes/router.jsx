@@ -18,7 +18,8 @@ import SellerPaymentHistory from "../pages/Dashboard/SellerPages/SellerPaymentHi
 import AskForAdvertisement from "../pages/Dashboard/SellerPages/AskForAdvertisements";
 import UserPaymentHistory from "../pages/Dashboard/UserPages/UserPaymentHistory";
 import CategoryMedicines from "../pages/Home/CategoryMedicines";
-import CheckoutPage from "../pages/Home/CheckoutPage";
+import CheckoutPage from "../pages/Home/paymentGateWay/CheckoutPage";
+import InvoicePage from "../pages/Home/paymentGateWay/InvoicePage";
 
 
 const router = createBrowserRouter([
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         Component: CheckoutPage
+      },
+      {
+        path: "/invoice",
+        Component: InvoicePage
       }
     ],
   },

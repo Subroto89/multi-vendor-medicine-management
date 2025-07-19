@@ -61,14 +61,11 @@ const Cart = () => {
 // handleCheckOut - now accepts a type argument
   const handleCheckout = (type) => {
     let itemsToCheckout = [];
-    let checkoutMessage = '';
 
     if (type === 'all') {
       itemsToCheckout = cartItems;
-      checkoutMessage = 'all items';
     } else if (type === 'selected') {
       itemsToCheckout = cartItems.filter(item => selectedItems.includes(item.medicineId));
-      checkoutMessage = 'selected items';
     }
 
     if (itemsToCheckout.length === 0) { 
@@ -85,11 +82,6 @@ const Cart = () => {
   // Navigate to checkout page, passing the items to be checked out via state
     navigate('/checkout', { state: { items: itemsToCheckout, checkoutType: type } }); 
   };
-
-
-
-
-
 
 
 
@@ -212,35 +204,6 @@ const handleRemoveItem = async (medicineId, itemName) => {
       }
     });
   };
-
-
-  // previous
-// // handleCheckOut
-//   const handleCheckout = () => {
-//     // Check cartItems.length, which is correctly derived from cart?.[0]?.items || []
-//     if (cartItems.length === 0) { 
-//       Swal.fire({
-//         icon: 'info',
-//         title: 'Cart is Empty',
-//         text: 'Please add items to your cart before proceeding to checkout.',
-//         timer: 2000,
-//         showConfirmButton: false,
-//       });
-//       return;
-//     }
-//     navigate('/checkout'); // Navigate to your checkout page
-//   };
-
-
-
-
-
-
-
-
-
-
-
 
 
     return (

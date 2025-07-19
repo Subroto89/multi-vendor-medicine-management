@@ -22,9 +22,9 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
     zipCode: '',
     country: 'US'
   });
-  const [paymentMethod, setPaymentMethod] = useState('credit_card'); // Default payment method
-  const [processing, setProcessing] = useState(false); // State for payment processing
-  const [cardError, setCardError] = useState(null); // State for Stripe CardElement errors
+  const [paymentMethod, setPaymentMethod] = useState('credit_card'); 
+  const [processing, setProcessing] = useState(false);
+  const [cardError, setCardError] = useState(null); 
 
 
   // Handle form submission for checkout
@@ -175,11 +175,11 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
         };
 
         // If payment method is Cash on Delivery, adjust status and payment details
-        // if (paymentMethod === 'cash_on_delivery') {
-        //     orderData.status = 'pending_cod'; // A specific status for COD
-        //     orderData.paymentIntentId = 'N/A';
-        //     orderData.transactionId = 'N/A';
-        // }
+        if (paymentMethod === 'cash_on_delivery') {
+            orderData.status = 'pending_cod';
+            orderData.paymentIntentId = 'N/A';
+            orderData.transactionId = 'N/A';
+        }
         
         // API Call For Saving Order Data In The Database ----------------------------------
         const { data: orderResponse } = await axiosSecure.post('/process-order', orderData);
@@ -227,6 +227,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
   // Handle Cash on Delivery submission
   const handleCashOnDeliverySubmit = async (e) => {
     e.preventDefault();
+    
     setProcessing(true);
 
     // Basic validation for shipping address
@@ -281,7 +282,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
                 text: `Your Cash on Delivery order for ${checkoutType} items has been placed successfully.`,
                 confirmButtonText: 'OK',
             }).then(() => {
-                navigate('/order-confirmation', { state: { orderData: orderResponse.order } });
+                navigate('/invoice', { state: { orderData: orderResponse.order } });
             });
         } else {
             Swal.fire({

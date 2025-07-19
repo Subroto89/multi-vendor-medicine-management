@@ -10,7 +10,6 @@ import Register from "../pages/Home/Register";
 import JoinUs from "../pages/Home/JoinUs";
 import ManageUsers from "../pages/Dashboard/AdminPages/ManageUsers";
 import ManageCategories from "../pages/Dashboard/AdminPages/ManageCategories";
-import PaymentManagement from "../pages/Dashboard/AdminPages/PaymentManagement";
 import SalesReport from "../pages/Dashboard/AdminPages/SalesReport";
 import ManageBannerAdvertises from "../pages/Dashboard/AdminPages/ManageBannerAdvertises";
 import ManageMedicines from "../pages/Dashboard/SellerPages/ManageMedicines";
@@ -20,6 +19,8 @@ import UserPaymentHistory from "../pages/Dashboard/UserPages/UserPaymentHistory"
 import CategoryMedicines from "../pages/Home/CategoryMedicines";
 import CheckoutPage from "../pages/Home/paymentGateWay/CheckoutPage";
 import InvoicePage from "../pages/Home/paymentGateWay/InvoicePage";
+import AdminPaymentManagement from "../pages/Dashboard/AdminPages/AdminPaymentManagement";
+
 
 
 const router = createBrowserRouter([
@@ -80,7 +81,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/payment-management",
-        Component: PaymentManagement,
+        Component: AdminPaymentManagement
       },
       {
         path: "/dashboard/sales-report",

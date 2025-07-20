@@ -158,11 +158,16 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
           userName: user?.displayName,
           items: itemsToCheckout.map(item => ({
             medicineId: item.medicineId,
+            medicineName: item.medicineName,
+            genericName: item.medicineGenericName,
+            mediPhoto: item.imageUrl,
             quantity: item.quantity,
             priceAtAddToCart: item.priceAtAddToCart,
             totalPricePerItem: item.totalPricePerItem,
             itemName: item.itemName,
-            company: item.company,
+            company: item.companyName,
+            sellerName: item.sellerName,
+            sellerEmail: item.sellerEmail
           })),
           totalAmount: totalAmount,
           shippingAddress: shippingAddress,
@@ -249,7 +254,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
         Swal.showLoading();
       },
     });
-
+console.log(itemsToCheckout)
     try {
         const orderData = {
             userId: user?.uid,
@@ -257,11 +262,18 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
             userName: user?.displayName,
             items: itemsToCheckout.map(item => ({
                 medicineId: item.medicineId,
+                medicineName: item.medicineName,
+                genericName: item.medicineGenericName,
+                mediPhoto: item.imageUrl,
                 quantity: item.quantity,
                 priceAtAddToCart: item.priceAtAddToCart,
                 totalPricePerItem: item.totalPricePerItem,
                 itemName: item.itemName,
-                company: item.company,
+                company: item.companyName,
+                sellerId: item.sellerId,
+                sellerName: item.sellerName,
+                sellerEmail: item.sellerEmail
+
             })),
             totalAmount: totalAmount,
             shippingAddress: shippingAddress,

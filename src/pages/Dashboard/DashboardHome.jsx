@@ -3,6 +3,7 @@
 import useAuth from '../../hooks/useAuth';
 import LoadingSpinner from '../../components/shared/LoadingSpinner';
 import SellerDashboardHome from './SellerPages/SellerDashboardHome'; // Import the seller home content
+import AdminDashboardHome from './AdminPages/AdminDashboardHome';
 
 
 const DashboardHome = () => {
@@ -17,7 +18,9 @@ const DashboardHome = () => {
     return <div className="text-center py-20">Please log in to view your dashboard.</div>;
   }
 
-  return <SellerDashboardHome/>
+  return <AdminDashboardHome/>
+//   return <SellerDashboardHome/>
+
   // Conditionally render the appropriate role-specific home page
 //   switch (userRole) {
 //     case 'admin':

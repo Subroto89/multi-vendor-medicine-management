@@ -127,7 +127,7 @@ const SellerPaymentHistory = () => {
                       <span
                         className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClasses(order.paymentStatus)}`}
                       >
-                        {order.paymentStatus ? order.paymentStatus.replace(/_/g, ' ').toUpperCase() : 'UNKNOWN'}
+                        {order.status ? order.status.replace(/_/g, ' ').toUpperCase() : 'UNKNOWN'}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700">

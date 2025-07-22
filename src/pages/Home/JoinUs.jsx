@@ -2,7 +2,7 @@ import InputField from "../../components/forms/InputField";
 import { useForm } from "react-hook-form";
 import { GoPasskeyFill } from "react-icons/go";
 import { FaEnvelope, FaGoogle, FaLock, FaSignInAlt } from "react-icons/fa";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { BounceLoader } from "react-spinners";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
@@ -11,7 +11,10 @@ import { saveUserToDatabase } from "../../utilities/utilities";
 
 const JoinUs = () => {
   const { signInUser } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
+  const destination = location.state || '/'
+ 
   const {
     register,
     handleSubmit,
@@ -39,7 +42,7 @@ const JoinUs = () => {
 
 
         // Step 3: Redirect after confirmation -------------------------
-        navigate("/");
+        navigate(destination);
       } else {
         throw new Error("Invalid credentials!");
       }

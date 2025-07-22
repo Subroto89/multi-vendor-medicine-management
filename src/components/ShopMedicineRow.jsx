@@ -16,7 +16,7 @@ const ShopMedicineRow = ({ medicine, handleModalView, setTargetMedicine }) => {
 
   return (
     <tr className="border-b-1 border-gray-300">
-      <td className="text-sm text-left px-5 py-1">{medicineName}</td>
+      <td className="text-sm text-left px-5 py-1 ">{medicineName}</td>
       <td className="text-sm text-left px-5 py-1">{genericName}</td>
       <td className="text-sm text-left px-5 py-1">{company}</td>
       <td className="text-sm text-left px-5 py-1">{status}</td>

@@ -166,6 +166,7 @@ const CheckoutFormContent = ({ itemsToCheckout, checkoutType, totalAmount }) => 
             totalPricePerItem: item.totalPricePerItem,
             itemName: item.itemName,
             company: item.companyName,
+            sellerId: item.sellerId,
             sellerName: item.sellerName,
             sellerEmail: item.sellerEmail
           })),

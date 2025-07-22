@@ -20,8 +20,7 @@ import CategoryMedicines from "../pages/Home/CategoryMedicines";
 import CheckoutPage from "../pages/Home/paymentGateWay/CheckoutPage";
 import InvoicePage from "../pages/Home/paymentGateWay/InvoicePage";
 import AdminPaymentManagement from "../pages/Dashboard/AdminPages/AdminPaymentManagement";
-
-
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   // ---------------------------------
@@ -37,25 +36,25 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path:"/category-medicines/:catName",
-        Component: CategoryMedicines
+        path: "/category-medicines/:catName",
+        Component: CategoryMedicines,
       },
       {
         path: "/shop",
-        Component: Shop
+        Component: Shop,
       },
       {
         path: "/cart",
-        Component: Cart
+        element: <PrivateRoute><Cart></Cart></PrivateRoute>
       },
       {
         path: "/checkout",
-        Component: CheckoutPage
+        Component: CheckoutPage,
       },
       {
         path: "/invoice",
-        Component: InvoicePage
-      }
+        Component: InvoicePage,
+      },
     ],
   },
   // ---------------------------------
@@ -63,21 +62,21 @@ const router = createBrowserRouter([
   // ---------------------------------
   {
     path: "/dashboard",
-    Component: DashboardLayout,
+    element: <PrivateRoute><DashboardLayout><DashboardLayout/></DashboardLayout></PrivateRoute>, 
     children: [
       {
         path: "/dashboard",
         index: true,
-        Component: DashboardHome,
+        Component: DashboardHome
       },
       //   Routes For Admin Pages-------
       {
         path: "/dashboard/manage-users",
-        Component: ManageUsers,
+        Component: ManageUsers
       },
       {
         path: "/dashboard/manage-categories",
-        Component: ManageCategories,
+        Component: ManageCategories
       },
       {
         path: "/dashboard/payment-management",
@@ -85,30 +84,30 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/sales-report",
-        Component: SalesReport,
+        Component: SalesReport
       },
       {
         path: "/dashboard/manage-banner-advertises",
-        Component: ManageBannerAdvertises,
+        Component: ManageBannerAdvertises
       },
       //   Routes For Seller Pages-------
       {
         path: "/dashboard/manage-medicines",
-        Component: ManageMedicines,
+        Component: ManageMedicines
       },
       {
         path: "/dashboard/seller-payment-history",
-        Component: SellerPaymentHistory,
+        Component: SellerPaymentHistory
       },
       {
         path: "/dashboard/ask-for-advertisements",
-        Component: AskForAdvertisement,
+        Component: AskForAdvertisement
       },
       //   Routes For User Pages-------
       {
         path: "/dashboard/user-payment-history",
         Component: UserPaymentHistory
-      }
+      },
     ],
   },
   // ---------------------------------

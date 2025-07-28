@@ -6,8 +6,10 @@ import UserRow from "../../../components/shared/Dashboard/userRow";
 import { GrUpdate } from "react-icons/gr";
 import RoleUpdateModal from "../../../components/modals/RoleUpdateModal";
 import { useState } from "react";
+import {TabTitle} from '../../../utilities/utilities'
 
 const ManageUsers = () => {
+  TabTitle('Manage Users')
   // -------------------------------------------------------------
   //   RoleUpdating Modal State Management
   // -------------------------------------------------------------

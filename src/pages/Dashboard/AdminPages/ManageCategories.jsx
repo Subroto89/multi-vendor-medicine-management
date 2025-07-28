@@ -9,8 +9,10 @@ import DataNotFound from "../../../components/shared/DataNotFound";
 import CategoryRow from "../../../components/shared/Dashboard/CategoryRow";
 import Swal from "sweetalert2";
 import UpdateCategoryModal from "../../../components/modals/UpdateCategoryModal";
+import { TabTitle } from "../../../utilities/utilities";
 
 const ManageCategories = () => {
+  TabTitle('Manage Categories');
   const axiosSecure = useAxiosSecure();
 
   // --------------------------------------------------------------------

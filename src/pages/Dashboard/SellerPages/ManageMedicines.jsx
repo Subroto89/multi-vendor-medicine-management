@@ -12,8 +12,10 @@ import Swal from "sweetalert2";
 import MedicineDetailsModal from "../../../components/modals/MedicineDetailsModal";
 import MedicineRestockModal from "../../../components/modals/MedicineRestockModal";
 import MedicineEditModal from "../../../components/modals/MedicineEditModal";
+import { TabTitle } from "../../../utilities/utilities";
 
 const ManageMedicines = () => {
+  TabTitle('Manage Medicines');
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   // ---------------------------------------------------------------------------------------

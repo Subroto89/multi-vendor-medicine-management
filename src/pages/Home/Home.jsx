@@ -8,8 +8,11 @@ import CategoryCardsContainer from "../../components/CategoryCardsContainer";
 import DiscounteProductSlider from "../../components/shared/DiscounteProductSlider";
 import DataNotFound from "../../components/shared/DataNotFound";
 import HealthBlogPost from "../../components/shared/HealthBlogPost";
+import ReviewSection from "../../components/ReviewSection";
+import {TabTitle} from "../../utilities/utilities";
 
 const Home = () => {
+  TabTitle('Home');
   const axiosSecure = useAxiosSecure();
 
   const { data: activeAds = [], isLoading } = useQuery({
@@ -42,14 +45,18 @@ const Home = () => {
         {/* ------------------------------------------------------
                 Discounted Medicines Slider 
         ------------------------------------------------------- */}
-    
+
         <DiscounteProductSlider />
+
+        {/* ------------------------------------------------------
+               Reviews Section
+        ------------------------------------------------------- */}
+        <ReviewSection />
 
         {/* ------------------------------------------------------
                 Health Blogs 
         ------------------------------------------------------- */}
-        <HealthBlogPost/>
-
+        <HealthBlogPost />
       </Container>
     </div>
   );

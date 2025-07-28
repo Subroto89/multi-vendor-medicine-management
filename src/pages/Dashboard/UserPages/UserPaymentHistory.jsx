@@ -1,27 +1,43 @@
+import { useQuery } from "@tanstack/react-query";
 
-import { useQuery } from '@tanstack/react-query';
-
-import LoadingSpinner from '../../../components/shared/LoadingSpinner';
-import DataNotFound from '../../../components/shared/DataNotFound';
-import useAuth from '../../../hooks/useAuth';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import UserPaymentRow from '../../../components/UserPaymentRow';
+import LoadingSpinner from "../../../components/shared/LoadingSpinner";
+import DataNotFound from "../../../components/shared/DataNotFound";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import UserPaymentRow from "../../../components/UserPaymentRow";
+import ReviewModal from "../../../components/modals/ReviewModal";
+import { useState } from "react";
+import {TabTitle} from "../../../utilities/utilities";
 
 const UserPaymentHistory = () => {
- const {user} = useAuth()
-  const axiosSecure = useAxiosSecure(); 
+  TabTitle('Payment History');
+  const [isReviewModal, setIsReviewModal] = useState(false);
+  const [orderDetails, setOrderDetails] = useState(null);
 
-  
+  const handleReviewModal = () => {
+    setIsReviewModal(!isReviewModal);
+  };
+
+  const handleOrderDetails = (particularOrder) => {
+    setOrderDetails(particularOrder);
+  };
+
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
   const {
-    data: userPaymentHistory = [], 
+    data: userPaymentHistory = [],
     isLoading,
+    refetch,
   } = useQuery({
-    queryKey: ['paymentHistory', user?.email], 
+    queryKey: ["paymentHistory", user?.email],
     queryFn: async () => {
       if (!user?.email) {
-        return []; 
+        return [];
       }
-      const { data } = await axiosSecure.get(`/user-payment-history/${user?.email}`);
+      const { data } = await axiosSecure.get(
+        `/user-payment-history/${user?.email}`
+      );
       return data;
     },
   });
@@ -29,14 +45,14 @@ const UserPaymentHistory = () => {
   // Determine status badge styling
   const getStatusBadgeClasses = (status) => {
     switch (status) {
-      case 'paid':
-        return 'bg-green-100 text-green-800';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'failed':
-        return 'bg-red-100 text-red-800';
+      case "paid":
+        return "bg-green-100 text-green-800";
+      case "pending":
+        return "bg-yellow-100 text-yellow-800";
+      case "failed":
+        return "bg-red-100 text-red-800";
       default:
-        return 'bg-gray-100 text-gray-800';
+        return "bg-gray-100 text-gray-800";
     }
   };
 
@@ -47,9 +63,14 @@ const UserPaymentHistory = () => {
   return (
     <div className="py-8 px-4 bg-gray-100 min-h-screen">
       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Your Payment History</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+          Your Payment History
+        </h1>
         <p className="text-lg text-gray-600 text-center mb-8">
-          Total payments: <span className="font-semibold text-blue-700">{userPaymentHistory.length}</span>
+          Total payments:{" "}
+          <span className="font-semibold text-blue-700">
+            {userPaymentHistory.length}
+          </span>
         </p>
 
         {userPaymentHistory.length > 0 ? (
@@ -72,12 +93,20 @@ const UserPaymentHistory = () => {
                   <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Give Review
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                  {userPaymentHistory.map((payment, index) => (
-                  
-                    <UserPaymentRow payment={payment} index={index} getStatusBadgeClasses={getStatusBadgeClasses}/>
+                {userPaymentHistory.map((payment, index) => (
+                  <UserPaymentRow
+                    payment={payment}
+                    index={index}
+                    getStatusBadgeClasses={getStatusBadgeClasses}
+                    handleReviewModal={handleReviewModal}
+                    handleOrderDetails={handleOrderDetails}
+                  />
                 ))}
               </tbody>
             </table>
@@ -86,6 +115,17 @@ const UserPaymentHistory = () => {
           <DataNotFound message="No payment history found for your account." />
         )}
       </div>
+
+      {/* -------------------------------------------------------------------------------------------------------------
+      Review Modal
+      ------------------------------------------------------------------------------------------------------------- */}
+      {isReviewModal && (
+        <ReviewModal
+          handleReviewModal={handleReviewModal}
+          orderDetails={orderDetails}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };

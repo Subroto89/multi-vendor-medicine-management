@@ -1,11 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import DataNotFound from "../../../components/shared/DataNotFound";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// FaFileCsv, FaFileExcel, FaAngleLeft, FaAngleRight for pagination and export
 import {
   FaFileCsv,
   FaFilePdf,
@@ -14,13 +13,14 @@ import {
   FaAngleLeft,
   FaAngleRight,
 } from "react-icons/fa";
-import Swal from "sweetalert2"; // SweetAlert2 for better alerts
-
-// Import jsPDF and html2canvas for PDF generation
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import Swal from "sweetalert2";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import SalesReportPdfDocument from "../../../components/SalesReportPdfDocument";
+import { TabTitle } from "../../../utilities/utilities";
 
 const AdminSalesReportPage = () => {
+  TabTitle("Sales Report");
+
   const axiosSecure = useAxiosSecure();
 
   // State for date range filtering
@@ -29,12 +29,8 @@ const AdminSalesReportPage = () => {
 
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10); // Default items per page
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  // Ref for the table element to be exported as PDF
-  const tableRef = useRef(null);
-
-  // Fetch sales report data
   const {
     data: reportData = { salesReport: [], totalCount: 0 },
     isLoading,
@@ -70,20 +66,17 @@ const AdminSalesReportPage = () => {
       }
 
       const { data } = await axiosSecure.get(url);
-      // Backend should return an object like { salesReport: [...], totalCount: N }
       return data;
     },
     staleTime: 1000 * 60 * 2,
     cacheTime: 1000 * 60 * 5,
   });
 
-  // Extract salesReport (paginated data) and totalCount from the fetched reportData
   const { salesReport, totalCount } = reportData;
-  // Total number of pages based on totalCount and itemsPerPage
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
-  // Function to handle PDF export with enhanced error reporting and debugging
-  const exportToPDF = async () => {
+  // Function to handle CSV export
+  const exportToCSV = () => {
     if (salesReport.length === 0) {
       Swal.fire({
         icon: "info",
@@ -95,78 +88,73 @@ const AdminSalesReportPage = () => {
       return;
     }
 
-    // Warning for pagination-limited export
     Swal.fire({
       icon: "warning",
       title: "Exporting Current Page",
-      text: 'This will export only the sales records currently displayed on this page. For a full report, a dedicated "Export All" feature would be needed (often server-side PDF generation).',
+      text: 'This will export only the sales records currently displayed on this page. For a full report, a dedicated "Export All" feature would be needed (often involves a separate backend endpoint).',
       showCancelButton: true,
       confirmButtonText: "Continue Export",
       cancelButtonText: "Cancel",
-    }).then(async (result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
-        if (!tableRef.current) {
-          Swal.fire({
-            icon: "error",
-            title: "Export Error",
-            text: "Table element not found for PDF export. Please ensure the table is rendered.",
-          });
-          return;
-        }
+        const headers = [
+          "Order ID",
+          "Medicine Name",
+          "Seller Email",
+          "Buyer Email",
+          "Quantity",
+          "Price Per Item",
+          "Total Price",
+          "Payment Status",
+          "Order Date",
+          "Transaction ID",
+        ];
 
-        // Temporarily disable scrollbar to ensure full content is captured
-        const originalOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
+        const csvRows = salesReport.map((record) => {
+          return [
+            `"${record._id}"`,
+            `"${record.itemName}"`,
+            `"${record.sellerEmail || "N/A"}"`,
+            `"${record.userEmail || "N/A"}"`,
+            record.quantity,
+            record.priceAtAddToCart
+              ? record.priceAtAddToCart.toFixed(2)
+              : "0.00",
+            record.totalPricePerItem
+              ? record.totalPricePerItem.toFixed(2)
+              : "0.00",
+            `"${
+              record.paymentStatus
+                ? record.paymentStatus.replace(/_/g, " ").toUpperCase()
+                : "UNKNOWN"
+            }"`,
+            `"${
+              record.orderDate
+                ? new Date(record.orderDate).toLocaleDateString()
+                : "N/A"
+            }"`,
+            `"${record.transactionId || "N/A"}"`,
+          ].join(",");
+        });
 
-        try {
-          const input = tableRef.current;
-          const canvas = await html2canvas(input, {
-            scale: 2, // Increase scale for better resolution
-            useCORS: true, // Enable CORS if your images/resources are from different origins
-            logging: false, // Set to false for cleaner console, set true for debugging html2canvas issues
-            backgroundColor: "#FFFFFF", // Explicitly set background color for canvas capture to avoid transparency issues
-          });
+        const csvContent = [headers.join(","), ...csvRows].join("\n");
 
-          const imgData = canvas.toDataURL("image/png");
-          const pdf = new jsPDF("p", "mm", "a4");
-          const imgWidth = 210; // A4 width in mm
-          const pageHeight = 297; // A4 height in mm
-
-          const imgHeight = (canvas.height * imgWidth) / canvas.width;
-          let heightLeft = imgHeight;
-          let position = 0;
-
-          pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-          heightLeft -= pageHeight;
-
-          while (heightLeft > 0) {
-            position = heightLeft - imgHeight;
-            pdf.addPage();
-            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-          }
-
-          pdf.save(`sales_report_page_${currentPage}.pdf`);
-          Swal.fire({
-            icon: "success",
-            title: "PDF Generated!",
-            text: "The current page of the sales report has been downloaded as a PDF.",
-            timer: 2000,
-            showConfirmButton: false,
-          });
-        } catch (error) {
-          console.error("Error during PDF export:", error);
-          Swal.fire({
-            icon: "error",
-            title: "PDF Export Failed",
-            text: `Failed to generate PDF. Please try again. Error: ${
-              error.message || "Unknown error"
-            }`,
-          });
-        } finally {
-          // Re-enable scrollbar
-          document.body.style.overflow = originalOverflow;
-        }
+        const blob = new Blob([csvContent], {
+          type: "text/csv;charset=utf-8;",
+        });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", `sales_report_page_${currentPage}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        Swal.fire({
+          icon: "success",
+          title: "CSV Generated!",
+          text: "The current page of the sales report has been downloaded as a CSV.",
+          timer: 2000,
+          showConfirmButton: false,
+        });
       }
     });
   };
@@ -268,18 +256,49 @@ const AdminSalesReportPage = () => {
           {/* Export Buttons */}
           <div className="flex space-x-3">
             <button
-              onClick={exportToPDF}
+              onClick={exportToCSV}
               className="px-4 py-2 rounded-md transition-colors flex items-center gap-2"
-              style={{ backgroundColor: "#DC2626", color: "#FFFFFF" }}
+              style={{ backgroundColor: "#10B981", color: "#FFFFFF" }}
             >
-              <FaFilePdf /> PDF
+              <FaFileCsv /> CSV
             </button>
+
+            {salesReport.length > 0 ? (
+              <PDFDownloadLink
+                document={
+                  <SalesReportPdfDocument
+                    salesReport={salesReport}
+                    totalCount={totalCount}
+                    startDate={startDate}
+                    endDate={endDate}
+                  />
+                }
+                fileName={`sales_report_page_${currentPage}.pdf`}
+              >
+                {({ blob, url, loading, error: pdfError }) => (
+                  <button
+                    className="px-4 py-2 rounded-md transition-colors flex items-center gap-2"
+                    style={{ backgroundColor: "#DC2626", color: "#FFFFFF" }}
+                    disabled={loading} // Disable button while PDF is generating
+                  >
+                    <FaFilePdf /> {loading ? "Generating PDF..." : "PDF"}
+                  </button>
+                )}
+              </PDFDownloadLink>
+            ) : (
+              <button
+                className="px-4 py-2 rounded-md transition-colors flex items-center gap-2 opacity-50 cursor-not-allowed"
+                style={{ backgroundColor: "#DC2626", color: "#FFFFFF" }}
+                disabled
+              >
+                <FaFilePdf /> PDF
+              </button>
+            )}
           </div>
         </div>
 
         {salesReport.length > 0 ? (
           <div
-            ref={tableRef}
             className="overflow-x-auto rounded-lg shadow-lg table-to-pdf"
             style={{
               backgroundColor: "#FFFFFF",
@@ -513,7 +532,7 @@ const AdminSalesReportPage = () => {
         )}
 
         {/* ADDED: Pagination Controls */}
-        {totalCount > 0 && ( // Only show pagination if there are records
+        {totalCount > 0 && (
           <div className="flex flex-col md:flex-row justify-between items-center mt-8 px-4 py-3 bg-white rounded-lg shadow-md">
             {/* Items Per Page Selector */}
             <div className="flex items-center gap-2">
@@ -542,9 +561,7 @@ const AdminSalesReportPage = () => {
               >
                 <FaAngleLeft />
               </button>
-              {/* Render a few page numbers around the current page for better UX */}
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) =>
-                // Show first, last, and pages within 2 of current page, with ellipsis
                 page === 1 ||
                 page === totalPages ||
                 (page >= currentPage - 2 && page <= currentPage + 2) ? (
@@ -560,7 +577,6 @@ const AdminSalesReportPage = () => {
                     {page}
                   </button>
                 ) : (
-                  // Show ellipsis for skipped pages, but only once for a block of skipped pages
                   (page === currentPage - 3 || page === currentPage + 3) && (
                     <span key={page} className="px-2 text-gray-500">
                       ...
@@ -577,7 +593,7 @@ const AdminSalesReportPage = () => {
               </button>
             </div>
             <span className="text-sm text-gray-700">
-              Page {currentPage} of {totalPages}
+              Page {currentPage} of {totalPages} ({totalCount} items)
             </span>
           </div>
         )}

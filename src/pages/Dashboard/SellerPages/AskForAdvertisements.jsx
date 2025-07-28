@@ -5,8 +5,10 @@ import { Link } from "react-router";
 import { FaPlus } from "react-icons/fa";
 import MyMedicineAdvertisements from "../../../components/shared/Dashboard/MyMedicineAdvertisements";
 import AdvertisementViewModal from "../../../components/modals/AdvertisementViewModal";
+import { TabTitle } from "../../../utilities/utilities";
 
 const AskForAdvertisements = () => {
+  TabTitle('Ask For Advertisement');
   const [isAdModalOpen, setIsAdModalOpen] = useState(false);
   const [isAdViewModal, setIsAdViewModal] = useState(false);
   const [particularAd, setParticularAd] = useState(null);

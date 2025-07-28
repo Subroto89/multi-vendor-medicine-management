@@ -4,8 +4,10 @@ import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../../components/shared/LoadingSpinner';
 import DataNotFound from '../../../components/shared/DataNotFound';
+import {TabTitle} from '../../../utilities/utilities'
 
 const AdminDashboardHome = () => {
+  TabTitle('Admin-Home');
   const { user } = useAuth(); 
   const axiosSecure = useAxiosSecure();
 

@@ -7,9 +7,10 @@ import { BounceLoader } from "react-spinners";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import GoogleLogin from "../../components/shared/GoogleLogin";
-import { saveUserToDatabase } from "../../utilities/utilities";
+import { saveUserToDatabase, TabTitle } from "../../utilities/utilities";
 
 const JoinUs = () => {
+  TabTitle('JoinUs');
   const { signInUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();

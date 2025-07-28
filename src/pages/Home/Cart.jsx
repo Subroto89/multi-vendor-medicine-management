@@ -10,8 +10,10 @@ import CartDataRow from '../../components/CartDataRow';
 import Swal from 'sweetalert2';
 import { MdOutlineRemoveShoppingCart } from 'react-icons/md';
 import { useNavigate } from 'react-router';
+import {TabTitle} from "../../utilities/utilities";
 
 const Cart = () => {
+  TabTitle('Cart');
    const [selectedItems, setSelectedItems] = useState([])
   const {user} = useAuth();
   const navigate = useNavigate();

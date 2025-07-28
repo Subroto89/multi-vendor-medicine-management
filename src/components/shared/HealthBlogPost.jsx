@@ -130,7 +130,7 @@ const HealthBlogPost = () => {
                         }`}
                       >
                         {page}
-                      </button>
+                      </button> 
                     ) : (
                       (page === currentPage - 3 || page === currentPage + 3) && (
                         <span key={page} className="px-2 text-gray-500">...</span>

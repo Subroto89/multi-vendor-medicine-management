@@ -6,10 +6,11 @@ import GoogleLogin from "../../components/shared/GoogleLogin";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import RegisterForm from "../../components/forms/RegisterForm";
-import { imageUpload, saveUserToDatabase } from "../../utilities/utilities";
-import axios from "axios";
+import { imageUpload, saveUserToDatabase, TabTitle } from "../../utilities/utilities";
+
 
 const Register = () => {
+  TabTitle('Register');
   //--------------------------------------------------------------
   //  Necessary State Variables
   // --------------------------------------------------------------

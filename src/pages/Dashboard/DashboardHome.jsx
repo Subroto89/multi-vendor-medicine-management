@@ -5,6 +5,7 @@ import LoadingSpinner from '../../components/shared/LoadingSpinner';
 import SellerDashboardHome from './SellerPages/SellerDashboardHome'; // Import the seller home content
 import AdminDashboardHome from './AdminPages/AdminDashboardHome';
 import useUserRole from '../../hooks/useUserRole';
+import UserDashboardHome from './UserPages/UserDashboardHome';
 
 
 const DashboardHome = () => {
@@ -26,8 +27,8 @@ console.log(userRole)
       return <AdminDashboardHome />;
     case 'seller':
       return <SellerDashboardHome />; 
-    // case 'user':
-    //   return <UserDashboardHome />;
+    case 'user':
+      return <UserDashboardHome />;
     default:
       return <div className="text-center py-20">Welcome to your Dashboard! Role not recognized.</div>;
   }

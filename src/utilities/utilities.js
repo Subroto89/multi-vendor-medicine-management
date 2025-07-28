@@ -93,3 +93,7 @@ export const saveUserToDatabase = async(userData) => {
       });
     }
   };
+
+  export const TabTitle = (newTitle) => {
+    return document.title = newTitle;
+  }

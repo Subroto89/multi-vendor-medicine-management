@@ -7,8 +7,10 @@ import { GrUpdate } from "react-icons/gr";
 import AdvertisementRow from "../../../components/shared/Dashboard/AdvertisementRow";
 import { useState } from "react";
 import BannerAdModal from "../../../components/modals/BannerAdModal";
+import { TabTitle } from "../../../utilities/utilities";
 
 const ManageBannerAdvertises = () => {
+  TabTitle('Manage Banner Advertises')
   const axiosSecure = useAxiosSecure();
 
   const [isBannerAdModal, setIsBannerAdModal] = useState(false);
@@ -32,6 +34,7 @@ const ManageBannerAdvertises = () => {
   if (isLoading) return <LoadingSpinner />;
   return (
     <div>
+      
       <Container>
         {advertisements.length > 0 ? (
           <div>

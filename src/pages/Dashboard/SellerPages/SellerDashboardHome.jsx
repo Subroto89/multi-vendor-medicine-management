@@ -4,9 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../../components/shared/LoadingSpinner';
 import useAuth from '../../../hooks/useAuth';
+import { TabTitle } from '../../../utilities/utilities';
 // import DataNotFound from '../../../components/shared/DataNotFound';
 
 const SellerDashboardHome = () => {
+  TabTitle('Seller-Dashboard Home');
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 

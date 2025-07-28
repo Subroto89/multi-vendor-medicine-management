@@ -5,8 +5,10 @@ import useAuth from '../../../hooks/useAuth';
 import LoadingSpinner from '../../../components/shared/LoadingSpinner';
 import DataNotFound from '../../../components/shared/DataNotFound';
 import { FaEye } from 'react-icons/fa'; // For view details icon
+import { TabTitle } from '../../../utilities/utilities';
 
 const SellerPaymentHistory = () => {
+  TabTitle('Payment History');
   const { user } = useAuth(); 
   const axiosSecure = useAxiosSecure();
 

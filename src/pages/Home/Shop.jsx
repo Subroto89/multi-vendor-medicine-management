@@ -6,6 +6,7 @@ import Container from "../../components/shared/Container";
 import ShopMedicineRow from "../../components/shopMedicineRow";
 import React, { useState } from "react";
 import ShopModal from "../../components/modals/ShopModal";
+import {TabTitle} from "../../utilities/utilities";
 import {
   FaArrowDown,
   FaArrowLeft,
@@ -17,6 +18,7 @@ import {
 
 
 const Shop = () => {
+  TabTitle('Shop');
   const axiosSecure = useAxiosSecure();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [targetMedicine, setTargetMedicine] = useState(null);

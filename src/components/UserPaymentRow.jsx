@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserPaymentRow = ({payment, index, getStatusBadgeClasses}) => {
+const UserPaymentRow = ({payment, index, getStatusBadgeClasses, handleReviewModal, handleOrderDetails}) => {
     return (
         <tr key={payment._id || index} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -28,6 +28,9 @@ const UserPaymentRow = ({payment, index, getStatusBadgeClasses}) => {
                         {payment.status ? payment.status.replace(/_/g, ' ').toUpperCase() : 'UNKNOWN'}
                       </span>
                     </td>
+                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                      <button onClick={()=>{handleReviewModal(), handleOrderDetails(payment)}} className='btn btn-outline px-2 rounded-md hover:bg-green-600 hover:text-white'>Submit Review</button>
+                     </td>
         </tr>
      
     );

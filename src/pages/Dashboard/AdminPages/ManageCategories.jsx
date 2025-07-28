@@ -8,6 +8,7 @@ import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import DataNotFound from "../../../components/shared/DataNotFound";
 import CategoryRow from "../../../components/shared/Dashboard/CategoryRow";
 import Swal from "sweetalert2";
+import UpdateCategoryModal from "../../../components/modals/UpdateCategoryModal";
 
 const ManageCategories = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,9 +17,15 @@ const ManageCategories = () => {
   // Add Category Modal Opening/Closing State & Function
   // --------------------------------------------------------------------
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [isUpdateCategoryModalOpen, setIsUpdateCategoryModalOpen] = useState(false);
+  const [categoryToEdit, setCategoryToEdit] = useState(null)
   const handleCategoryModal = () => {
     setIsCategoryModalOpen(!isCategoryModalOpen);
   };
+
+  const handleUpdateCategoryModal = () => {
+    setIsUpdateCategoryModalOpen(!isUpdateCategoryModalOpen)
+  }
 
   // --------------------------------------------------------------------
   // Fetching All Categories Using Tanstack
@@ -95,7 +102,10 @@ const ManageCategories = () => {
                 </thead>
                 <tbody>
                   {categories.map((category) => (
-                    <CategoryRow key={category._id} category={category} handleCategoryDelete = {handleCategoryDelete} />
+                    <CategoryRow key={category._id} category={category} 
+                    handleCategoryDelete = {handleCategoryDelete} 
+                    handleUpdateCategoryModal={handleUpdateCategoryModal}
+                    setCategoryToEdit={setCategoryToEdit}/>
                   ))}
                 </tbody>
               </table>
@@ -112,6 +122,10 @@ const ManageCategories = () => {
             <CategoryModal handleCategoryModal={handleCategoryModal} refetch={refetch} />
           )}
         </div>
+        {isUpdateCategoryModalOpen && (
+          <UpdateCategoryModal 
+          handleUpdateCategoryModal={handleUpdateCategoryModal}
+          categoryToEdit={categoryToEdit} refetch={refetch}/>)}
       </Container>
     </div>
   );

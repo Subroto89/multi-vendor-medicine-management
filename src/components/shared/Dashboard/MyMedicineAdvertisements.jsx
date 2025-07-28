@@ -7,20 +7,62 @@ import Container from "../Container";
 import DataNotFound from "../DataNotFound";
 import MyMediAdsRow from "./MyMediAdsRow";
 import { GrUpdate } from "react-icons/gr";
+import Swal from "sweetalert2";
 
-const MyMedicineAdvertisements = () => {
+const MyMedicineAdvertisements = ({ handleAdViewModal, handleParticularAd }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: allMediAds = [], isLoading } = useQuery({
+  const {
+    data: allMediAds = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["myMediAds"],
     queryFn: async () => {
       const { data } = await axiosSecure(
-        `/my-advertisements/?email=${user.email}`
+        `/my-advertisements?email=${user.email}`
       );
       return data;
     },
   });
+
+  const handleAdsDelete = async (id) => {
+    const confirmation = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (confirmation.isConfirmed) {
+      try {
+        const { data } = await axiosSecure.delete(
+          `/delete-advertisement/${id}`
+        );
+        if (data.deletedCount) {
+          Swal.fire({
+            icon: "success",
+            title: "Deletion Success!",
+            text: "Your advertisement has been deleted successfully",
+            timer: 1000,
+          });
+          refetch();
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Deletion Failed!",
+            text: "Your advertisement can not be deleted",
+            timer: 1000,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -75,7 +117,13 @@ const MyMedicineAdvertisements = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {allMediAds.map((mediAd) => (
-                    <MyMediAdsRow key={mediAd._id} mediAd={mediAd} />
+                    <MyMediAdsRow
+                      key={mediAd._id}
+                      mediAd={mediAd}
+                      handleAdsDelete={handleAdsDelete}
+                      handleAdViewModal={handleAdViewModal}
+                      handleParticularAd={handleParticularAd}
+                    />
                   ))}
                 </tbody>
               </table>

@@ -1,29 +1,45 @@
 import axios from "axios";
-import { useEffect } from "react";
 import useAuth from "./useAuth";
+import { useNavigate } from "react-router";
+
+
+
 
 const axiosSecure = axios.create({
-  baseURL: import.meta.env.VITE_Server_API_KEY,
-  // withCredentials: true,
+     baseURL: import.meta.env.VITE_Server_API_KEY
 });
 
 const useAxiosSecure = () => {
-  const { logOutUser } = useAuth();
-  useEffect(() => {
-    axiosSecure.interceptors.response.use(
-      (res) => {
-        return res;
-      },
+    const { user, logOutUser } = useAuth();
+    const navigate = useNavigate();
+const token = localStorage.getItem('token');
+    axiosSecure.interceptors.request.use(config => {
+        config.headers.Authorization = `Bearer ${token}`
+        return config;
+    }, error => {
+        return Promise.reject(error);
+    })
 
-      async (err) => {
-        if (err.response.status === 401 || err.response.status === 403) {
-          logOutUser();
+    axiosSecure.interceptors.response.use(res => {
+        return res;
+    }, error => {
+        const status = error.status;
+        if (status === 403) {
+            navigate('/forbidden');
         }
-        return Promise.reject(err);
-      }
-    );
-  }, [logOutUser]);
-  return axiosSecure;
+        else if (status === 401) {
+            logOutUser()
+                .then(() => {
+                    navigate('/auth/joinUs')
+                })
+                .catch(() => { })
+        }
+
+        return Promise.reject(error);
+    })
+
+
+    return axiosSecure;
 };
 
 export default useAxiosSecure;

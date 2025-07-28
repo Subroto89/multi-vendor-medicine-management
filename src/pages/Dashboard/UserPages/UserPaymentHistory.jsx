@@ -15,7 +15,6 @@ const UserPaymentHistory = () => {
   const {
     data: userPaymentHistory = [], 
     isLoading,
-    // refetch, // refetch function to manually trigger a data fetch
   } = useQuery({
     queryKey: ['paymentHistory', user?.email], 
     queryFn: async () => {
@@ -44,8 +43,6 @@ const UserPaymentHistory = () => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
-
-
 
   return (
     <div className="py-8 px-4 bg-gray-100 min-h-screen">
@@ -82,35 +79,6 @@ const UserPaymentHistory = () => {
                   
                     <UserPaymentRow payment={payment} index={index} getStatusBadgeClasses={getStatusBadgeClasses}/>
                 ))}
-                {/* {userPaymentHistory.map((payment, index) => (
-                  <tr key={payment._id || index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {index + 1}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      {payment.transactionId || 'N/A'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      ${payment.totalAmount ? payment.totalAmount.toFixed(2) : '0.00'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      {payment.orderDate ? new Date(payment.orderDate).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      }) : 'N/A'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center">
-                      <span
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClasses(payment.status)}`}
-                      >
-                        {payment.status ? payment.status.replace(/_/g, ' ').toUpperCase() : 'UNKNOWN'}
-                      </span>
-                    </td>
-                  </tr>
-                ))} */}
               </tbody>
             </table>
           </div>

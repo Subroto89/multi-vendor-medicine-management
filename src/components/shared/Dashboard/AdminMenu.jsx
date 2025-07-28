@@ -24,6 +24,10 @@ const AdminMenu = () => {
                 label="Manage Banner Advertises"
                 address="/dashboard/manage-banner-advertises"
            />
+           <MenuButton
+                label="Manage Blogs"
+                address="/dashboard/manage-blogs"
+           />
 
         </div>
     );

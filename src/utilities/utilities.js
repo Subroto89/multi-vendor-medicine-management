@@ -1,5 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 export const imageUpload = async (imageFile) => {
   const imageFormData = new FormData();
@@ -26,6 +27,7 @@ export const saveUserToDatabase = async(userData) => {
 
 
  export const handleAddToCart = async (stockQuantity, _id) => {
+  
     if (!user) {
       Swal.fire({
         icon: "warning",
@@ -58,7 +60,7 @@ export const saveUserToDatabase = async(userData) => {
     };
 
     try {
-      const { data } = await axiosSecure.post("/add-to-cart", cartData);
+      const { data } = await useAxiosSecure.post("/add-to-cart", cartData);
 
       if (data.insertedId || data.modifiedCount) {
         Swal.fire({

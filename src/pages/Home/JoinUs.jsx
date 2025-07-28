@@ -13,6 +13,7 @@ const JoinUs = () => {
   const { signInUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  
   const destination = location.state || '/'
  
   const {

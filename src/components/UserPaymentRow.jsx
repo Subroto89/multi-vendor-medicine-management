@@ -28,7 +28,7 @@ const UserPaymentRow = ({payment, index, getStatusBadgeClasses}) => {
                         {payment.status ? payment.status.replace(/_/g, ' ').toUpperCase() : 'UNKNOWN'}
                       </span>
                     </td>
-                  </tr>
+        </tr>
      
     );
 };

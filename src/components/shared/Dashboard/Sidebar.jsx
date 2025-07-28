@@ -3,8 +3,16 @@ import AdminMenu from "../../shared/Dashboard/AdminMenu";
 import SellerMenu from "../../shared/Dashboard/SellerMenu";
 import UserMenu from "../../shared/Dashboard/UserMenu";
 import { Link } from "react-router";
+import useAuth from "../../../hooks/useAuth";
+import LoadingSpinner from "../LoadingSpinner";
+import useUserRole from "../../../hooks/useUserRole";
 
 const Sidebar = ({ isSideBarOpen, toggleMenu }) => {
+  const { loading:authLoading } = useAuth()
+  const {userRole, userRoleLoading} = useUserRole();
+  if(authLoading || userRoleLoading) return <LoadingSpinner/>
+console.log(userRole)
+
   return (
     <div>
       <div
@@ -25,9 +33,15 @@ const Sidebar = ({ isSideBarOpen, toggleMenu }) => {
             Sidebar Menu
         ---------------------------------------------------------------- */}
         <div className="w-full" onClick={toggleMenu}>
-          <AdminMenu />
-          <SellerMenu />
-          <UserMenu />
+
+
+          {
+            userRole === 'admin' ? (<AdminMenu/>) : userRole === 'seller' ? (<SellerMenu/>): userRole === 'user' ? (<UserMenu/>):(<h2>No menu</h2>)
+          }
+
+          
+          
+           
         </div>
       </div>
     </div>

@@ -15,13 +15,16 @@ import {
   FaTools,
 } from "react-icons/fa";
 
+
 const Shop = () => {
   const axiosSecure = useAxiosSecure();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [targetMedicine, setTargetMedicine] = useState(null);
 
+
+
   // ----------------------------------------------------------------------------------------
-  // Pagination States
+  // Pagination States                                                                                 
   // ----------------------------------------------------------------------------------------
   const [totalItem, setTotalItem] = useState(0);
   const [itemPerPage, setItemPerPage] = useState(12);

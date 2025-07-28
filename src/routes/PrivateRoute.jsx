@@ -10,9 +10,9 @@ const PrivateRoute = ({children}) => {
 
         if(loading) return <LoadingSpinner/>
 
-        if(user && user?.email) return children;
-
-        return <Navigate to="/auth/joinUs" state={location.pathname}></Navigate>
+        if(!user) return <Navigate to="/auth/joinUs" state={location.pathname}></Navigate>
+        
+        return children;
 };
 
 export default PrivateRoute;

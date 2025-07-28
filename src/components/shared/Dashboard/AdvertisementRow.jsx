@@ -4,7 +4,7 @@ import { MdAdd, MdDelete, MdVisibility } from "react-icons/md";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const AdvertisementRow = ({ advertisement, refetch }) => {
+const AdvertisementRow = ({ advertisement, refetch, handleBannerAdModal, setParticularBannerAd }) => {
     const axiosSecure = useAxiosSecure();
   const {
     _id,
@@ -85,7 +85,7 @@ const AdvertisementRow = ({ advertisement, refetch }) => {
       <td className="px-5 py-2">{formattedDate}</td>
       <td className="px-5 py-2">
         <div className="flex items-center gap-2">
-            <MdVisibility className="btn btn-outline btn-xs cursor-pointer hover:bg-blue-400"/>
+            <MdVisibility onClick={()=>{handleBannerAdModal(), setParticularBannerAd(advertisement)}} className="btn btn-outline btn-xs cursor-pointer hover:bg-blue-400"/>
           {status === "pending" || status === "Rejected" ? (
             <button onClick={()=>handleAdvertisementStatus(_id, "approve")} className="btn btn-outline btn-xs hover:bg-green-500 hover:text-white ">
               Add To Slide

@@ -4,11 +4,23 @@ import AskForAdvertisementModal from "../../../components/modals/AskForAdvertise
 import { Link } from "react-router";
 import { FaPlus } from "react-icons/fa";
 import MyMedicineAdvertisements from "../../../components/shared/Dashboard/MyMedicineAdvertisements";
+import AdvertisementViewModal from "../../../components/modals/AdvertisementViewModal";
 
 const AskForAdvertisements = () => {
   const [isAdModalOpen, setIsAdModalOpen] = useState(false);
+  const [isAdViewModal, setIsAdViewModal] = useState(false);
+  const [particularAd, setParticularAd] = useState(null);
+
   const handleIsAddModal = () => {
     setIsAdModalOpen(!isAdModalOpen);
+  };
+
+  const handleAdViewModal = () => {
+    setIsAdViewModal(!isAdViewModal);
+  };
+
+  const handleParticularAd = (particularAd) => {
+    setParticularAd(particularAd);
   };
   return (
     <div className="relative">
@@ -29,22 +41,31 @@ const AskForAdvertisements = () => {
           </Link>
         </div>
 
-
-
-{/* -----------------------------------------------------------------------
-Table of Medicine Ask For Advertisement and Status
---------------------------------------------------------------------------- */}
+        {/* -----------------------------------------------------------------------
+        Table of Medicine Ask For Advertisement and Status
+        --------------------------------------------------------------------------- */}
         <div>
-
-        <MyMedicineAdvertisements></MyMedicineAdvertisements>
+          <MyMedicineAdvertisements
+            handleAdViewModal={handleAdViewModal}
+              handleParticularAd={handleParticularAd} 
+          />
         </div>
 
         {/* -------------------------------------------------------------
-Ask For Advertisement Modal
-------------------------------------------------------------- */}
+        Ask For Advertisement Modal
+        ------------------------------------------------------------- */}
         <div>
           {isAdModalOpen && (
             <AskForAdvertisementModal handleIsAddModal={handleIsAddModal} />
+          )}
+        </div>
+
+        {/* -------------------------------------------------------------
+        Ask For Advertisement View Modal
+        ------------------------------------------------------------- */}
+        <div>
+          {isAdViewModal && (
+            <AdvertisementViewModal handleAdViewModal={handleAdViewModal} particularAd={particularAd} />
           )}
         </div>
       </Container>

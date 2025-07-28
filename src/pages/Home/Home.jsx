@@ -6,6 +6,8 @@ import Container from "../../components/shared/Container";
 import AdsSlider from "../../components/AdsSlider";
 import CategoryCardsContainer from "../../components/CategoryCardsContainer";
 import DiscounteProductSlider from "../../components/shared/DiscounteProductSlider";
+import DataNotFound from "../../components/shared/DataNotFound";
+import HealthBlogPost from "../../components/shared/HealthBlogPost";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,7 +27,7 @@ const Home = () => {
       <Container>
         {/* ------------------------------------------------------
                 Active Medicine Advertisements' Slides
-                ------------------------------------------------------- */}
+        ------------------------------------------------------- */}
         {activeAds.length > 0 ? (
           <AdsSlider activeAds={activeAds} />
         ) : (
@@ -34,14 +36,20 @@ const Home = () => {
 
         {/* ------------------------------------------------------
                 Medicine Categories Cards 
-                ------------------------------------------------------- */}
+        ------------------------------------------------------- */}
         <CategoryCardsContainer />
 
         {/* ------------------------------------------------------
                 Discounted Medicines Slider 
-                ------------------------------------------------------- */}
+        ------------------------------------------------------- */}
     
         <DiscounteProductSlider />
+
+        {/* ------------------------------------------------------
+                Health Blogs 
+        ------------------------------------------------------- */}
+        <HealthBlogPost/>
+
       </Container>
     </div>
   );

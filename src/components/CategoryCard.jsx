@@ -1,20 +1,9 @@
-import React from "react";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Link } from "react-router";
 
 const CategoryCard = ({ category }) => {
   const { categoryPhoto, catName, medicineCount } = category;
-  console.log(category);
-//   const axiosSecure = useAxiosSecure();
+  
 
-//   const handleCategoryMedicines = async (cat) => {
-//     try {
-//       const { data } = await axiosSecure(`/get-medicines/category/${cat}`);
-//       console.log(data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
 
   return (
     <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group">
@@ -37,14 +26,13 @@ const CategoryCard = ({ category }) => {
         <p className="text-gray-600 text-sm">
           <span className="font-semibold text-blue-600">
             {medicineCount || 0}
-          </span>{" "}
+          </span>
           Medicines
         </p>
 
-        {/* Optional: View Category Button */}
+        {/*  View Category Button */}
         <Link to={`/category-medicines/${catName}`}>
           <button
-            // onClick={() => handleCategoryMedicines(catName)}
             className="mt-4 px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105"
           >
             View Category

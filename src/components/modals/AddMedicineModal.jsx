@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 
 const AddMedicineModal = ({ handleAddMedicineModal, refetch }) => {
-  console.log(refetch)
+ 
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   

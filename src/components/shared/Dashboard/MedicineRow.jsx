@@ -1,35 +1,88 @@
-import React from 'react';
+import React from "react";
+import { FaBoxes, FaEdit, FaInfoCircle, FaTrashAlt } from "react-icons/fa";
 
-const MedicineRow = ({medicine}) => {
-    const {mediPhoto, medicineName, category, genericName, company, stockQuantity, status} = medicine;
-   
-    return (
-         <tr className="min-w-full divide-y divide-gray-200 text-gray-700 text-sm font-normal hover:bg-blue-50 transition-color duration-300">
-                <td className="px-5 py-2 w-12 h-12 overflow-hidden"><img src={mediPhoto} alt="medicine photo" className='w-12 h-12'/></td>
-                <td className="px-5 py-2 text-left">{medicineName}</td>
-                <td className="px-5 py-2 text-left max-w-20 truncate">{category}</td>
-                <td className="px-5 py-2 text-left w-20">{genericName}</td>
-                <td className="px-5 py-2 text-left w-50 truncate">{company}</td>
-                <td className="px-5 py-2 text-left">{stockQuantity}</td>
-                <td className="px-5 py-2 text-left">
-                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-          status === 'active' ? 'bg-green-100 text-green-800' : 
-          status === 'out_of_stock' ? 'bg-red-100 text-red-800' : 
-          'bg-gray-100 text-gray-800'
-        }`}>
+const MedicineRow = ({
+  medicine,
+  handleDeleteMedicine,
+  handleMedicineDetailsModal,
+  setParticularMedicine,
+  handleRestockModal,
+  handleMedicineEditModal
+}) => {
+  const {
+    _id,
+    mediPhoto,
+    medicineName,
+    categoryName,
+    genericName,
+    company,
+    stockQuantity,
+    status,
+  } = medicine;
+
+  return (
+    <tr className="min-w-full divide-y divide-gray-200 text-gray-700 text-sm font-normal hover:bg-blue-50 transition-color duration-300">
+      <td className="px-5 py-2 w-12 h-12 overflow-hidden">
+        <img src={mediPhoto} alt="medicine photo" className="w-12 h-12" />
+      </td>
+      <td className="px-5 py-2 text-left">{medicineName}</td>
+      <td className="px-5 py-2 text-left max-w-20 truncate">{categoryName}</td>
+      <td className="px-5 py-2 text-left w-20">{genericName}</td>
+      <td className="px-5 py-2 text-left w-50 truncate">{company}</td>
+      <td className="px-5 py-2 text-left">{stockQuantity}</td>
+      <td className="px-5 py-2 text-left">
+        <span
+          className={`px-2 py-1 rounded-full text-xs font-semibold ${
+            status === "active"
+              ? "bg-green-100 text-green-800"
+              : status === "out_of_stock"
+              ? "bg-red-100 text-red-800"
+              : "bg-gray-100 text-gray-800"
+          }`}
+        >
           {status}
         </span>
-                </td>
-                <td className="px-5 py-2 text-center">
-                    <div className='flex items-center gap-2 '>
-                        <button className='btn btn-outline btn-sm hover:bg-blue-500 hover:text-white'>Edit</button>
-                        <button className='btn btn-outline btn-sm hover:bg-green-500 hover:text-white'>Re-stock</button>
-                        <button className='btn btn-outline btn-sm hover:bg-gray-500 hover:text-white'>Details</button>
-                        <button className='btn btn-outline btn-sm hover:bg-red-500 hover:text-white'>Delete</button>
-                    </div>
-                </td>
-            </tr>
-    );
+      </td>
+      <td className="px-5 py-2 text-center">
+        <div className="flex items-center gap-2 ">
+          <button  
+          title="Edit"
+          onClick={()=>{handleMedicineEditModal(),setParticularMedicine(medicine)}}  
+          className="btn btn-outline btn-sm hover:bg-blue-500 hover:text-white">
+           
+            <FaEdit />
+          </button>
+          <button
+          title="Re-stock"
+            onClick={() => {
+              handleRestockModal(),
+                setParticularMedicine({ _id, medicineName, stockQuantity });
+            }}
+            className="btn btn-outline btn-sm hover:bg-green-500 hover:text-white"
+          >
+            
+            <FaBoxes />
+          </button>
+          <button
+          title="Details"
+            onClick={() => {
+              handleMedicineDetailsModal(), setParticularMedicine(medicine);
+            }}
+            className="btn btn-outline btn-sm hover:bg-gray-500 hover:text-white"
+          >
+            <FaInfoCircle />
+          </button>
+          <button
+          title="Delete"
+            onClick={() => handleDeleteMedicine(_id)}
+            className="btn btn-outline btn-sm hover:bg-red-500 hover:text-white"
+          >
+            <FaTrashAlt />
+          </button>
+        </div>
+      </td>
+    </tr>
+  );
 };
 
 export default MedicineRow;

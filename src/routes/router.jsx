@@ -21,6 +21,12 @@ import CheckoutPage from "../pages/Home/paymentGateWay/CheckoutPage";
 import InvoicePage from "../pages/Home/paymentGateWay/InvoicePage";
 import AdminPaymentManagement from "../pages/Dashboard/AdminPages/AdminPaymentManagement";
 import PrivateRoute from "./PrivateRoute";
+import Forbidden from "../pages/Forbidden";
+import AdminRoute from "./AdminRoute";
+import UserRoute from "./UserRoute";
+import SellerRoute from "./SellerRoute";
+import ManageBlogs from "../pages/Dashboard/AdminPages/ManageBlogs";
+import BlogDetails from "../pages/Home/BlogDetails";
 
 const router = createBrowserRouter([
   // ---------------------------------
@@ -55,6 +61,14 @@ const router = createBrowserRouter([
         path: "/invoice",
         Component: InvoicePage,
       },
+      {
+        path: "/forbidden",
+        Component: Forbidden
+      },
+      {
+        path: "/blog/:id",
+        Component: BlogDetails
+      }
     ],
   },
   // ---------------------------------
@@ -62,7 +76,7 @@ const router = createBrowserRouter([
   // ---------------------------------
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout><DashboardLayout/></DashboardLayout></PrivateRoute>, 
+    element: <PrivateRoute><DashboardLayout/></PrivateRoute>,
     children: [
       {
         path: "/dashboard",
@@ -72,41 +86,45 @@ const router = createBrowserRouter([
       //   Routes For Admin Pages-------
       {
         path: "/dashboard/manage-users",
-        Component: ManageUsers
+        element: <AdminRoute><ManageUsers/></AdminRoute>
       },
       {
         path: "/dashboard/manage-categories",
-        Component: ManageCategories
+        element: <AdminRoute><ManageCategories/></AdminRoute>
       },
       {
         path: "/dashboard/payment-management",
-        Component: AdminPaymentManagement
+        element: <AdminRoute><AdminPaymentManagement/></AdminRoute>
       },
       {
         path: "/dashboard/sales-report",
-        Component: SalesReport
+        element: <AdminRoute><SalesReport/></AdminRoute>
       },
       {
         path: "/dashboard/manage-banner-advertises",
-        Component: ManageBannerAdvertises
+        element: <AdminRoute><ManageBannerAdvertises/></AdminRoute>
+      },
+      {
+        path: "/dashboard/manage-blogs",
+        element: <AdminRoute><ManageBlogs/></AdminRoute>
       },
       //   Routes For Seller Pages-------
       {
         path: "/dashboard/manage-medicines",
-        Component: ManageMedicines
+        element: <SellerRoute><ManageMedicines/></SellerRoute>
       },
       {
         path: "/dashboard/seller-payment-history",
-        Component: SellerPaymentHistory
+        element: <SellerRoute><SellerPaymentHistory/></SellerRoute>
       },
       {
         path: "/dashboard/ask-for-advertisements",
-        Component: AskForAdvertisement
+        element: <SellerRoute><AskForAdvertisement/></SellerRoute>
       },
       //   Routes For User Pages-------
       {
         path: "/dashboard/user-payment-history",
-        Component: UserPaymentHistory
+        element: <UserRoute><UserPaymentHistory/></UserRoute>
       },
     ],
   },

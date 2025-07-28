@@ -6,7 +6,7 @@ import LoadingSpinner from '../../../components/shared/LoadingSpinner';
 import DataNotFound from '../../../components/shared/DataNotFound';
 
 const AdminDashboardHome = () => {
-  const { user } = useAuth(); // Get the current authenticated user (admin)
+  const { user } = useAuth(); 
   const axiosSecure = useAxiosSecure();
 
   // Fetch website-wide sales summary data (Paid Total, Pending Total)

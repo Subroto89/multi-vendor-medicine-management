@@ -10,11 +10,12 @@ import {
   updateProfile,
   signOut,
 } from "firebase/auth";
+import axios from "axios";
 
 const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
 
 
@@ -34,17 +35,35 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateUserProfile = (updateData)=> {
+    setLoading(true);
     return updateProfile(auth.currentUser, updateData);
   }
 
   const logOutUser = () => {
+     localStorage.removeItem('token');
     return signOut(auth)
   }
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      
+      
+      if(currentUser?.email){
+        
+        axios.post(`${import.meta.env.VITE_Server_API_KEY}/jwt`, { email: currentUser.email })
+        .then(res=>{
+          const token = res.data.token;
+          localStorage.setItem('token', token);
+        })
+      }
+      if(!currentUser?.email){
+        localStorage.removeItem('token')
+      }
+      
+setLoading(false);
+
+      
     });
 
     return () => {

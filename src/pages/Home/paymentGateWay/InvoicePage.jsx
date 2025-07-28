@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
@@ -9,7 +9,7 @@ import DataNotFound from '../../../components/shared/DataNotFound';
 const InvoicePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const invoiceRef = useRef();
+  const invoiceRef = React.useRef();
 
   const orderData = location.state?.orderData;
 

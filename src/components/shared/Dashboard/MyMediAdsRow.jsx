@@ -1,7 +1,7 @@
 import React from "react";
 import { MdDelete, MdVisibility } from "react-icons/md";
 
-const MyMediAdsRow = ({ mediAd }) => {
+const MyMediAdsRow = ({ mediAd, handleAdsDelete, handleAdViewModal, handleParticularAd }) => {
   const {
     _id,
     adDescription,
@@ -27,8 +27,8 @@ const MyMediAdsRow = ({ mediAd }) => {
       </td>
       <td className="px-5 text-center">
         <div className="flex items-center gap-2">
-          <MdVisibility className="btn btn-outline btn-xs hover:bg-green-500 hover:text-white" />
-          <MdDelete className="btn btn-outline btn-xs hover:bg-red-500 hover:text-white" />
+          <MdVisibility onClick={()=>{handleAdViewModal(), handleParticularAd(mediAd)}} className="btn btn-outline btn-xs hover:bg-green-500 hover:text-white" />
+          <MdDelete onClick={()=>handleAdsDelete(_id)} className="btn btn-outline btn-xs hover:bg-red-500 hover:text-white" />
         </div>
       </td>
     </tr>

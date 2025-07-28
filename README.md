@@ -1,113 +1,112 @@
-Medi-Mart: Your Online Medicine Store
+#Medi-Mart: Your Online Medicine Store
 Welcome to Medi-Mart, a comprehensive online platform designed to streamline the process of buying and selling medicines. This full-stack application provides a secure and intuitive experience for users, sellers, and administrators, ensuring efficient medicine management, secure transactions, and valuable health information.
 
-Live Demo
+#Live Demo
 Live Site URL: https://medi-mart-cure.web.app 
 
-Admin Credentials (for demonstration/testing)
+#Admin Credentials:
 Username (Email): subrotosarker1988@gmail.com
+Password: Subroto@89
 
- Password: Subroto@89
-
-Key Features
+#Key Features
 Robust User Authentication & Authorization:
 
-Secure user registration and login.
+*Secure user registration and login.
 
-Distinct roles for Admins, Sellers, and General Users, each with tailored dashboards and access permissions.
+*Distinct roles for Admins, Sellers, and General Users, each with tailored dashboards and access permissions.
 
-Comprehensive Medicine Management for Sellers:
+*Comprehensive Medicine Management for Sellers:
 
-Sellers can easily add new medicines, providing details like name, category, generic name, company, price, and stock quantity.
+*Sellers can easily add new medicines, providing details like name, category, generic name, company, price, and stock quantity.
 
-Intuitive interface to view, edit, restock, and delete their listed medicines.
+*Intuitive interface to view, edit, restock, and delete their listed medicines.
 
-Paginated display of medicines for efficient management.
+*Paginated display of medicines for efficient management.
 
-Seamless Medicine Browsing & Purchasing for Users:
+*Seamless Medicine Browsing & Purchasing for Users:
 
-Browse a wide range of medicines categorized for easy navigation.
+*Browse a wide range of medicines categorized for easy navigation.
 
-Powerful search functionality to quickly find specific medicines.
+*Powerful search functionality to quickly find specific medicines.
 
-Detailed product pages with essential information.
+*Detailed product pages with essential information.
 
-Secure shopping cart and streamlined checkout process.
+*Secure shopping cart and streamlined checkout process.
 
-Flexible Payment Options:
+*Flexible Payment Options:
 
-Support for online payment methods (e.g., Stripe, SSLCommerz - if implemented).
+*Support for online payment methods (e.g., Stripe, SSLCommerz - if implemented).
 
-Convenient Cash on Delivery (COD) option for eligible orders.
+*Convenient Cash on Delivery (COD) option for eligible orders.
 
-User Order Tracking & Invoice Generation:
+*User Order Tracking & Invoice Generation:
 
-Users can view their complete order history and track the status of their purchases.
+*Users can view their complete order history and track the status of their purchases.
 
-Ability to download professional, high-quality PDF invoices for each order using react-pdf/renderer.
+*Ability to download professional, high-quality PDF invoices for each order using react-pdf/renderer.
 
-Centralized Admin Dashboard:
+*Centralized Admin Dashboard:
 
-A powerful control panel for administrators to oversee the entire platform.
+*A powerful control panel for administrators to oversee the entire platform.
 
-Manage users, review payments, oversee banner advertisements, and generate sales reports.
+*Manage users, review payments, oversee banner advertisements, and generate sales reports.
 
-Admin Payment Management:
+*Admin Payment Management:
 
-View all payment transactions, filter by status (e.g., pending COD, paid).
+*View all payment transactions, filter by status (e.g., pending COD, paid).
 
-Ability to manually mark COD payments as "Paid" and update order statuses.
+*Ability to manually mark COD payments as "Paid" and update order statuses.
 
-Dynamic Banner Advertisement Management:
+*Dynamic Banner Advertisement Management:
 
-Admins can manage and approve banner advertisements displayed prominently on the homepage.
+*Admins can manage and approve banner advertisements displayed prominently on the homepage.
 
-Advanced Sales Report Generation:
+*Advanced Sales Report Generation:
 
-Admins can generate detailed sales reports, filterable by date range.
+*Admins can generate detailed sales reports, filterable by date range.
 
-Export sales data to high-quality PDF documents using react-pdf/renderer or CSV format.
+*Export sales data to high-quality PDF documents using react-pdf/renderer or CSV format.
 
-Engaging Health Blog Section:
+*Engaging Health Blog Section:
 
-A dedicated section on the homepage featuring informative articles on health and wellness.
+*A dedicated section on the homepage featuring informative articles on health and wellness.
 
-Paginated display of blog posts for easy browsing.
+*Paginated display of blog posts for easy browsing.
 
-Dedicated pages for full blog post details.
+*Dedicated pages for full blog post details.
 
-Customer Review & Testimonial System:
+*Customer Review & Testimonial System:
 
-A prominent "What Our Customers Say" section on the homepage showcasing positive feedback.
+*A prominent "What Our Customers Say" section on the homepage showcasing positive feedback.
 
-Authenticated users can submit reviews for their purchased items/orders, building trust and credibility.
+*Authenticated users can submit reviews for their purchased items/orders, building trust and credibility.
 
-Responsive and Modern UI:
+#Responsive and Modern UI:
 
-Built with Tailwind CSS, ensuring a clean, modern, and fully responsive user interface across all devices (desktop, tablet, mobile).
+*Built with Tailwind CSS, ensuring a clean, modern, and fully responsive user interface across all devices (desktop, tablet, mobile).
 
-Efficient Data Management:
+#Efficient Data Management:
 
-Leverages TanStack Query for efficient data fetching, caching, and synchronization, providing a fast and smooth user experience.
+*Leverages TanStack Query for efficient data fetching, caching, and synchronization, providing a fast and smooth user experience.
 
-Utilizes re-title for dynamic and consistent page titles across the application.
+*Utilizes re-title for dynamic and consistent page titles across the application.
 
 Technologies Used
 Frontend: React.js, Tailwind CSS, React Hook Form, React Datepicker, React Icons, SweetAlert2, TanStack Query, React Router DOM, re-title, @react-pdf/renderer.
 
 Backend: Node.js, Express.js, MongoDB (with Mongoose/MongoDB Driver), JWT (JSON Web Tokens) for authentication.
 
-Setup Instructions
+#Setup Instructions
 Clone the repositories:
 
-git clone https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Subroto89
-git clone https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-Subroto89
+#git clone https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Subroto89
+#git clone https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-Subroto89
 
-Backend Setup (medi-mart-server):
+#Backend Setup (medi-mart-server):
 
 Navigate into the medi-mart-server directory.
 
-Install dependencies: npm install
+#Install dependencies: npm install
 
 Create a .env file and configure your MongoDB URI, JWT secret, etc.
 
@@ -117,12 +116,12 @@ PORT=5000
 
 Run the server: npm start (or node index.js)
 
-Frontend Setup (medi-mart-client):
+#Frontend Setup (medi-mart-client):
 
 Navigate into the medi-mart-client directory.
 
-Install dependencies: npm install
+#Install dependencies: npm install
 
-Ensure your axiosSecure instance points to your backend URL (e.g., http://localhost:5000).
+#Ensure your axiosSecure instance points to your backend URL (e.g., http://localhost:5000).
 
 Run the client: npm run dev

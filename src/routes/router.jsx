@@ -27,6 +27,7 @@ import UserRoute from "./UserRoute";
 import SellerRoute from "./SellerRoute";
 import ManageBlogs from "../pages/Dashboard/AdminPages/ManageBlogs";
 import BlogDetails from "../pages/Home/BlogDetails";
+import UpdateProfilePage from "../pages/Home/UpdateProfilePage";
 
 const router = createBrowserRouter([
   // ---------------------------------
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/blog/:id",
         Component: BlogDetails
+      },
+      {
+        path: "/update-profile/:email",
+        Component: UpdateProfilePage
       }
     ],
   },

@@ -15,7 +15,7 @@ const BlogTable = ({
   handleViewBlogDetails,
 }) => {
   return (
-    <div className="w-full">
+    <div className="w-full min-h-[calc(100vh-120px)] flex flex-col justify-between">
       {totalCount > 0 ? (
         <>
           <div className="w-full rounded-lg overflow-auto shadow-lg border border-gray-200">
@@ -47,7 +47,7 @@ const BlogTable = ({
           </div>
 
           {/* Pagination Controls */}
-          <div className="flex flex-col md:flex-row justify-between items-center mt-8 px-4 py-3 bg-white rounded-lg shadow-md">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-4 py-3 bg-white rounded-lg shadow-md">
             {/* Items Per Page Selector */}
             <div className="flex items-center gap-2">
               <label htmlFor="blogItemsPerPage" className="text-sm text-gray-700">Blogs per page:</label>

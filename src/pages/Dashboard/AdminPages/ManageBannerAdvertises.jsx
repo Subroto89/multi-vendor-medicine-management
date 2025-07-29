@@ -36,8 +36,9 @@ const ManageBannerAdvertises = () => {
     <div>
       
       <Container>
+        <h2 className="text-xl md:text-2xl font-bold text-gray-600 py-8 md:py-4 ">Manage Banner Advertisements</h2>
         {advertisements.length > 0 ? (
-          <div>
+          <div className="overflow-auto rounded-lg">
             <table className="w-8/12 md:min-w-full divide-y divide-gray-200 overflow-scroll text-gray-800">
               <thead className="bg-gray-200 shadow-lg text-sm">
                 <tr>

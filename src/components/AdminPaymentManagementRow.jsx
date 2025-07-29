@@ -47,7 +47,7 @@ const AdminPaymentManagementRow = ({
             : "UNKNOWN"}
         </span>
       </td>
-      <td className="px-4 py-4  whitespace-nowrap text-sm text-center">
+      <td className="sticky right-0 px-4 py-4  whitespace-nowrap text-sm text-center bg-white">
         {payment.paymentMethod === "cash_on_delivery" &&
           payment.status === "pending_cod" ? (
             <button

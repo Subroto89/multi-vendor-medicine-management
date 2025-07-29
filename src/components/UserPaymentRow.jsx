@@ -29,7 +29,7 @@ const UserPaymentRow = ({payment, index, getStatusBadgeClasses, handleReviewModa
                       </span>
                     </td>
                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      <button onClick={()=>{handleReviewModal(), handleOrderDetails(payment)}} className='btn btn-outline px-2 rounded-md hover:bg-green-600 hover:text-white'>Submit Review</button>
+                      <button onClick={()=>{handleReviewModal(), handleOrderDetails(payment)}} className='btn btn-outline px-2 rounded-md hover:bg-green-600 hover:text-white text-xs'>Submit Review</button>
                      </td>
         </tr>
      

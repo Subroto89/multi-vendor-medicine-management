@@ -98,7 +98,7 @@ try{
 
   return (
     <div className="fixed inset-0 w-full h-full bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-gray-50 rounded-lg w-[500px] p-6 text-gray-700 shadow-lg">
+      <div className="bg-gray-50 rounded-lg w-[400px] md:w-[500px] p-6 text-gray-700 shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-center">Update Category: {categoryToEdit.catName}</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -126,7 +126,7 @@ try{
             name="status"
             type="select"
             icon={FaListAlt}
-            placeholder="Select category status"
+            placeholder="---Select category status"
             register={register}
             errors={errors}
             validationRules={{

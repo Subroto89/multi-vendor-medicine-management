@@ -87,18 +87,14 @@ const AdvertisementRow = ({ advertisement, refetch, handleBannerAdModal, setPart
         <div className="flex items-center gap-2">
             <MdVisibility onClick={()=>{handleBannerAdModal(), setParticularBannerAd(advertisement)}} className="btn btn-outline btn-xs cursor-pointer hover:bg-blue-400"/>
           {status === "pending" || status === "Rejected" ? (
-            <button onClick={()=>handleAdvertisementStatus(_id, "approve")} className="btn btn-outline btn-xs hover:bg-green-500 hover:text-white ">
+            <button onClick={()=>handleAdvertisementStatus(_id, "approve")} className="btn btn-outline btn-xs hover:bg-green-500 hover:text-white w-32">
               Add To Slide
             </button>
           ) : (
-            <button onClick={()=>handleAdvertisementStatus(_id, "reject")} className="btn btn-outline btn-xs hover:bg-red-600 hover:text-white ">
+            <button onClick={()=>handleAdvertisementStatus(_id, "reject")} className="btn btn-outline btn-xs hover:bg-red-600 hover:text-white w-32">
               Remove From Slide
             </button>
           )}
-
-          {/* 
-          <MdAdd className="btn btn-outline btn-xs cursor-pointer hover:bg-green-400"/>
-          <MdDelete className="btn btn-outline btn-xs cursor-pointer hover:bg-red-600 hover:text-white"/> */}
         </div>
       </td>
     </tr>

@@ -18,7 +18,7 @@ console.log(userRole)
       <div
         className={`absolute w-56 md:w-64  inset-y-0  bg-gray-200 flex flex-col gap-20 md:fixed   md:translate-x-0 transform ${
           !isSideBarOpen && "-translate-x-full"
-        }  transition duration-200 ease-in-out`}
+        }  transition duration-200 ease-in-out z-10`}
       >
         {/*---------------------------------------------------------------
         Sidebar Logo - For Large Screen Only 
@@ -32,7 +32,7 @@ console.log(userRole)
         {/* ---------------------------------------------------------------
             Sidebar Menu
         ---------------------------------------------------------------- */}
-        <div className="w-full" onClick={toggleMenu}>
+        <div className="w-full mt-24 md:mt-6 " onClick={toggleMenu}>
 
 
           {

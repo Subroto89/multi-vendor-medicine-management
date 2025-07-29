@@ -8,11 +8,11 @@ const MedicineRestockModal = ({ handleRestockModal, particularMedicine, handleRe
   }
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center shadow-2xl">
-      <div className="w-4/12 h-4/12 rounded-lg p-6 bg-gray-50 text-gray-700">
+      <div className="w-10/12 md:w-4/12 h-4/12 rounded-lg p-6 bg-gray-50 text-gray-700">
         <div className="text-gray-600">
           <p className="text-2xl font-bold text-center mb-4">{medicineName}</p>
           <div className="flex items-center h-14 rounded-3xl overflow-hidden border-2 border-gray-600 mb-4">
-            <label className="h-full font-bold border-r border-gray-500 px-4 py-3">
+            <label className="h-full text-xs md:text-md font-bold border-r border-gray-500 px-4 py-3">
               Stock Quantity
             </label>
             <input

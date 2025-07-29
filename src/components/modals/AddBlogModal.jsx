@@ -100,7 +100,7 @@ const AddBlogModal = ({ handleAddBlogModal }) => {
   };
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-      <div className="relative w-9/12 h-11/12 rounded-lg bg-gray-50 p-6 text-gray-700">
+      <div className="relative w-9/12 md:w-6/12 h-11/12 rounded-lg bg-gray-50 p-6 text-gray-700">
         <button
           onClick={handleAddBlogModal}
           className="absolute top-6 right-6 border border-gray-500 p-1 rounded-md hover:bg-red-600 hover:text-white"

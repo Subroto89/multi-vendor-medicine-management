@@ -23,9 +23,7 @@ const AdminDashboardHome = () => {
       const { data } = await axiosSecure.get('/admin/sales-summary');
       return data;
     },
-    // This query should always be enabled as it's for the overall site,
-    // but you might add `enabled: user?.role === 'admin'` if you want to be extra strict
-    // about not fetching if the user isn't an admin.
+    
     staleTime: 1000 * 60 * 5, 
     cacheTime: 1000 * 60 * 10
   });

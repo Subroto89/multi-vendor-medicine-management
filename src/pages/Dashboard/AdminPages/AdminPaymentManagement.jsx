@@ -103,7 +103,7 @@ const AdminPaymentManagement = () => {
         </h1>
         <div className="flex items-center justify-between my-0">
           <p className="text-lg text-gray-600 text-center mb-8">
-            Total Record Found:{" "}
+            Total Record Found:
             <span className="font-semibold text-blue-700">
               {payments.length}
             </span>
@@ -149,7 +149,7 @@ const AdminPaymentManagement = () => {
                   <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                     Payment Status
                   </th>
-                  <th className="sticky right-0 px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="sticky right-0 px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50">
                     Actions
                   </th>
                 </tr>

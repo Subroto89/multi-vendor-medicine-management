@@ -194,15 +194,15 @@ const AdminSalesReportPage = () => {
 
   return (
     <div
-      className="py-8 px-4"
-      style={{ backgroundColor: "#F3F4F6", minHeight: "100vh" }}
+      className=" px-4 min-h-screen"
+      
     >
       <div
-        className="max-w-7xl mx-auto rounded-lg shadow-xl p-6 md:p-8"
-        style={{ backgroundColor: "#FFFFFF" }}
+        className="max-w-7xl mx-auto px-2 shadow-xl max-h-[calc(100vh-10px)] overflow-auto"
+       
       >
         <h1
-          className="text-3xl font-bold mb-6 text-center"
+          className="text-3xl font-bold mb-6 text-center pt-16 pb-4 md:pt-8 md:pb-0"
           style={{ color: "#1F2937" }}
         >
           Website Sales Report
@@ -226,7 +226,7 @@ const AdminSalesReportPage = () => {
               startDate={startDate}
               endDate={endDate}
               placeholderText="Start Date"
-              className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-1 md:px-4 py-2 w-30 md:w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <span>-</span>
             <DatePicker
@@ -237,7 +237,7 @@ const AdminSalesReportPage = () => {
               endDate={endDate}
               minDate={startDate}
               placeholderText="End Date"
-              className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-600"
+              className="px-1 md:px-4 py-2 w-30 md:w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-600"
             />
             <button
               onClick={() => {
@@ -299,16 +299,15 @@ const AdminSalesReportPage = () => {
 
         {salesReport.length > 0 ? (
           <div
-            className="overflow-x-auto rounded-lg shadow-lg table-to-pdf"
+            className="overflow-auto rounded-lg shadow-lg table-to-pdf"
             style={{
-              backgroundColor: "#FFFFFF",
+              // backgroundColor: "#FFFFFF",
               border: "1px solid #E5E7EB",
             }}
           >
             <table
               className="min-w-full"
               style={{
-                backgroundColor: "#FFFFFF",
                 borderCollapse: "collapse",
                 tableLayout: "fixed",
               }}
@@ -531,9 +530,9 @@ const AdminSalesReportPage = () => {
           <DataNotFound message="No sales records found for the selected criteria." />
         )}
 
-        {/* ADDED: Pagination Controls */}
+        {/*  Pagination Controls */}
         {totalCount > 0 && (
-          <div className="flex flex-col md:flex-row justify-between items-center mt-8 px-4 py-3 bg-white rounded-lg shadow-md">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-4 py-3 bg-white rounded-lg shadow-md">
             {/* Items Per Page Selector */}
             <div className="flex items-center gap-2">
               <label htmlFor="itemsPerPage" className="text-sm text-gray-700">

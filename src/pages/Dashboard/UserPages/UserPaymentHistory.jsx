@@ -61,8 +61,8 @@ const UserPaymentHistory = () => {
   }
 
   return (
-    <div className="py-8 px-4 bg-gray-100 min-h-screen">
-      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8">
+    <div className=" px-4 bg-gray-100 min-h-screen">
+      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-xl pt-14 md:p-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Your Payment History
         </h1>

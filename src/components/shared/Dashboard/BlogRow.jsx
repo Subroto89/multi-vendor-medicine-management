@@ -14,10 +14,10 @@ const BlogRow = ({ blog, handleDeleteBlog, handleEditBlog, handleViewBlogDetails
     : "N/A";
 
   return (
-    <tr className="hover:bg-gray-50">
+    <tr className="hover:bg-gray-50 h-content">
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
         <img
-          src={blog.blogPhoto || placeholderImage} // Assuming blogPhoto is the image URL
+          src={blog.blogPhoto || placeholderImage} 
           alt={blog.blogTitle || "Blog Image"}
           className="w-12 h-12 object-cover rounded-md"
           onError={(e) => { e.target.onerror = null; e.target.src = placeholderImage; }}

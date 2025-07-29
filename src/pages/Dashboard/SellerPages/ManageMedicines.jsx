@@ -132,7 +132,7 @@ const ManageMedicines = () => {
         {/* --------------------------------------------------------------------------------
             Button To Open Add New Medicine Modal 
             -------------------------------------------------------------------------------- */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pt-12 md:pt-1">
           <h2 className="text-lg font-bold text-gray-700">
             Manage Your Medicine
           </h2>

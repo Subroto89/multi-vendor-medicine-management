@@ -13,14 +13,14 @@ const BannerAdModal = ({ handleBannerAdModal, particularBannerAd }) => {
     createdAt,
   } = particularBannerAd;
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-      <div className="relative w-3/4 h-3/4 rounded-lg bg-gray-50 p-16">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center ">
+      <div className="relative w-11/12 md:w-2/4 h-3/4 rounded-lg bg-gray-50 p-16 overflow-y-auto">
         <MdOutlineClose
           onClick={handleBannerAdModal}
           size={24}
           className="absolute right-10 top-6 border border-gray-600 rounded-md text-gray-600 hover:bg-red-600 hover:text-white"
         />
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col md:flex-row items-center gap-4">
           <div>
             <img src={mediPhoto} />
           </div>

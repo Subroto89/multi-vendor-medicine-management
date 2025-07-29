@@ -68,12 +68,12 @@ const MyMedicineAdvertisements = ({ handleAdViewModal, handleParticularAd }) => 
 
   return (
     <div>
-      <Container>
-        <h2 className="text-red-800">My Advertisements</h2>
+      
+        <h2 className="text-gray-700 pt-10 font-semibold">My Advertisements</h2>
         <div>
           {allMediAds.length > 0 ? (
-            <div>
-              <table className="w-8/12 md:min-w-full divide-y divide-gray-200 overflow-scroll">
+            <div className="overflow-auto">
+              <table className="w-full divide-y divide-gray-200 overflow-scroll">
                 <thead className="bg-gray-200 shadow-lg text-sm">
                   <tr>
                     <th
@@ -136,7 +136,7 @@ const MyMedicineAdvertisements = ({ handleAdViewModal, handleParticularAd }) => 
             />
           )}
         </div>
-      </Container>
+      
     </div>
   );
 };

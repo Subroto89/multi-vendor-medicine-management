@@ -30,7 +30,7 @@ const AskForAdvertisements = () => {
         {/* --------------------------------------------------------------------------------
             Button To Open Ask For Advertisement Modal 
             -------------------------------------------------------------------------------- */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pt-8 md:pt-1">
           <h2 className="text-lg font-bold text-gray-700">
             Create New Advertisement
           </h2>

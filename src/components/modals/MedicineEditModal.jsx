@@ -102,7 +102,7 @@ const MedicineEditModal = ({ handleMedicineEditModal, refetch, particularMedicin
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-      <div className="w-6/12 h-10/12 rounded-lg p-6 bg-gray-50 text-gray-700 overflow-auto">
+      <div className="w-11/12 md:w-6/12 h-10/12 rounded-lg p-6 bg-gray-50 text-gray-700 overflow-auto">
         
         <div className="relative font-bold text-2xl text-gray-700 text-center mb-6 flex items-center justify-center gap-3">
             <FaEdit/>Medicine Edit

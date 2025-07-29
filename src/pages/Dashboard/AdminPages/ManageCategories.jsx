@@ -73,7 +73,7 @@ const ManageCategories = () => {
                 Page Title & Button For Adding New Category
                 -------------------------------------------------------------- */}
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold">Manage Medicine Categories</h2>
+          <h2 className="text-lg md:text-xl font-bold my-10 md:my-2">Manage Medicine Categories</h2>
           <button
             onClick={handleCategoryModal}
             className="flex items-center gap-2 btn btn-outline hover:bg-green-500 hover:text-white"

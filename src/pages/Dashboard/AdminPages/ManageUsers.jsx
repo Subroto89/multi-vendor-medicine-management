@@ -42,17 +42,17 @@ const ManageUsers = () => {
   // -------------------------------------------------------------
   return (
     <div className="min-h-screen p-8 relative">
-      <h2 className="text-2xl font-bold text-center text-gray-700">
+      <h2 className="text-2xl font-bold text-center text-gray-700 mt-10 md:mt-0 mb-4">
         Avaiable Users
       </h2>
       {users.length > 0 ? (
-        <div>
-          <table className="w-8/12 md:min-w-full divide-y divide-gray-200 overflow-scroll">
+        <div className="w-full min-h-[calc(100vh - 200px)] overflow-x-auto rounded-lg shadow-lg border border-gray-200">
+          <table className="min-w-full divide-y divide-gray-200 ">
             <thead className="bg-gray-200 shadow-lg text-sm">
               <tr>
                 <th
                   scope="col"
-                  className="w-86 text-gray-800 font-bold uppercase text-center px-5 py-2"
+                  className=" text-gray-800 font-bold uppercase text-center px-5 py-2"
                 >
                   Email
                 </th>

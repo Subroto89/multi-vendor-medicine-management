@@ -28,6 +28,7 @@ import SellerRoute from "./SellerRoute";
 import ManageBlogs from "../pages/Dashboard/AdminPages/ManageBlogs";
 import BlogDetails from "../pages/Home/BlogDetails";
 import UpdateProfilePage from "../pages/Home/UpdateProfilePage";
+import ObserveMedicines from "../pages/Dashboard/AdminPages/ObserveMedicines";
 
 const router = createBrowserRouter([
   // ---------------------------------
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/manage-banner-advertises",
         element: <AdminRoute><ManageBannerAdvertises/></AdminRoute>
+      },
+      {
+        path: "/dashboard/admin/manage-medicines",
+        element: <AdminRoute><ObserveMedicines/></AdminRoute>
       },
       {
         path: "/dashboard/manage-blogs",

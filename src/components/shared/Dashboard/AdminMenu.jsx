@@ -25,6 +25,10 @@ const AdminMenu = () => {
                 address="/dashboard/manage-banner-advertises"
            />
            <MenuButton
+                label="Manage Medicines"
+                address="/dashboard/admin/manage-medicines"
+           />
+           <MenuButton
                 label="Manage Blogs"
                 address="/dashboard/manage-blogs"
            />

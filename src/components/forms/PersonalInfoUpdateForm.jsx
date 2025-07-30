@@ -88,13 +88,13 @@ const PersonalInfoUpdateForm = () => {
         try {
           const imageUrl = await imageUpload(file);
           setUploadedUserPhoto(imageUrl);
-          Swal.fire({
-            icon: "success",
-            title: "Photo Uploaded!",
-            text: "Your new profile photo has been uploaded.",
-            timer: 1500,
-            showConfirmButton: false,
-          });
+          // Swal.fire({
+          //   icon: "success",
+          //   title: "Photo Uploaded!",
+          //   text: "Your new profile photo has been uploaded.",
+          //   timer: 1500,
+          //   showConfirmButton: false,
+          // });
         } catch (error) {
           console.error("Image upload failed:", error);
           setPhotoUploadError("Image upload failed. Please try again.");
@@ -154,10 +154,10 @@ const PersonalInfoUpdateForm = () => {
         ) {
           await updateUserProfile({
             displayName: data.fullName,
-            photoURL: uploadedUserPhoto
+            photoURL: uploadedUserPhoto,
           });
         }
-        setLoading(false)
+        setLoading(false);
       } else {
         Swal.fire({
           icon: "info",
@@ -177,9 +177,13 @@ const PersonalInfoUpdateForm = () => {
     }
   };
 
-    if (loading || isFetchingInitialData) {
-      return <div className="flex justify-center items-center h-40"><BounceLoader color="#36d7b7" /></div>;
-    }
+  if (loading || isFetchingInitialData) {
+    return (
+      <div className="flex justify-center items-center h-40">
+        <BounceLoader color="#36d7b7" />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -189,41 +193,67 @@ const PersonalInfoUpdateForm = () => {
       </h3>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 relative">
-        {/* User Name Field ---------------------------------------------------------------------------------------------------*/}
-        <InputField
-          label="Full Name"
-          name="fullName"
-          type="text"
-          placeholder="Enter your full name"
-          icon={FaUser}
-          register={register}
-          errors={errors}
-          validationRules={{
-            required: "Full Name is required",
-            minLength: {
-              value: 3,
-              message: "Full Name must be at least 3 characters long",
-            },
-          }}
-        />
-        {/* User Email Field (Read-only) --------------------------------------------------------------------------------------*/}
-        <InputField
-          label="User Email"
-          name="userEmail"
-          type="email"
-          placeholder="xyz@gmail.com"
-          icon={FaEnvelope}
-          register={register}
-          errors={errors}
-          readOnly={true}
-          validationRules={{
-            required: "User Email is required",
-            pattern: {
-              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-              message: "Invalid email address",
-            },
-          }}
-        />
+        <div className="flex items-center gap-2">
+          {/* User Name & Email Field */}
+          <div className="flex-1">
+            {/* User Name Field ---------------------------------------------------------------------------------------------------*/}
+            <InputField
+              label="Full Name"
+              name="fullName"
+              type="text"
+              placeholder="Enter your full name"
+              icon={FaUser}
+              register={register}
+              errors={errors}
+              validationRules={{
+                required: "Full Name is required",
+                minLength: {
+                  value: 3,
+                  message: "Full Name must be at least 3 characters long",
+                },
+              }}
+            />
+            {/* User Email Field (Read-only) --------------------------------------------------------------------------------------*/}
+            <InputField
+              label="User Email"
+              name="userEmail"
+              type="email"
+              placeholder="xyz@gmail.com"
+              icon={FaEnvelope}
+              register={register}
+              errors={errors}
+              readOnly={true}
+              validationRules={{
+                required: "User Email is required",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: "Invalid email address",
+                },
+              }}
+            />
+          </div>
+          {/* User Photo Viewer */}
+          <div className="w-26 h-26 flex items-center justify-center border border-gray-600 rounded-md mt-5">
+            {/* User Photo Viewer Field ----------------------------------------------------------------------------------------*/}
+            <div className="w-24 h-24 rounded-md overflow-hidden border-2 border-gray-300 flex items-center justify-center">
+              {uploadedUserPhoto ? (
+                <img
+                  src={uploadedUserPhoto}
+                  alt="User Photo"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="flex items-center justify-center w-full h-full">
+                  {uploadingPhoto ? (
+                    <PuffLoader size={50} color="#36d7b7" />
+                  ) : (
+                    <FaUser size={50} className="text-gray-400" />
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
         {/* Phone Number Field ------------------------------------------------------------------------------------------------*/}
         <InputField
           label="Phone Number"
@@ -259,24 +289,7 @@ const PersonalInfoUpdateForm = () => {
             },
           }}
         />
-        {/* User Photo Viewer Field ----------------------------------------------------------------------------------------*/}
-        <div className="absolute right-2 top-6 w-20 h-24 rounded-md overflow-hidden border-2 border-gray-300 flex items-center justify-center">
-          {uploadedUserPhoto ? (
-            <img
-              src={uploadedUserPhoto}
-              alt="User Photo"
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="flex items-center justify-center w-full h-full">
-              {uploadingPhoto ? (
-                <PuffLoader size={50} color="#36d7b7" />
-              ) : (
-                <FaUser size={50} className="text-gray-400" />
-              )}
-            </div>
-          )}
-        </div>
+
         {photoUploadError && (
           <p className="text-red-500 text-xs mt-1">{photoUploadError}</p>
         )}

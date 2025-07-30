@@ -29,6 +29,7 @@ import ManageBlogs from "../pages/Dashboard/AdminPages/ManageBlogs";
 import BlogDetails from "../pages/Home/BlogDetails";
 import UpdateProfilePage from "../pages/Home/UpdateProfilePage";
 import ObserveMedicines from "../pages/Dashboard/AdminPages/ObserveMedicines";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   // ---------------------------------
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/update-profile/:email",
         Component: UpdateProfilePage
+      },
+      {
+        path: "/*",
+        Component: ErrorPage
       }
     ],
   },
@@ -136,6 +141,10 @@ const router = createBrowserRouter([
         path: "/dashboard/user-payment-history",
         element: <UserRoute><UserPaymentHistory/></UserRoute>
       },
+      {
+        path: "/dashboard/*",
+        Component: ErrorPage
+      }
     ],
   },
   // ---------------------------------
@@ -153,6 +162,10 @@ const router = createBrowserRouter([
         path: "/auth/joinUs",
         Component: JoinUs,
       },
+      {
+        path: "/auth/*",
+        Component: ErrorPage
+      }
     ],
   },
 ]);

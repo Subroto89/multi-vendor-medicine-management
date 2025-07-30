@@ -4,21 +4,56 @@ import LoadingSpinner from "../../../components/shared/LoadingSpinner";
 import Container from "../../../components/shared/Container";
 import DataNotFound from "../../../components/shared/DataNotFound";
 import { GrUpdate } from "react-icons/gr";
-// import { useState } from "react";
-// import BannerAdModal from "../../../components/modals/BannerAdModal";
+import { useState } from "react";
 import { TabTitle } from "../../../utilities/utilities";
 import MedicineRow from "../../../components/shared/MedicineRow";
+import MedicineObserveModal from "../../../components/modals/MedicineObserveModal";
+import Swal from "sweetalert2";
 
 const ObserveMedicines = () => {
-  TabTitle('Manage Medicines')
+  TabTitle("Manage Medicines");
   const axiosSecure = useAxiosSecure();
 
-//   const [isBannerAdModal, setIsBannerAdModal] = useState(false);
-//   const [particularBannerAd, setParticularBannerAd] = useState(null)
-//   const handleBannerAdModal = () => {
-//     setIsBannerAdModal(!isBannerAdModal);
-//   };
+  const [isMedicineObserveModal, setIsMedicineObserveModal] = useState(false);
+  const [particularMedicine, setParticularMedicine] = useState(null);
 
+  const handleMedicineObserveModal = () => {
+    setIsMedicineObserveModal(!isMedicineObserveModal);
+  };
+
+  const handleMedicineStatus = async (medicineId, action) => {
+    const confirm = await Swal.fire({
+      title: `${action === "active" ? "Active" : "Reject"} Application?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    try {
+      const { data } = await axiosSecure.patch(
+        `/medicine/approve/reject/${medicineId}`,
+        {
+          status: action === "active" ? "active" : "inactive",
+        }
+      );
+      if (data.modifiedCount) {
+        Swal.fire({
+          icon: "success",
+          title: `Advertisement has been ${
+            action === "active" ? "active" : "inactive"
+          } successfully`,
+          timer: 1500,
+        });
+        refetch();
+      }
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const {
     data: medicinesList = [],
     isLoading,
@@ -32,12 +67,13 @@ const ObserveMedicines = () => {
   });
 
   if (isLoading) return <LoadingSpinner />;
-  console.log(medicinesList)
+  console.log(medicinesList);
   return (
     <div>
-      
       <Container>
-        <h2 className="text-xl md:text-2xl font-bold text-gray-600 py-8 md:py-4 ">Manage Medicines</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-gray-600 py-8 md:py-4 ">
+          Manage Medicines
+        </h2>
         {medicinesList.length > 0 ? (
           <div className="overflow-auto rounded-lg">
             <table className="w-8/12 md:min-w-full divide-y divide-gray-200 overflow-scroll text-gray-800">
@@ -94,8 +130,9 @@ const ObserveMedicines = () => {
                     key={medicine._id}
                     medicine={medicine}
                     refetch={refetch}
-                    // handleBannerAdModal={handleBannerAdModal}
-                    // setParticularBannerAd={setParticularBannerAd}
+                    handleMedicineObserveModal={handleMedicineObserveModal}
+                    setParticularMedicine={setParticularMedicine}
+                    handleMedicineStatus={handleMedicineStatus}
                   />
                 ))}
               </tbody>
@@ -112,9 +149,13 @@ const ObserveMedicines = () => {
            Banner Advertisement Modal
            ------------------------------------------------------------------------------------------------------------------ */}
       <div>
-        {/* {isBannerAdModal && (
-          <BannerAdModal particularBannerAd={particularBannerAd} handleBannerAdModal={handleBannerAdModal} />
-        )} */}
+        {isMedicineObserveModal && (
+          <MedicineObserveModal
+            particularMedicine={particularMedicine}
+            handleMedicineObserveModal={handleMedicineObserveModal}
+            handleMedicineStatus={handleMedicineStatus}
+          />
+        )}
       </div>
     </div>
   );

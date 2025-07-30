@@ -8,8 +8,9 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 const MedicineRow = ({
   medicine,
   refetch,
-//   handleBannerAdModal,
-//   setParticularBannerAd,
+  handleMedicineObserveModal,
+  setParticularMedicine,
+  handleMedicineStatus
 }) => {
   const axiosSecure = useAxiosSecure();
   const {
@@ -41,39 +42,39 @@ const MedicineRow = ({
       ? "bg-red-100 text-red-800"
       : "bg-gray-100 text-gray-800";
 
-  const handleAdvertisementStatus = async (medicineId, action) => {
-    const confirm = await Swal.fire({
-      title: `${action === "active" ? "Active" : "Reject"} Application?`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
-    });
+//   const handleMedicineStatus = async (medicineId, action) => {
+//     const confirm = await Swal.fire({
+//       title: `${action === "active" ? "Active" : "Reject"} Application?`,
+//       icon: "warning",
+//       showCancelButton: true,
+//       confirmButtonText: "Yes",
+//       cancelButtonText: "No",
+//     });
 
-    if (!confirm.isConfirmed) return;
+//     if (!confirm.isConfirmed) return;
 
-    try {
-      const { data } = await axiosSecure.patch(
-        `/medicine/approve/reject/${medicineId}`,
-        {
-          status: action === "active" ? "active" : "inactive",
-        }
-      );
-      if (data.modifiedCount) {
-        Swal.fire({
-          icon: "success",
-          title: `Advertisement has been ${
-            action === "active" ? "active" : "inactive"
-          } successfully`,
-          timer: 1500,
-        });
-        refetch();
-      }
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+//     try {
+//       const { data } = await axiosSecure.patch(
+//         `/medicine/approve/reject/${medicineId}`,
+//         {
+//           status: action === "active" ? "active" : "inactive",
+//         }
+//       );
+//       if (data.modifiedCount) {
+//         Swal.fire({
+//           icon: "success",
+//           title: `Advertisement has been ${
+//             action === "active" ? "active" : "inactive"
+//           } successfully`,
+//           timer: 1500,
+//         });
+//         refetch();
+//       }
+//       console.log(data);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
 
   return (
     <tr className="hover:bg-blue-50">
@@ -95,20 +96,20 @@ const MedicineRow = ({
         <div className="flex items-center gap-2">
           <MdVisibility
             onClick={() => {
-            //   handleBannerAdModal(), setParticularBannerAd(advertisement);
+              handleMedicineObserveModal(), setParticularMedicine(medicine);
             }}
             className="btn btn-outline btn-xs cursor-pointer hover:bg-blue-400"
           />
           {status === "inactive" ? (
             <button
-              onClick={() => handleAdvertisementStatus(_id, "active")}
+              onClick={() => handleMedicineStatus(_id, "active")}
               className="btn btn-outline btn-xs hover:bg-green-500 hover:text-white w-32"
             >
               Approve
             </button>
           ) : (
             <button
-              onClick={() => handleAdvertisementStatus(_id, "inactive")}
+              onClick={() => handleMedicineStatus(_id, "inactive")}
               className="btn btn-outline btn-xs hover:bg-red-600 hover:text-white w-32"
             >
               Reject

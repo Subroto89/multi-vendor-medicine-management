@@ -216,7 +216,7 @@ const handleRemoveItem = async (medicineId, itemName) => {
             ----------------------------------------------------------------------------------------- */}
             <div className='mb-4'>
               <h2 className='text-2xl font-bold text-gray-700'>Your Shopping Cart Is Ready For Checkout!</h2>  
-              <button onClick={()=>handleClearCart()}>clear All</button>
+           
             </div>
              {/* ----------------------------------------------------------------------------------------
             Header Section
@@ -224,9 +224,10 @@ const handleRemoveItem = async (medicineId, itemName) => {
             <div>
               {
                 cartItems?.length > 0 ? (
-                  <div className='overflow-x-auto rounded-xl shadow-xl'>
+                  <div>
+                    <div className='max-h-[calc(100vh-280px)] overflow-auto rounded-xl shadow-xl'>
                     <table className='w-full divider-y divider-gray-200'>
-                      <thead className='bg-gray-100 text-md font-semibold text-gray-700'>
+                      <thead className='bg-gray-100 text-md font-semibold text-gray-700 sticky top-0'>
                          <th className='px-4 py-2 text-sm font-semibold text-center uppercase'>
                         <input
                           type="checkbox"
@@ -258,14 +259,13 @@ const handleRemoveItem = async (medicineId, itemName) => {
                     </table>
 
 
-
-
-
+               
+                  </div>
                     {/* -------------------------------------------------------
                     Bottom part
                     ----------------------------------------------------------
                      */}
-                <div className="flex flex-col md:flex-row justify-between items-center mt-6 pt-4 border-t border-gray-200">
+                    <div className="flex flex-col md:flex-row justify-between items-center mt-6 pt-4 border-t border-gray-200">
                 <div className="text-2xl font-bold text-gray-800 mb-4 md:mb-0">
                   Total: <span className="text-green-700">${cart?.[0]?.totalCartPrice?.toFixed(2) || '0.00'}</span>
                 </div>
@@ -293,7 +293,7 @@ const handleRemoveItem = async (medicineId, itemName) => {
                   </button>
                 </div>
               </div>
-                  </div>
+                    </div>
                 ):(
                   <DataNotFound message={"NO Items In Cart, Select Items First To Check Out."}/>
                 )

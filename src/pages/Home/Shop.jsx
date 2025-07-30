@@ -154,7 +154,7 @@ const Shop = () => {
 
         <div>
           {allMedicines.length > 0 ? (
-            <div className="w-full rounded-lg overflow-auto shadow-lg min-h-[calc(100vh-200px)] bg-gray-50">
+            <div className="w-full rounded-lg overflow-auto shadow-lg max-h-[calc(100vh-250px)] bg-gray-50">
               <table className="w-full h-full divider-y divider-gray-300">
                 <thead className="bg-gray-50 text-gray-700 text-md font-semibold sticky top-0">
                   <tr>

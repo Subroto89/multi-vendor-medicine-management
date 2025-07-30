@@ -8,7 +8,7 @@ import {imageUpload} from "../../utilities/utilities"
 import AddBlogForm from "../forms/AddBlogForm";
 import Swal from "sweetalert2";
 
-const AddBlogModal = ({ handleAddBlogModal }) => {
+const AddBlogModal = ({ handleAddBlogModal, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
@@ -83,7 +83,7 @@ const AddBlogModal = ({ handleAddBlogModal }) => {
         timer: 1500,
       });
       handleAddBlogModal();
-    //   refetch();
+      refetch();
     } else {
       Swal.fire({
         position: "center",

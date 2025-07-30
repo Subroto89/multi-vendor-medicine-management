@@ -13,7 +13,7 @@ const SellerPaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
 
   // State to manage the filter for payment status
-  const [filterPaymentStatus, setFilterPaymentStatus] = useState('pending_cod'); // 'all', 'paid', 'pending_cod'
+  const [filterPaymentStatus, setFilterPaymentStatus] = useState('pending_cod'); 
 
   // Fetch seller's purchase history
   const {
@@ -21,7 +21,7 @@ const SellerPaymentHistory = () => {
     isLoading,
     
   } = useQuery({
-    queryKey: ['sellerPaymentHistory', user?.email, filterPaymentStatus], // Query key includes seller email and filter status
+    queryKey: ['sellerPaymentHistory', user?.email, filterPaymentStatus], 
     queryFn: async () => {
       // Ensure user email is available before making the API call
       if (!user?.email) {
@@ -29,7 +29,7 @@ const SellerPaymentHistory = () => {
       }
       let url = `/seller/payment-history/${user.email}`;
       if (filterPaymentStatus !== 'all') {
-        url += `?paymentStatus=${filterPaymentStatus}`; // Add query parameter for filtering
+        url += `?paymentStatus=${filterPaymentStatus}`; 
       }
       const { data } = await axiosSecure.get(url);
       return data;

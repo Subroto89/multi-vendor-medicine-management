@@ -12,7 +12,7 @@ const BlogTable = ({
   handleItemsPerPageChange,
   handleDeleteBlog,
   handleEditBlog,
-  handleViewBlogDetails,
+  handleViewBlogDetails
 }) => {
   return (
     <div className="w-full min-h-[calc(100vh-120px)] flex flex-col justify-between">

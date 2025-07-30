@@ -6,9 +6,16 @@ import { FaPlus } from "react-icons/fa";
 import MyMedicineAdvertisements from "../../../components/shared/Dashboard/MyMedicineAdvertisements";
 import AdvertisementViewModal from "../../../components/modals/AdvertisementViewModal";
 import { TabTitle } from "../../../utilities/utilities";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
 
 const AskForAdvertisements = () => {
   TabTitle('Ask For Advertisement');
+
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+
   const [isAdModalOpen, setIsAdModalOpen] = useState(false);
   const [isAdViewModal, setIsAdViewModal] = useState(false);
   const [particularAd, setParticularAd] = useState(null);
@@ -24,6 +31,22 @@ const AskForAdvertisements = () => {
   const handleParticularAd = (particularAd) => {
     setParticularAd(particularAd);
   };
+  
+
+  const {
+    data: allMediAds = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["myMediAds"],
+    queryFn: async () => {
+      const { data } = await axiosSecure(
+        `/my-advertisements?email=${user.email}`
+      );
+      return data;
+    },
+  });
+
   return (
     <div className="relative">
       <Container>
@@ -48,8 +71,11 @@ const AskForAdvertisements = () => {
         --------------------------------------------------------------------------- */}
         <div>
           <MyMedicineAdvertisements
+            allMediAds={allMediAds}
+            isLoading={isLoading}
             handleAdViewModal={handleAdViewModal}
-              handleParticularAd={handleParticularAd} 
+              handleParticularAd={handleParticularAd}
+              refetch={refetch} 
           />
         </div>
 
@@ -58,7 +84,7 @@ const AskForAdvertisements = () => {
         ------------------------------------------------------------- */}
         <div>
           {isAdModalOpen && (
-            <AskForAdvertisementModal handleIsAddModal={handleIsAddModal} />
+            <AskForAdvertisementModal handleIsAddModal={handleIsAddModal} refetch={refetch}/>
           )}
         </div>
 

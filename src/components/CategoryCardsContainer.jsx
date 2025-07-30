@@ -25,7 +25,8 @@ const CategoryCardsContainer = () => {
     return (
         <div>
             <Container>
-                {
+                <div>
+                    {
                     categories.length > 0 ? (
                        <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>
                          {
@@ -36,6 +37,7 @@ const CategoryCardsContainer = () => {
                         <DataNotFound message={"No Category Available Now!"}/>
                     )
                 }
+                </div>
             </Container>
         </div>
     );

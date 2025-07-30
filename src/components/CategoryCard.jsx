@@ -7,7 +7,7 @@ const CategoryCard = ({ category }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group">
-      <div className="relative w-full h-40 bg-gray-100 overflow-hidden">
+      <div className="relative w-full h-40 bg-blue-100 overflow-hidden">
         <img
           src={categoryPhoto}
           alt={catName || "Category Image"}

@@ -1,7 +1,4 @@
-import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../LoadingSpinner";
 import Container from "../Container";
 import DataNotFound from "../DataNotFound";
@@ -9,23 +6,9 @@ import MyMediAdsRow from "./MyMediAdsRow";
 import { GrUpdate } from "react-icons/gr";
 import Swal from "sweetalert2";
 
-const MyMedicineAdvertisements = ({ handleAdViewModal, handleParticularAd }) => {
+const MyMedicineAdvertisements = ({ allMediAds, isLoading, handleAdViewModal, handleParticularAd, refetch }) => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
-
-  const {
-    data: allMediAds = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["myMediAds"],
-    queryFn: async () => {
-      const { data } = await axiosSecure(
-        `/my-advertisements?email=${user.email}`
-      );
-      return data;
-    },
-  });
+ 
 
   const handleAdsDelete = async (id) => {
     const confirmation = await Swal.fire({

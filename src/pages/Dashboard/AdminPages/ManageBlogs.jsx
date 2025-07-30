@@ -20,10 +20,10 @@ const ManageBlogs = () => {
   };
 
     const {
-    data: blogData = { blogPosts: [], totalCount: 0 }, // Expect object with blogPosts array and totalCount
+    data: blogData = { blogPosts: [], totalCount: 0 }, 
     isLoading,
     error,
-    refetch, // Function to refetch data after CRUD operations
+    refetch, 
   } = useQuery({
     queryKey: ["adminAllBlogPosts", currentPage, itemsPerPage],
     queryFn: async () => {
@@ -101,9 +101,6 @@ const ManageBlogs = () => {
             Posted Blogs Table
                 --------------------------------------------------------------------------- */}
 
-
-
-
  <BlogTable
           blogPosts={blogPosts}
           totalCount={totalCount}
@@ -123,7 +120,7 @@ const ManageBlogs = () => {
                 Add Blog Modal
                 --------------------------------------------------------------------------- */}
         {isAddBlogModal && (
-            <AddBlogModal handleAddBlogModal={handleAddBlogModal}/>
+            <AddBlogModal handleAddBlogModal={handleAddBlogModal} refetch={refetch}/>
         )}
       </Container>
     </div>

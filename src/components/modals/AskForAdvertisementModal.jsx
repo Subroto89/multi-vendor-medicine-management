@@ -7,7 +7,7 @@ import Container from "../shared/Container";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const AskForAdvertisementModal = ({ handleIsAddModal }) => {
+const AskForAdvertisementModal = ({ handleIsAddModal, refetch }) => {
   const axiosSecure = useAxiosSecure();
   //--------------------------------------------------------------
   //  Necessary State Variables For Medicine Photo Upload
@@ -63,6 +63,7 @@ const AskForAdvertisementModal = ({ handleIsAddModal }) => {
                   title: "Medicine Added Successfully",
                   timer: 1500,
                 });
+                refetch();
                 handleIsAddModal();
 
         }else{

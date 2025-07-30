@@ -41,13 +41,13 @@ const InvoicePage = () => {
         <div className="max-w-4xl mx-auto bg-white p-6 rounded shadow">
           <div className="flex justify-end mb-4">
             <PDFDownloadLink
-              document={<InvoicePdfDocument orderData={orderData} />} // Pass orderData to your PDF component
+              document={<InvoicePdfDocument orderData={orderData} />} 
               fileName={`Invoice-${transactionId || "order"}.pdf`}
             >
               {({ blob, url, loading, error }) => (
                 <button
                   className="px-5 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700"
-                  disabled={loading} // Disable button while PDF is generating
+                  disabled={loading} 
                 >
                   {loading ? "Generating PDF..." : "Download as PDF"}
                 </button>

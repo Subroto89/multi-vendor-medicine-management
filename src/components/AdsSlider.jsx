@@ -55,7 +55,7 @@ const AdsSlider = ({ activeAds }) => {
 
                 {ad.linkedMedicineId && (
                   <Link
-                    to={`/medicine-details/${ad.linkedMedicineId}`}
+                    to={`/shop`}
                     className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
                     Shop Now

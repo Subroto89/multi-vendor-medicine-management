@@ -15,12 +15,12 @@ const BlogTable = ({
   handleViewBlogDetails
 }) => {
   return (
-    <div className="w-full min-h-[calc(100vh-120px)] flex flex-col justify-between">
+    <div className="w-full max-h-[calc(100vh-160px)] flex flex-col justify-between">
       {totalCount > 0 ? (
         <>
-          <div className="w-full rounded-lg overflow-auto shadow-lg border border-gray-200">
+          <div className="w-full max-h-[calc(100vh-100px)] rounded-lg overflow-auto shadow-lg border border-gray-200">
             <table className="w-full divide-y divide-gray-200 bg-white">
-              <thead className="bg-gray-50 text-gray-700 text-sm font-semibold uppercase tracking-wider">
+              <thead className="bg-gray-50 text-gray-700 text-sm font-semibold uppercase tracking-wider sticky top-0">
                 <tr>
                   <th scope="col" className="w-1/12 text-left px-6 py-3">Image</th>
                   <th scope="col" className="w-3/12 text-left px-6 py-3">Title</th>

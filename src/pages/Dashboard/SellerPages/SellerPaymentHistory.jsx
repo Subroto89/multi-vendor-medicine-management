@@ -57,10 +57,10 @@ const SellerPaymentHistory = () => {
 
 
   return (
-    <div className="py-8 px-4 bg-gray-100 min-h-screen">
+    <div className=" px-4 bg-gray-100">
       <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Your Sales History</h1>
-        <p className="text-lg text-gray-600 text-center mb-8">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center mt-8 md:mt-2">Your Sales History</h1>
+        <p className="text-lg text-gray-600 text-center mb-2">
           Total orders containing your medicines: <span className="font-semibold text-blue-700">{paymentHistory.length}</span>
         </p>
 
@@ -79,9 +79,9 @@ const SellerPaymentHistory = () => {
         </div>
 
         {paymentHistory.length > 0 ? (
-          <div className="overflow-x-auto rounded-lg shadow-lg border border-gray-200">
+          <div className="max-h-[calc(100vh-226px)] overflow-auto rounded-lg shadow-lg border border-gray-200">
             <table className="min-w-full divide-y divide-gray-200 bg-white">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50 sticky top-0">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     #

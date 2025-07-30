@@ -87,9 +87,9 @@ const ManageCategories = () => {
                 -------------------------------------------------------------- */}
         <div>
           {categories.length > 0 ? (
-            <div className="w-full overflow-auto rounded-lg mt-10 shadow-lg">
+            <div className="w-full max-h-[calc(100vh-150px)] overflow-auto rounded-lg mt-10 shadow-lg">
               <table className="w-full divider-y divider-gray-300">
-                <thead className="h-4 bg-gray-200 uppercase text-sm font-semibold ">
+                <thead className="h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0">
                   <tr className="text-left">
                     <th className="py-2 px-20">Photo</th>
                     <th className="py-2 px-8">Category Name</th>

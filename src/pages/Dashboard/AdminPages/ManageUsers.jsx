@@ -41,14 +41,14 @@ const ManageUsers = () => {
   // Users Ready To Load
   // -------------------------------------------------------------
   return (
-    <div className="min-h-screen p-8 relative">
+    <div className="p-8 relative">
       <h2 className="text-2xl font-bold text-center text-gray-700 mt-10 md:mt-0 mb-4">
         Avaiable Users
       </h2>
       {users.length > 0 ? (
-        <div className="w-full min-h-[calc(100vh - 200px)] overflow-x-auto rounded-lg shadow-lg border border-gray-200">
+        <div className="w-full max-h-[calc(100vh-120px)] overflow-auto rounded-lg shadow-lg border border-gray-200">
           <table className="min-w-full divide-y divide-gray-200 ">
-            <thead className="bg-gray-200 shadow-lg text-sm">
+            <thead className="bg-gray-200 shadow-lg text-sm sticky top-0">
               <tr>
                 <th
                   scope="col"

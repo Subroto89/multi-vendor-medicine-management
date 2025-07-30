@@ -124,7 +124,7 @@ const AdminPaymentManagement = () => {
         </div>
 
         {payments.length > 0 ? (
-          <div className="h-[460px] overflow-auto rounded-lg shadow-lg border border-gray-200">
+          <div className="max-h-[calc(100vh-100px)] overflow-auto rounded-lg shadow-lg border border-gray-200">
             <table className="min-w-full divide-y divide-gray-200 bg-white">
               <thead className="bg-gray-50 sticky top-0">
                 <tr>

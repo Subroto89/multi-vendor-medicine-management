@@ -61,7 +61,7 @@ const UserPaymentHistory = () => {
   }
 
   return (
-    <div className=" px-4 bg-gray-100 min-h-screen">
+    <div className="px-4 bg-gray-100 min-h-screen">
       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-xl pt-14 md:p-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Your Payment History
@@ -74,7 +74,7 @@ const UserPaymentHistory = () => {
         </p>
 
         {userPaymentHistory.length > 0 ? (
-          <div className="h-[500px] overflow-auto rounded-lg shadow-lg border border-gray-200">
+          <div className="max-h-[calc(100vh-190px)] overflow-auto rounded-lg shadow-lg border border-gray-200">
             <table className="min-w-full divide-y divide-gray-200 bg-white">
               <thead className="bg-gray-50 sticky top-0">
                 <tr>

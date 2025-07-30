@@ -299,9 +299,8 @@ const AdminSalesReportPage = () => {
 
         {salesReport.length > 0 ? (
           <div
-            className="overflow-auto rounded-lg shadow-lg table-to-pdf"
+            className="max-h-[calc(100vh-330px)] overflow-auto rounded-lg shadow-lg table-to-pdf"
             style={{
-              // backgroundColor: "#FFFFFF",
               border: "1px solid #E5E7EB",
             }}
           >
@@ -313,6 +312,7 @@ const AdminSalesReportPage = () => {
               }}
             >
               <thead
+                className="sticky top-0"
                 style={{
                   backgroundColor: "#F9FAFB",
                   borderBottom: "1px solid #E5E7EB",

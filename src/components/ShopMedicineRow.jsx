@@ -9,6 +9,7 @@ const ShopMedicineRow = ({ medicine, handleModalView, setTargetMedicine }) => {
     genericName,
     company,
     status,
+    isApproved,
     stockQuantity,
     perUnitPrice,
   } = medicine;
@@ -30,7 +31,7 @@ const ShopMedicineRow = ({ medicine, handleModalView, setTargetMedicine }) => {
           <MdVisibility size={16} />
         </button>
         <button
-          onClick={() => handleAddToCart(stockQuantity, _id)}
+          onClick={() => handleAddToCart(stockQuantity, _id, isApproved, status)}
           className="btn btn-outline btn-xs hover:bg-green-500 hover:text-white font-bold"
         >
           <FaCartPlus/> Select

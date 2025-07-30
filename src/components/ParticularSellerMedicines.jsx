@@ -31,9 +31,9 @@ const ParticularSellerMedicines = ({
       {medicines.length > 0 ? (
         <>
           {/* Table */}
-          <div className="overflow-x-auto rounded-lg shadow-lg">
+          <div className="max-h-[calc(100vh-174px)] overflow-x-auto rounded-lg shadow-lg">
             <table className="w-full divide-y divide-gray-200 bg-white">
-              <thead className="bg-gray-200 text-sm font-semibold">
+              <thead className="bg-gray-200 text-sm font-semibold sticky top-0">
                 <tr>
                   <th className="w-1/12 text-gray-800 text-center px-5 py-3">Photo</th>
                   <th className="w-2/12 text-gray-800 text-center py-3">Medicine Name</th>

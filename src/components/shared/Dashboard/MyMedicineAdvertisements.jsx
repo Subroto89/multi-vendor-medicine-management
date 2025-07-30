@@ -55,9 +55,9 @@ const MyMedicineAdvertisements = ({ allMediAds, isLoading, handleAdViewModal, ha
         <h2 className="text-gray-700 pt-10 font-semibold">My Advertisements</h2>
         <div>
           {allMediAds.length > 0 ? (
-            <div className="overflow-auto">
+            <div className="max-h-[calc(100vh-200px)] overflow-auto">
               <table className="w-full divide-y divide-gray-200 overflow-scroll">
-                <thead className="bg-gray-200 shadow-lg text-sm">
+                <thead className="bg-gray-200 shadow-lg text-sm sticky top-0">
                   <tr>
                     <th
                       scope="col"

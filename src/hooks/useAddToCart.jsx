@@ -5,7 +5,7 @@ import useAxiosSecure from "./useAxiosSecure";
 const useAddToCart = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const handleAddToCart = async (stockQuantity, _id) => {
+  const handleAddToCart = async (stockQuantity, _id, isApproved, status) => {
     if (!user) {
       Swal.fire({
         icon: "warning",
@@ -18,11 +18,11 @@ const useAddToCart = () => {
     }
 
     const quantity = 1;
-    if (stockQuantity < quantity) {
+    if (stockQuantity < quantity || isApproved === 'false' || status === 'inactive') {
       Swal.fire({
         icon: "error",
-        title: "Out of Stock",
-        text: "This medicine is currently out of stock or requested quantity is not available.",
+        title: "Not ready to sell!",
+        text: "This medicine is currently out of stock or inactive.",
         timer: 2000,
         showConfirmButton: false,
       });

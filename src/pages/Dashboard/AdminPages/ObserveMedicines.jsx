@@ -47,7 +47,9 @@ const ObserveMedicines = () => {
           } successfully`,
           timer: 1500,
         });
+        handleMedicineObserveModal(),
         refetch();
+
       }
       console.log(data);
     } catch (err) {
@@ -72,12 +74,13 @@ const ObserveMedicines = () => {
     <div>
       <Container>
         <h2 className="text-xl md:text-2xl font-bold text-gray-600 py-8 md:py-4 ">
-          Manage Medicines
+          Manage Medicines <br/>
+          <span className="text-sm">Check and confirm for advertisement engagement and ready to sell.</span>
         </h2>
         {medicinesList.length > 0 ? (
-          <div className="overflow-auto rounded-lg">
+          <div className="overflow-auto rounded-lg max-h-[calc(100vh-150px)]">
             <table className="w-8/12 md:min-w-full divide-y divide-gray-200 overflow-scroll text-gray-800">
-              <thead className="bg-gray-200 shadow-lg text-sm">
+              <thead className="bg-gray-200 shadow-lg text-sm sticky top-0">
                 <tr>
                   <th
                     scope="col"

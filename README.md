@@ -98,7 +98,9 @@ Frontend: React.js, Tailwind CSS, React Hook Form, React Datepicker, React Icons
 
 Backend: Node.js, Express.js, MongoDB (with Mongoose/MongoDB Driver), JWT (JSON Web Tokens) for authentication.
 
-#Setup Instructions
+
+🚀 # Getting Started
+
 Clone the repositories:
 
 #git clone https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Subroto89

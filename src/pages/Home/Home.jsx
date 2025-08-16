@@ -26,7 +26,7 @@ const Home = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="text-blue-800">
+    <div className="text-blue-800 w-full bg-secondary">
       <Container>
         {/* ------------------------------------------------------
                 Active Medicine Advertisements' Slides

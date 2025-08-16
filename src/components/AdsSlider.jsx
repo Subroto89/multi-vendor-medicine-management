@@ -1,14 +1,32 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router";
+import { useTheme } from "../context/ThemeContext";
 
 const AdsSlider = ({ activeAds }) => {
   if (!activeAds || activeAds.length === 0) {
     return null;
   }
 
+  // Use the useTheme hook to get the current theme state
+  const { theme } = useTheme();
+
+  // Define dynamic styles based on the theme
+  const dynamicWrapperStyle = {
+    backgroundColor: 'var(--bg-color)' // The background color of the slider container
+  };
+
+  const dynamicCardStyle = {
+    backgroundColor: 'var(--bg-secondary)', // Assuming the card itself should be a light color
+    color: 'var(--text-color)' // The text color
+  };
+
+  const dynamicHeadingStyle = {
+    color: 'var(--accent-color)', // A strong accent color for the heading
+  };
+
   return (
-    <div className="mx-auto py-8 md:py-12 bg-secondary">
+    <div className="w-full mx-auto pt-14" style={dynamicWrapperStyle}>
       <Carousel
         autoPlay={true}
         infiniteLoop={true}
@@ -17,39 +35,42 @@ const AdsSlider = ({ activeAds }) => {
         showArrows={true}
         interval={5000}
         transitionTime={500}
-        className="rounded-xl shadow-2xl overflow-hidden"
+        className="rounded-xl shadow-xl overflow-hidden"
       >
         {activeAds.map((ad) => (
           <div
             key={ad._id}
             className="relative w-full min-h-[300px] md:min-h-[400px] lg:min-h-[450px] flex items-center justify-center p-4 md:p-8"
           >
-            <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10 gap-6 md:gap-10">
+            <div
+              className={`flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto rounded-xl shadow-lg p-6 md:p-10 gap-6 md:gap-10 ${theme==='dark' ? "category-card" : ""}`}
+              style={dynamicCardStyle}
+            >
               {/* Medicine Photo Section */}
               <div className="w-full md:w-1/3 flex justify-center items-center">
-                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 overflow-hidden rounded-full border-4 border-blue-200 shadow-md flex items-center justify-center bg-gray-50">
+                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 p-2 overflow-hidden rounded-full border-4 border-blue-200 shadow-md flex items-center justify-center">
                   <img
                     src={
                       ad.mediPhoto ||
                       "https://placehold.co/250x250/E0E7FF/4338CA?text=No+Image"
-                    } // Fallback image
+                    }
                     alt={ad.linkedMedicineName || "Medicine Photo"}
                     className="w-full h-full object-contain p-2"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src =
                         "https://placehold.co/250x250/E0E7FF/4338CA?text=Image+Error";
-                    }} // Error fallback
+                    }}
                   />
                 </div>
               </div>
 
               {/* Text Content Section */}
-              <div className="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-2/3">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-blue-800 mb-2 leading-tight">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left w-11/12 mx-auto">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 leading-tight" style={dynamicHeadingStyle}>
                   {ad.linkedMedicineName}
                 </h2>
-                <p className="text-base md:text-lg text-gray-700 mb-4 md:mb-6">
+                <p className="text-base md:text-lg mb-4 md:mb-6">
                   {ad.adDescription}
                 </p>
 

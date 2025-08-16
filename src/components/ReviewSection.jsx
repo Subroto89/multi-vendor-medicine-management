@@ -7,9 +7,11 @@ import Container from '../components/shared/Container';
 import ReviewCard from './ReviewCard';
 import { FaQuoteLeft } from 'react-icons/fa';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { useTheme } from '../context/ThemeContext';
 
 const ReviewSection = () => {
   const axiosSecure = useAxiosSecure();
+  const {theme} = useTheme();
 
   // Fetch reviews for the homepage
   const {
@@ -33,7 +35,7 @@ const ReviewSection = () => {
 
   if (error) {
     return (
-      <Container>
+      
         <div className="text-red-600 p-8 text-center bg-white shadow-md rounded-lg mx-auto max-w-4xl">
           <h3 className="text-xl font-semibold mb-2">Error Loading Reviews</h3>
           <p>We encountered an issue loading customer reviews: {error.message}</p>
@@ -44,17 +46,17 @@ const ReviewSection = () => {
             Retry
           </button>
         </div>
-      </Container>
+    
     );
   }
 
   return (
-    <div className="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
-      <Container>
-        <div className="text-center mb-12">
+    <div className="mt-24 py-16 bg-secondary w-11/12 mx-auto">
+      
+        <div className={`text-center mb-10 ${theme==='dark' ? "text-white" : ""}`}>
           <FaQuoteLeft className="text-5xl text-blue-400 mx-auto mb-4" />
-          <h2 className="text-4xl font-extrabold text-gray-800 mb-4">What Our Customers Say</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-extrabold mb-4">What Our Customers Say</h2>
+          <p className="text-lg max-w-2xl mx-auto">
             Hear from real people who trust us with their health needs.
           </p>
         </div>
@@ -68,7 +70,7 @@ const ReviewSection = () => {
         ) : (
           <DataNotFound message="No customer reviews available yet. Be the first to leave one!" />
         )}
-      </Container>
+    
     </div>
   );
 };

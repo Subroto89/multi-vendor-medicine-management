@@ -10,9 +10,11 @@ import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { useTheme } from '../../context/ThemeContext';
 
 const DiscountProductSlider = () => {
   const axiosSecure = useAxiosSecure();
+  const {theme} = useTheme();
 
   const {
     data: discountedMedicines,
@@ -28,9 +30,9 @@ const DiscountProductSlider = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <section className="py-12 px-4 bg-gradient-to-r from-purple-50 to-pink-50">
-      <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-10">
+    <section className="mt-24">
+      <div className="w-11/12 mx-auto">
+        <h2 className={`text-4xl font-extrabold text-center text-gray-900 mb-10 ${theme==='dark' ? 'text-white' : ""}`}>
           Special Offers & Discounts
         </h2>
 

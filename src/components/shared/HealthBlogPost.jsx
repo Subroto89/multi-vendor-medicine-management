@@ -6,9 +6,11 @@ import DataNotFound from './DataNotFound';
 import Container from './Container';
 import BlogPostCard from './BlogPostCard';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'; 
+import { useTheme } from '../../context/ThemeContext';
 
 const HealthBlogPost = () => {
   const axiosSecure = useAxiosSecure();
+  const {theme} = useTheme();
 
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -62,7 +64,7 @@ const HealthBlogPost = () => {
 
   if (error) {
     return (
-      <Container>
+  
         <div className="text-red-600 py-8 text-center bg-white shadow-md rounded-lg mx-auto w-full">
           <h3 className="text-xl font-semibold mb-2">Error Loading Blog Posts</h3>
           <p>We encountered an issue loading the health blog: {error.message}</p>
@@ -73,14 +75,14 @@ const HealthBlogPost = () => {
             Retry
           </button>
         </div>
-      </Container>
+      
     );
   }
 
   return (
-    <div className="py-8 bg-gray-100 min-h-screen">
-      <Container>
-        <h1 className="text-4xl font-extrabold text-center text-blue-800 mb-10">
+    <div className="py-8 bg-secondary min-h-screen w-11/12 mx-auto">
+      
+        <h1 className={`text-4xl font-extrabold text-center text-blue-800 mb-10 ${theme==="dark" ? "text-white" : ""}`}>
           Health Blog & Insights
         </h1>
 
@@ -94,10 +96,10 @@ const HealthBlogPost = () => {
 
             {/* Pagination Controls */}
             {totalCount > 0 && (
-              <div className="flex flex-col md:flex-row justify-between items-center mt-12 px-4 py-3 bg-white rounded-lg shadow-md">
+              <div className={`flex flex-col md:flex-row justify-between items-center mt-12 px-4 py-3 rounded-lg shadow-md ${theme==="dark" ? "category-card" : ""}`}>
                 {/* Items Per Page Selector */}
                 <div className="flex items-center gap-2">
-                  <label htmlFor="blogItemsPerPage" className="text-sm text-gray-700">Posts per page:</label>
+                  <label htmlFor="blogItemsPerPage" className="text-sm">Posts per page:</label>
                   <select
                     id="blogItemsPerPage"
                     value={itemsPerPage}
@@ -145,14 +147,14 @@ const HealthBlogPost = () => {
                     <FaAngleRight />
                   </button>
                 </div>
-                <span className="text-sm text-gray-700">Page {currentPage} of {totalPages} ({totalCount} posts)</span>
+                <span className="text-sm">Page {currentPage} of {totalPages} ({totalCount} posts)</span>
               </div>
             )}
           </>
         ) : (
           <DataNotFound message={`No blog posts available. Total posts: ${totalCount}. Please check back later.`} />
         )}
-      </Container>
+      
     </div>
   );
 };

@@ -1,6 +1,8 @@
 #Medi-Mart: Your Online Medicine Store
 Welcome to Medi-Mart, a comprehensive online platform designed to streamline the process of buying and selling medicines. This full-stack application provides a secure and intuitive experience for users, sellers, and administrators, ensuring efficient medicine management, secure transactions, and valuable health information.
 
+![image alt](https://github.com/Subroto89/multi-vendor-medicine-management/blob/c95dfdfad3323eacc54096f03e9f5c9760c8a963/MediMartHome.png)
+![image alt](https://github.com/Subroto89/multi-vendor-medicine-management/blob/06f20120c9bea0534db412089e9b05f0746fc6d1/mediMartDashboard.png)
 #Live Demo
 Live Site URL: https://medi-mart-cure.web.app 
 
@@ -96,7 +98,9 @@ Frontend: React.js, Tailwind CSS, React Hook Form, React Datepicker, React Icons
 
 Backend: Node.js, Express.js, MongoDB (with Mongoose/MongoDB Driver), JWT (JSON Web Tokens) for authentication.
 
-#Setup Instructions
+
+🚀 # Getting Started
+
 Clone the repositories:
 
 #git clone https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-Subroto89

@@ -1,14 +1,16 @@
 import { useState } from "react";
 import NavMenu from "./NavMenu";
-import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaMoon, FaSun, FaTimes, FaUserCircle } from "react-icons/fa";
 import Logo from "./Logo";
 import NavMenuAvatar from "./NavMenuAvatar";
 import LanguageMenu from "../LanguageMenu";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router";
+import { useTheme } from "../../context/ThemeContext";
 
 const Navbar = () => {
   const { user } = useAuth();
+  const {theme, toggleTheme} = useTheme()
   
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,6 +45,17 @@ const Navbar = () => {
           <div className="w-40 rounded-lg overflow-hidden">
              <Link to="/"><Logo/></Link>
           </div>
+
+          {/* -----------------------------------------------------------------------
+          Theme Toggler Icon
+          ----------------------------------------------------------------------- */}
+          <div onClick={()=>toggleTheme()}>
+            {
+            theme === 'dark' ? <FaSun size="18"/> : <FaMoon size="18"/>
+          }
+          </div>
+
+
 
         {/* -------------------------------------------------------------------------
           Navigation Link Section

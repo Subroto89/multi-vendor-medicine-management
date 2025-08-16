@@ -5,25 +5,43 @@
 @import 'swiper/css/navigation'; 
 @import 'swiper/css/pagination';
 
+/* Light Theme (Default) */
 :root {
-  --primary-color: #C5CFD5;
-  --secondary-color: #F0F4F8;
-  --accent-color: #239BA7;
-  --hover-color: #3AB4C2 ;
+  --navbar-color: #c5cfd5;
+  --bg-color: #f0f4f8;
+  --text-color: #263238;
+  --accent-color: #239ba7;
+  --hover-color: #3ab4c2;
 }
 
-.bg-primary{
-  background-color: var(--primary-color);
+/* Dark Theme */
+.dark {
+  --navbar-color: #2d3748;
+  --bg-color: #1a202c;
+  --text-color: #f0f4f8;
+  --accent-color: #239ba7;
+  --hover-color: #3ab4c2;
 }
 
-.bg-secondary{
-  background-color: var(--secondary-color);
+/* Base styles that use the variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-.btn-color{
-  background-color: var(--primary-color);
+.bg-primary {
+  background-color: var(--navbar-color);
 }
 
-.btn-color:hover{
-  background-color: var(--hover-color)
+.bg-secondary {
+  background-color: var(--bg-color);
+}
+
+.btn-accent {
+  background-color: var(--accent-color);
+  color: #FFFFFF;
+}
+
+.btn-accent:hover {
+  background-color: var(--hover-color);
 }

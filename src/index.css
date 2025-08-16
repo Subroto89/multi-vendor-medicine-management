@@ -5,3 +5,25 @@
 @import 'swiper/css/navigation'; 
 @import 'swiper/css/pagination';
 
+:root {
+  --primary-color: #C5CFD5;
+  --secondary-color: #F0F4F8;
+  --accent-color: #239BA7;
+  --hover-color: #3AB4C2 ;
+}
+
+.bg-primary{
+  background-color: var(--primary-color);
+}
+
+.bg-secondary{
+  background-color: var(--secondary-color);
+}
+
+.btn-color{
+  background-color: var(--primary-color);
+}
+
+.btn-color:hover{
+  background-color: var(--hover-color)
+}

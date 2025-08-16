@@ -6,7 +6,7 @@ const NavMenuButton = ({address, label, icon: Icon, onClick}) => {
         <div>
             <NavLink to={address} 
                      onClick={onClick}
-                     className='btn bg-transparent border-0 w-full font-semibold text-gray-600 hover:bg-gray-200 shadow-none'>
+                     className='btn bg-transparent border-0 w-full font-semibold text-gray-800 btn-color shadow-none'>
                      {label}
                      {Icon && <Icon size={20} />}
             </NavLink>

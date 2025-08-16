@@ -8,7 +8,7 @@ const AdsSlider = ({ activeAds }) => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-12">
+    <div className="mx-auto py-8 md:py-12 bg-secondary">
       <Carousel
         autoPlay={true}
         infiniteLoop={true}
@@ -17,7 +17,7 @@ const AdsSlider = ({ activeAds }) => {
         showArrows={true}
         interval={5000}
         transitionTime={500}
-        className="rounded-xl shadow-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100"
+        className="rounded-xl shadow-2xl overflow-hidden"
       >
         {activeAds.map((ad) => (
           <div

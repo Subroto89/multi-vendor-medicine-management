@@ -36,7 +36,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-0 z-1000 w-full">
-      <div className="h-14 relative flex items-center justify-between gap-4 bg-gray-600 text-xl bg-gradient-to-b from-teal-50 to-gray-400 p-4 shadow-lg">
+      <div className="h-14 relative flex items-center justify-between gap-4 bg-primary p-4 shadow-lg">
         {/* -------------------------------------------------------------------------
           Logo Section
           --------------------------------------------------------------------- */}
@@ -92,7 +92,7 @@ const Navbar = () => {
         {isMenuOpen && (
           <div
             onClick={closeMenu}
-            className="absolute right-2 z-10 w-40 transition duration-1000 ease-in-out md:hidden "
+            className="absolute right-0 bg-primary z-10 w-40 transition duration-1000 ease-in-out md:hidden "
           >
             <NavMenu closeMenu={closeMenu} />
           </div>
@@ -105,7 +105,7 @@ const Navbar = () => {
         {isMenuOpen && (
           <div
             onClick={closeMenu}
-            className={`absolute right-2 z-16 w-40 transition  duration-1000 ease-in-out`}
+            className={`absolute right-0 bg-primary z-16 w-40 transition  duration-1000 ease-in-out`}
           >
             <NavMenuAvatar />
           </div>

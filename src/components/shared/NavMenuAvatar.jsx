@@ -8,7 +8,7 @@ const NavMenuAvatar = () => {
   return (
     <div>
       
-        <div className=" bg-teal-50 rounded-lg">
+        <div className="">
         <NavMenuButton address={`/update-profile/${user?.email}`} label="Update Profile" />
         <NavMenuButton address="/dashboard" label="Dashboard" />
         

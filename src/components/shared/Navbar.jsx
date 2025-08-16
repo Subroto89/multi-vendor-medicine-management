@@ -35,7 +35,7 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <div className="fixed top-0 z-1000 w-full">
       <div className="h-14 relative flex items-center justify-between gap-4 bg-gray-600 text-xl bg-gradient-to-b from-teal-50 to-gray-400 p-4 shadow-lg">
         {/* -------------------------------------------------------------------------
           Logo Section

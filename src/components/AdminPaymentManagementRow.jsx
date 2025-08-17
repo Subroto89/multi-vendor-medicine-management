@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "../context/ThemeContext";
 
 const AdminPaymentManagementRow = ({
   payment,
@@ -6,26 +7,27 @@ const AdminPaymentManagementRow = ({
   handleAcceptPayment,
   getStatusBadgeClasses,
 }) => {
+  const {theme} = useTheme();
   return (
-    <tr key={payment._id || index} className="hover:bg-gray-50">
+    <tr key={payment._id || index} className={`hover:bg-gray-50 ${theme==="dark" ? "category-card text-white" : "bg-secondary"}`}>
       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
         {index + 1}
       </td>
-      <td className="px-4 py-4 max-w-12 truncate whitespace-nowrap text-sm text-gray-700">
+      <td className="px-4 py-4 max-w-12 truncate whitespace-nowrap text-sm ">
         {payment.transactionId || "N/A"}
       </td>
-      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
+      <td className="px-4 py-4 whitespace-nowrap text-sm ">
         {payment.userEmail || "N/A"}
       </td>
-      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
+      <td className="px-4 py-4 whitespace-nowrap text-sm ">
         ${payment.totalAmount ? payment.totalAmount.toFixed(2) : "0.00"}
       </td>
-      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
+      <td className="px-4 py-4 whitespace-nowrap text-sm ">
         {payment.paymentMethod
           ? payment.paymentMethod.replace(/_/g, " ").toUpperCase()
           : "N/A"}
       </td>
-      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
+      <td className="px-4 py-4 whitespace-nowrap text-sm ">
         {payment.orderDate
           ? new Date(payment.orderDate).toLocaleDateString("en-US", {
               year: "numeric",
@@ -47,7 +49,7 @@ const AdminPaymentManagementRow = ({
             : "UNKNOWN"}
         </span>
       </td>
-      <td className="sticky right-0 px-4 py-4  whitespace-nowrap text-sm text-center bg-white">
+      <td className="sticky right-0 px-4 py-4  whitespace-nowrap text-sm text-cente">
         {payment.paymentMethod === "cash_on_delivery" &&
           payment.status === "pending_cod" ? (
             <button

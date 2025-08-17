@@ -17,9 +17,11 @@ import Swal from "sweetalert2";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import SalesReportPdfDocument from "../../../components/SalesReportPdfDocument";
 import { TabTitle } from "../../../utilities/utilities";
+import { useTheme } from "../../../context/ThemeContext";
 
 const AdminSalesReportPage = () => {
   TabTitle("Sales Report");
+  const { theme } = useTheme();
 
   const axiosSecure = useAxiosSecure();
 
@@ -193,23 +195,18 @@ const AdminSalesReportPage = () => {
   }
 
   return (
-    <div
-      className=" px-4 min-h-screen"
-      
-    >
-      <div
-        className="max-w-7xl mx-auto px-2 shadow-xl max-h-[calc(100vh-10px)] overflow-auto"
-       
-      >
-        <h1
+    <div className={`w-full min-h-screen ${theme==="dark" ? "bg-secondary" : "var(--light-bg-color) text-gray-800"}`}>
+      <div className={`w-full min-h-screen ${theme==="dark" ? "bg-secondaray text-white" : "var(--light-bg-color)"} shadow-xl max-h-[calc(100vh-10px)] overflow-auto`}>
+       <div className="w-11/12 mx-auto">
+         <h1
           className="text-3xl font-bold mb-6 text-center pt-16 pb-4 md:pt-8 md:pb-0"
-          style={{ color: "#1F2937" }}
+          // style={{ color: "#1F2937" }}
         >
           Website Sales Report
         </h1>
-        <p className="text-lg text-center mb-8" style={{ color: "#4B5563" }}>
+        <p className="text-lg text-center mb-8">
           Total sales records found:{" "}
-          <span className="font-semibold" style={{ color: "#1D4ED8" }}>
+          <span className="font-semibold">
             {totalCount}
           </span>
         </p>
@@ -217,7 +214,7 @@ const AdminSalesReportPage = () => {
         {/* Date Range Filter and Export Buttons */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
           {/* Date Pickers */}
-          <div className="flex items-center gap-3 text-gray-600">
+          <div className="flex items-center gap-3">
             <FaFilter style={{ color: "#4B5563" }} />
             <DatePicker
               selected={startDate}
@@ -237,7 +234,7 @@ const AdminSalesReportPage = () => {
               endDate={endDate}
               minDate={startDate}
               placeholderText="End Date"
-              className="px-1 md:px-4 py-2 w-30 md:w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-600"
+              className="px-1 md:px-4 py-2 w-30 md:w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               onClick={() => {
@@ -301,7 +298,7 @@ const AdminSalesReportPage = () => {
           <div
             className="max-h-[calc(100vh-330px)] overflow-auto rounded-lg shadow-lg table-to-pdf"
             style={{
-              border: "1px solid #E5E7EB",
+              // border: "1px solid #E5E7EB",
             }}
           >
             <table
@@ -312,9 +309,8 @@ const AdminSalesReportPage = () => {
               }}
             >
               <thead
-                className="sticky top-0"
+                className={`sticky top-0 ${theme==="dark" ? "category-card" : "bg-secondary"}`}
                 style={{
-                  backgroundColor: "#F9FAFB",
                   borderBottom: "1px solid #E5E7EB",
                 }}
               >
@@ -322,7 +318,7 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
+
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -332,7 +328,7 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
+
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -342,7 +338,6 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -352,7 +347,6 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -362,7 +356,6 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -372,7 +365,6 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -382,7 +374,6 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -392,7 +383,6 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -402,7 +392,6 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -412,7 +401,6 @@ const AdminSalesReportPage = () => {
                   <th
                     className="px-6 py-3 text-left text-xs font-medium"
                     style={{
-                      color: "#6B7280",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -421,45 +409,39 @@ const AdminSalesReportPage = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody style={{ backgroundColor: "#FFFFFF" }}>
+              <tbody className={`${theme==="dark" ? "category-card" : "var(--light-bg-color) text-gray-"}`}>
                 {salesReport.map((saleRecord, index) => (
                   <tr
                     key={`${saleRecord._id}-${saleRecord.medicineId}-${index}`}
-                    style={{ borderBottom: "1px solid #E5E7EB" }}
+                    className="border-b border-gray-500"  
                   >
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm font-medium"
-                      style={{ color: "#1F2937" }}
                     >
                       {saleRecord._id}
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm"
-                      style={{ color: "#374151" }}
                     >
                       {saleRecord.itemName}
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm"
-                      style={{ color: "#374151" }}
                     >
                       {saleRecord.sellerEmail || "N/A"}
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm"
-                      style={{ color: "#374151" }}
                     >
                       {saleRecord.userEmail || "N/A"}
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm text-center"
-                      style={{ color: "#374151" }}
                     >
                       {saleRecord.quantity}
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm"
-                      style={{ color: "#374151" }}
                     >
                       $
                       {saleRecord.priceAtAddToCart
@@ -468,7 +450,6 @@ const AdminSalesReportPage = () => {
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm font-semibold"
-                      style={{ color: "#047857" }}
                     >
                       $
                       {saleRecord.totalPricePerItem
@@ -502,7 +483,6 @@ const AdminSalesReportPage = () => {
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm"
-                      style={{ color: "#374151" }}
                     >
                       {saleRecord.orderDate
                         ? new Date(saleRecord.orderDate).toLocaleDateString(
@@ -517,7 +497,6 @@ const AdminSalesReportPage = () => {
                     </td>
                     <td
                       className="px-6 py-4 whitespace-nowrap text-sm"
-                      style={{ color: "#374151" }}
                     >
                       {saleRecord.transactionId || "N/A"}
                     </td>
@@ -532,7 +511,7 @@ const AdminSalesReportPage = () => {
 
         {/*  Pagination Controls */}
         {totalCount > 0 && (
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-4 py-3 bg-white rounded-lg shadow-md">
+          <div className={`flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-4 py-3 rounded-lg shadow-md ${theme==="dark" ? "category-card" : "var(--light-bg-color)"}`}>
             {/* Items Per Page Selector */}
             <div className="flex items-center gap-2">
               <label htmlFor="itemsPerPage" className="text-sm text-gray-700">
@@ -542,7 +521,7 @@ const AdminSalesReportPage = () => {
                 id="itemsPerPage"
                 value={itemsPerPage}
                 onChange={handleItemsPerPageChange}
-                className="px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm border-gray-600 text-gray-700"
+                className="px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
               >
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -591,11 +570,12 @@ const AdminSalesReportPage = () => {
                 <FaAngleRight />
               </button>
             </div>
-            <span className="text-sm text-gray-700">
+            <span className="text-sm">
               Page {currentPage} of {totalPages} ({totalCount} items)
             </span>
           </div>
         )}
+       </div>
       </div>
     </div>
   );

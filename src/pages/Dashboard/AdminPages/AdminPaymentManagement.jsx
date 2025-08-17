@@ -6,10 +6,12 @@ import DataNotFound from "../../../components/shared/DataNotFound";
 import Swal from "sweetalert2"; // For user feedback
 import AdminPaymentManagementRow from "../../../components/AdminPaymentManagementRow";
 import { TabTitle } from "../../../utilities/utilities";
+import {useTheme} from "../../../context/ThemeContext";
 
 
 const AdminPaymentManagement = () => {
   TabTitle('Payment Management');
+  const {theme} = useTheme()
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient(); // Get query client for invalidation
 
@@ -95,16 +97,16 @@ const AdminPaymentManagement = () => {
   }
 
   return (
-    <div className=" px-4 bg-gray-100 min-h-screen">
+    <div className="w-full min-h-screen">
       
-      <div className="max-w-7xl mx-auto bg-white rounded-lg  px-6 md:px-8 pb-4 min-h-screen">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 pt-6 text-center">
+      <div className={`w-full mx-auto   px-6 md:px-8 pb-4 min-h-screen ${theme==="dark" ? "dark-bg" : "bg-secondary"}`}>
+        <h1 className={`text-3xl font-bold mb-6 pt-6 text-center ${theme==="dark" ? "text-white" : "text-gray-800"}`}>
           Payment Management
         </h1>
         <div className="flex items-center justify-between my-0">
-          <p className="text-lg text-gray-600 text-center mb-8">
+          <p className="text-lg text-center mb-8">
             Total Record Found:
-            <span className="font-semibold text-blue-700">
+            <span className="font-semibold">
               {payments.length}
             </span>
           </p>
@@ -124,32 +126,32 @@ const AdminPaymentManagement = () => {
         </div>
 
         {payments.length > 0 ? (
-          <div className="max-h-[calc(100vh-100px)] overflow-auto rounded-lg shadow-lg border border-gray-200">
+          <div className={`max-h-[calc(100vh-100px)] overflow-auto rounded-lg shadow-lg border border-gray-200 ${theme==="dark" ? "category-card" : "bg-secondary"}`}>
             <table className="min-w-full divide-y divide-gray-200 bg-white">
-              <thead className="bg-gray-50 sticky top-0">
+              <thead className={`bg-gray-50 top-0 sticky ${theme==="dark" ? "category-card text-white" : "bg-secondary text-gray-600"}`}>
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                     #
                   </th>
-                  <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  <th className="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap">
                     Transaction ID
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap">
                     User Email
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">
                     Amount
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">
                     Method
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap">
                     Order Date
                   </th>
-                  <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  <th className="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider whitespace-nowrap">
                     Payment Status
                   </th>
-                  <th className="sticky right-0 px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50">
+                  <th className="sticky right-0 px-6 py-3 text-center text-xs font-medium uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>

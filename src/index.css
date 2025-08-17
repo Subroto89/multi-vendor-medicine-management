@@ -8,7 +8,7 @@
 /* Light Theme (Default) */
 :root {
   --navbar-color: #c5cfd5;
-  --bg-color: #f0f4f8;
+  --light-bg-color: #f0f4f8;
   --text-color: #263238;
   --accent-color: #239ba7;
   --hover-color: #3ab4c2;

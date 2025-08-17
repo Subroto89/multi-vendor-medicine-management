@@ -10,10 +10,12 @@ import CategoryRow from "../../../components/shared/Dashboard/CategoryRow";
 import Swal from "sweetalert2";
 import UpdateCategoryModal from "../../../components/modals/UpdateCategoryModal";
 import { TabTitle } from "../../../utilities/utilities";
+import { useTheme } from "../../../context/ThemeContext";
 
 const ManageCategories = () => {
   TabTitle('Manage Categories');
   const axiosSecure = useAxiosSecure();
+  const {theme} = useTheme();
 
   // --------------------------------------------------------------------
   // Add Category Modal Opening/Closing State & Function
@@ -67,12 +69,12 @@ const ManageCategories = () => {
   }
 
   return (
-    <div className="w-full text-gray-700 pt-12">
-      <div className="w-11/12 mx-auto">
+    <div className={`w-full min-h-screen text-gray-700 pt-12 ${theme==="dark" ? "dark-bg" : ""}`}>
+      <div className={`w-11/12 mx-auto `}>
         {/* --------------------------------------------------------------
                 Page Title & Button For Adding New Category
                 -------------------------------------------------------------- */}
-        <div className="flex items-center justify-between">
+        <div className={`flex items-center justify-between ${theme==="dark" ? "dark-bg text-white" : ""}`}>
           <h2 className="text-lg md:text-xl font-bold my-10 md:my-2">Manage Medicine Categories</h2>
           <button
             onClick={handleCategoryModal}
@@ -88,8 +90,8 @@ const ManageCategories = () => {
         <div>
           {categories.length > 0 ? (
             <div className="w-full max-h-[calc(100vh-150px)] overflow-auto rounded-lg mt-10 shadow-lg">
-              <table className="w-full divider-y divider-gray-300">
-                <thead className="h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0">
+              <table className={`w-full divider-y divider-gray-300 ${theme==="dark" ? "category-card" : ""}`}>
+                <thead className={`h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0 ${theme==="dark" ? "category-card" : ""}`}>
                   <tr className="text-left">
                     <th className="py-2 px-20">Photo</th>
                     <th className="py-2 px-8">Category Name</th>

@@ -9,8 +9,11 @@ import useUserRole from "../../../hooks/useUserRole";
 import DigitalClock from "../DigitalClock";
 import { FaEdit, FaHome, FaSignOutAlt } from "react-icons/fa";
 import { LuSettings } from "react-icons/lu";
+import { useTheme } from "../../../context/ThemeContext";
 
 const Sidebar = ({ isSideBarOpen, toggleMenu }) => {
+  
+  const {theme} = useTheme();
   const { user, logOutUser } = useAuth();
   const navigate = useNavigate();
 
@@ -22,7 +25,7 @@ const Sidebar = ({ isSideBarOpen, toggleMenu }) => {
   return (
     <div>
       <div
-        className={`absolute w-56 md:w-64  inset-y-0  bg-gray-200 flex flex-col gap-20 md:fixed   md:translate-x-0 transform ${
+        className={`absolute w-56 md:w-64  inset-y-0 ${theme==="dark" ? "category-card" : "bg-secondary"} flex flex-col gap-20 md:fixed   md:translate-x-0 transform ${
           !isSideBarOpen && "-translate-x-full"
         }  transition duration-200 ease-in-out z-10`}
       >
@@ -62,7 +65,7 @@ const Sidebar = ({ isSideBarOpen, toggleMenu }) => {
           )}
          </div>
 
-          <div className="flex flex-col items-center mt-6 text-gray-800">
+          <div className={`flex flex-col items-center mt-6  ${theme==="dark" ? "text-white" : "text-gray-800  "}`}>
             <DigitalClock />
             <Link
               to={`/update-profile/${user?.email}`}

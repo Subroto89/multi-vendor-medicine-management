@@ -127,8 +127,8 @@ const ManageMedicines = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="relative">
-      <Container>
+    <div className="relative w-full">
+      <div className="w-11/12 mx-auto">
         {/* --------------------------------------------------------------------------------
             Button To Open Add New Medicine Modal 
             -------------------------------------------------------------------------------- */}
@@ -202,7 +202,7 @@ const ManageMedicines = () => {
             particularMedicine={particularMedicine}
           />
         )}
-      </Container>
+      </div>
     </div>
   );
 };

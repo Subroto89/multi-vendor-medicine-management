@@ -67,8 +67,8 @@ const ManageCategories = () => {
   }
 
   return (
-    <div className="text-gray-700">
-      <Container>
+    <div className="w-full text-gray-700 pt-12">
+      <div className="w-11/12 mx-auto">
         {/* --------------------------------------------------------------
                 Page Title & Button For Adding New Category
                 -------------------------------------------------------------- */}
@@ -128,7 +128,7 @@ const ManageCategories = () => {
           <UpdateCategoryModal 
           handleUpdateCategoryModal={handleUpdateCategoryModal}
           categoryToEdit={categoryToEdit} refetch={refetch}/>)}
-      </Container>
+      </div>
     </div>
   );
 };

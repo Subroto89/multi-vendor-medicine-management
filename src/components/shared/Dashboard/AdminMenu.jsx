@@ -2,7 +2,8 @@ import React from 'react';
 import MenuButton from '../MenuButton';
 
 const AdminMenu = () => {
-    return (
+    
+     return (
         <div>
            <MenuButton
                 label="Manage Users"

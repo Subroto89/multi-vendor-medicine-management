@@ -7,9 +7,10 @@ import { GrUpdate } from "react-icons/gr";
 import RoleUpdateModal from "../../../components/modals/RoleUpdateModal";
 import { useState } from "react";
 import {TabTitle} from '../../../utilities/utilities'
-
+import {useTheme} from '../../../context/ThemeContext';
 const ManageUsers = () => {
-  TabTitle('Manage Users')
+  TabTitle('Manage Users');
+  const {theme} = useTheme();
   // -------------------------------------------------------------
   //   RoleUpdating Modal State Management
   // -------------------------------------------------------------
@@ -41,43 +42,43 @@ const ManageUsers = () => {
   // Users Ready To Load
   // -------------------------------------------------------------
   return (
-    <div className="p-8 relative">
-      <h2 className="text-2xl font-bold text-center text-gray-700 mt-10 md:mt-0 mb-4">
+    <div className={`p-8 relative min-h-screen ${theme=== "dark" ? "dark-bg" : ""}`}>
+      <h2 className={`text-2xl font-bold text-center mt-10 md:mt-0 mb-4 ${theme==="dark" ? "text-white" : "text-gray-700"}`}>
         Avaiable Users
       </h2>
       {users.length > 0 ? (
         <div className="w-full max-h-[calc(100vh-120px)] overflow-auto rounded-lg shadow-lg border border-gray-200">
           <table className="min-w-full divide-y divide-gray-200 ">
-            <thead className="bg-gray-200 shadow-lg text-sm sticky top-0">
+            <thead className={` shadow-lg text-sm sticky top-0 ${theme==="dark" ? "category-card" : "bg-gray-200"}`}>
               <tr>
                 <th
                   scope="col"
-                  className=" text-gray-800 font-bold uppercase text-center px-5 py-2"
+                  className="font-bold uppercase text-center px-5 py-2"
                 >
                   Email
                 </th>
                 <th
                   scope="col"
-                  className="text-gray-800 font-bold uppercase text-center px-5 py-2"
+                  className="font-bold uppercase text-center px-5 py-2"
                 >
                   Role
                 </th>
                 <th
                   scope="col"
-                  className="text-gray-800 font-bold uppercase text-center px-5 py-2"
+                  className="font-bold uppercase text-center px-5 py-2"
                 >
                   Status
                 </th>
                 <th
                   scope="col"
-                  className="text-gray-800 font-bold uppercase flex items-center justify-center  gap-3 px-5 py-2"
+                  className="font-bold uppercase flex items-center justify-center  gap-3 px-5 py-2"
                 >
                   <GrUpdate size={18} />
                   Action
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className={`bg-white divide-y divide-gray-200 ${theme==="dark" ? "category-card" : ""}`}>
               {users.map((user) => (
                 <UserRow key={user._id} user={user} handleRoleModal={handleRoleModal} setRole={setRole} setUserEmail={setUserEmail}/>
               ))}

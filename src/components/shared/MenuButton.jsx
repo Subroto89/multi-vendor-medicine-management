@@ -1,11 +1,13 @@
 
 import { Link } from 'react-router';
+import { useTheme } from '../../context/ThemeContext';
 
 const MenuButton = ({address, label, icon: Icon}) => {
+    const {theme} = useTheme();
     return (
         <div>
             <Link to={address} 
-                     className='btn bg-transparent border-0  w-full md:w-full text-gray-600 hover:bg-gray-400 shadow-lg'>
+                     className={`btn ${theme==="dark" ? "border-b border-gray-1" : "text-gray-800 border-0 bg-transparent" }    w-full hover:bg-gray-400 shadow-lg`}>
                      {label}
             </Link>
         </div>

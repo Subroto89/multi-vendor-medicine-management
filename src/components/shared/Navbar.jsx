@@ -37,7 +37,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className={`fixed top-0 z-1000 w-full ${theme==="dark" ? "card-bg border-b border-gray-500" : "bg-primary"}`}>
+    <div className={`fixed top-0 z-1000 w-full ${theme==="dark" ? "dark-bg border-b border-gray-500" : "bg-primary"}`}>
       <div className="w-11/12 mx-auto h-14 relative flex items-center justify-between gap-4  p-4 shadow-lg">
         {/* -------------------------------------------------------------------------
           Logo Section

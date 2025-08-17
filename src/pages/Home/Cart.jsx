@@ -11,10 +11,13 @@ import Swal from 'sweetalert2';
 import { MdOutlineRemoveShoppingCart } from 'react-icons/md';
 import { useNavigate } from 'react-router';
 import {TabTitle} from "../../utilities/utilities";
+import { useTheme } from '../../context/ThemeContext';
 
 const Cart = () => {
   TabTitle('Cart');
-   const [selectedItems, setSelectedItems] = useState([])
+
+  const {theme} = useTheme();
+  const [selectedItems, setSelectedItems] = useState([])
   const {user} = useAuth();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
@@ -33,7 +36,7 @@ const Cart = () => {
 
   if(isLoading) return <LoadingSpinner/>
 
- const cartItems = cart[0]?.items || [];
+  const cartItems = cart[0]?.items || [];
 
 
 
@@ -209,13 +212,13 @@ const handleRemoveItem = async (medicineId, itemName) => {
 
 
     return (
-        <div>
-          <Container>
+        <div className={`w-full min-h-screen pt-24 ${theme==="dark" ? "bg-secondary" : ""}`}>
+          <div className='w-11/12 mx-auto'>
             {/* ----------------------------------------------------------------------------------------
             Header Section
             ----------------------------------------------------------------------------------------- */}
             <div className='mb-4'>
-              <h2 className='text-2xl font-bold text-gray-700'>Your Shopping Cart Is Ready For Checkout!</h2>  
+              <h2 className={`text-2xl font-bold  ${theme==="dark" ? "text-white" : "text-gray-700"}`}>Your Shopping Cart Is Ready For Checkout!</h2>  
            
             </div>
              {/* ----------------------------------------------------------------------------------------
@@ -225,9 +228,9 @@ const handleRemoveItem = async (medicineId, itemName) => {
               {
                 cartItems?.length > 0 ? (
                   <div>
-                    <div className='max-h-[calc(100vh-280px)] overflow-auto rounded-xl shadow-xl'>
+                    <div className={`max-h-[calc(100vh-280px)] overflow-auto rounded-xl shadow-xl`}>
                     <table className='w-full divider-y divider-gray-200'>
-                      <thead className='bg-gray-100 text-md font-semibold text-gray-700 sticky top-0'>
+                      <thead className={`bg-gray-100 text-md font-semibold text-gray-700 sticky top-0 w-full divider-y divider-gray-200 ${theme==="dark" ? "category-card" : ""}`}>
                          <th className='px-4 py-2 text-sm font-semibold text-center uppercase'>
                         <input
                           type="checkbox"
@@ -245,7 +248,7 @@ const handleRemoveItem = async (medicineId, itemName) => {
                         <th className='px-4 py-2 text-sm font-semibold text-center uppercase'>Total Price</th>
                         <th className='px-4 py-2 text-sm font-semibold text-center uppercase flex items-center gap-2'><FaTools/>Action</th>
                       </thead>
-                      <tbody>
+                      <tbody className={`${theme==="dark" ? "category-card" : ""}`}>
                         {
                           cartItems.map(item => <CartDataRow key={item._id} item={item}
                              handleQuantityChange={handleQuantityChange}
@@ -266,8 +269,8 @@ const handleRemoveItem = async (medicineId, itemName) => {
                     ----------------------------------------------------------
                      */}
                     <div className="flex flex-col md:flex-row justify-between items-center mt-6 pt-4 border-t border-gray-200">
-                <div className="text-2xl font-bold text-gray-800 mb-4 md:mb-0">
-                  Total: <span className="text-green-700">${cart?.[0]?.totalCartPrice?.toFixed(2) || '0.00'}</span>
+                <div className={`${theme==="dark" ? "text-white" : "text-green-700"} text-2xl font-bold text-gray-800 mb-4 md:mb-0`}>
+                  Total: <span>${cart?.[0]?.totalCartPrice?.toFixed(2) || '0.00'}</span>
                 </div>
                 <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 w-full md:w-auto">
                   <button
@@ -302,7 +305,7 @@ const handleRemoveItem = async (medicineId, itemName) => {
 
               
             </div>
-          </Container>
+          </div>
         </div>
     );
 };

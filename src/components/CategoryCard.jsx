@@ -24,7 +24,7 @@ const CategoryCard = ({ category }) => {
       className={`${theme==='dark' ? "category-card" : ""} rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group`}
       style={cardStyle}
     >
-      <div className="relative w-full h-40 bg-blue-100 overflow-hidden">
+      <div className={`relative w-full h-40  overflow-hidden ${theme==='dark' ? "category-card" : "bg-blue-100"} `}>
         <img
           src={categoryPhoto}
           alt={catName || "Category Image"}
@@ -33,7 +33,7 @@ const CategoryCard = ({ category }) => {
         <div className="absolute inset-0 bg-black/20 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
       </div>
 
-      <div className="p-5 text-center">
+      <div className={`p-5 text-center ${theme==='dark' ? "bg-gray-700" : ""}`}>
         <h3
           className="text-xl font-bold mb-2 truncate"
           style={{ color: 'var(--text-color)' }}

@@ -8,12 +8,6 @@ const DiscounteProductCard = ({ medicine }) => {
   const { theme } = useTheme();
 
   const finalPrice = medicine.perUnitPrice - (medicine.perUnitPrice * (medicine.discountPercentage / 100 || 0));
-
-  const cardStyle = {
-    backgroundColor: theme === 'dark' ? 'var(--card-bg-dark)' : 'var(--card-bg-light)',
-    color: theme === 'dark' ? 'var(--text-color-dark)' : 'var(--text-color-light)',
-    border: theme === 'dark' ? '1px solid var(--card-border)' : '1px solid var(--card-border-light)'
-  };
   
   const headingStyle = {
     color: 'var(--text-color)'
@@ -43,8 +37,7 @@ const DiscounteProductCard = ({ medicine }) => {
 
   return (
     <div
-      className="rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden relative"
-      style={cardStyle}
+      className={`rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden relative ${theme==="dark" ? "category-card" : ""}`}
     >
       {medicine.discountPercentage > 0 && (
         <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">

@@ -7,11 +7,7 @@ const ReviewCard = ({ review }) => {
 
   const { reviewerName, rating, reviewText, timestamp } = review || {};
 
-    const cardStyle = {
-    backgroundColor: theme === 'dark' ? 'var(--card-bg-dark)' : 'var(--card-bg-light)',
-    color: theme === 'dark' ? 'var(--text-color)' : 'var(--text-color-light)',
-  };
-
+   
   // Function to render star rating
   const renderStars = (numStars) => {
     const stars = [];
@@ -36,7 +32,7 @@ const ReviewCard = ({ review }) => {
     : "N/A";
 
   return (
-    <div style={cardStyle} className={`bg-white rounded-lg shadow-md p-6 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl flex flex-col justify-between ${theme==="dark" ? "category-card" : ""}`}>
+    <div className={`bg-white rounded-lg shadow-md p-6 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl flex flex-col justify-between ${theme==="dark" ? "category-card" : ""}`}>
       <div>
         <div className="flex items-center mb-4">
           <div className="flex text-lg mr-2">{renderStars(rating)}</div>

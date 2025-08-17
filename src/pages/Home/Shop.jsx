@@ -6,7 +6,7 @@ import Container from "../../components/shared/Container";
 import ShopMedicineRow from "../../components/shopMedicineRow";
 import React, { useState } from "react";
 import ShopModal from "../../components/modals/ShopModal";
-import {TabTitle} from "../../utilities/utilities";
+import { TabTitle } from "../../utilities/utilities";
 import {
   FaArrowDown,
   FaArrowLeft,
@@ -15,18 +15,19 @@ import {
   FaSearch,
   FaTools,
 } from "react-icons/fa";
-
+import { useTheme } from "../../context/ThemeContext";
 
 const Shop = () => {
-  TabTitle('Shop');
+  TabTitle("Shop");
+
   const axiosSecure = useAxiosSecure();
+  const { theme } = useTheme();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [targetMedicine, setTargetMedicine] = useState(null);
 
-
-
   // ----------------------------------------------------------------------------------------
-  // Pagination States                                                                                 
+  // Pagination States
   // ----------------------------------------------------------------------------------------
   const [totalItem, setTotalItem] = useState(0);
   const [itemPerPage, setItemPerPage] = useState(12);
@@ -73,8 +74,7 @@ const Shop = () => {
     if (e.key === "Enter") {
       setAppliedSearchTerm(searchTerm);
       setCurrentPage(0);
-      searchRef.focus()
-     
+      searchRef.focus();
     }
   };
 
@@ -87,7 +87,6 @@ const Shop = () => {
   const handleModalView = () => {
     setIsModalOpen(!isModalOpen);
   };
-
 
   // ------------------------------------------------------------------------------------------------------------
   // Fetching Data Using UseQuery
@@ -116,10 +115,14 @@ const Shop = () => {
 
   if (isLoading) return <LoadingSpinner />;
   return (
-    <div className="text-gray-400 text-xl">
-      <Container>
+    <div
+      className={`w-full mx-auto bg-secondary min-h-screen  text-gray-400 text-xl pt-24 ${
+        theme === "dark" ? "" : ""
+      }`}
+    >
+      <div className="w-11/12 mx-auto">
         <div>
-          <h2 className="text-3xl font-bold text-gray-700 mb-4 text-center">
+          <h2 className={`text-3xl font-bold mb-4 text-center ${theme==="dark" ? "text-white" : "text-gray-700"}`}>
             Medicines Store in Different Categories{" "}
           </h2>
         </div>
@@ -133,7 +136,7 @@ const Shop = () => {
               type="text"
               placeholder="Search by name, generic, company..."
               ref={searchRef}
-              className="w-full py-2 pl-10 pr-4 text-sm text-gray-800 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full py-2 pl-10 pr-4 text-sm border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme==="dark" ? "category-card text-white" : "text-gray-700"}`}
               value={searchTerm}
               onChange={handleSearchChange}
               onKeyDown={handleKeyDown}
@@ -144,7 +147,7 @@ const Shop = () => {
           <select
             value={sortOrder}
             onChange={handleSortingPrice}
-            className="text-lg border border-gray-500 rounded-lg py-2 px-4 text-gray-800"
+            className={`text-lg border border-gray-500 rounded-lg py-2 px-4 ${theme==="dark" ? "text-white btn-accent" : "text-gray-700"}`}
           >
             <option value="">Unsorted</option>
             <option value="asc">Lowest First</option>
@@ -154,9 +157,9 @@ const Shop = () => {
 
         <div>
           {allMedicines.length > 0 ? (
-            <div className="w-full rounded-lg overflow-auto shadow-lg max-h-[calc(100vh-250px)] bg-gray-50">
-              <table className="w-full h-full divider-y divider-gray-300">
-                <thead className="bg-gray-50 text-gray-700 text-md font-semibold sticky top-0">
+            <div className={`w-full rounded-lg overflow-auto shadow-lg max-h-[calc(100vh-250px)]`}>
+              <table className={`w-full h-full divider-y divider-gray-300`}>
+                <thead className={`bg-gray-50 text-gray-700 text-md font-semibold sticky top-0 ${theme==="dark" ? "category-card" : "bg-gray-50"}`}>
                   <tr>
                     <th className="px-5 py-2 text-left">Medicine Name</th>
                     <th className="px-5 py-2 text-left">Generic Name</th>
@@ -179,7 +182,7 @@ const Shop = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-gray-100 text-gray-800">
+                <tbody className={`bg-gray-100 text-gray-800 ${theme==="dark" ? "category-card" : "bg-gray-50"}`}>
                   {allMedicines.map((medicine) => (
                     <ShopMedicineRow
                       key={medicine._id}
@@ -240,7 +243,7 @@ const Shop = () => {
             <select
               value={itemPerPage}
               onChange={handleItemPerPage}
-              className="text-gray-800 border border-blue-400 rounded-md"
+              className={`text-gray-800 border border-blue-400 rounded-md ${theme==="dark" ? "category-card" : ""}`}
             >
               <option value="5">5</option>
               <option value="10">10</option>
@@ -250,7 +253,7 @@ const Shop = () => {
             </select>
           </div>
         )}
-      </Container>
+      </div>
     </div>
   );
 };

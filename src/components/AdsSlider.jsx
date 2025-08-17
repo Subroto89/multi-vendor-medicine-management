@@ -16,11 +16,6 @@ const AdsSlider = ({ activeAds }) => {
     backgroundColor: 'var(--bg-color)' // The background color of the slider container
   };
 
-  const dynamicCardStyle = {
-    backgroundColor: 'var(--bg-secondary)', // Assuming the card itself should be a light color
-    color: 'var(--text-color)' // The text color
-  };
-
   const dynamicHeadingStyle = {
     color: 'var(--accent-color)', // A strong accent color for the heading
   };
@@ -40,14 +35,14 @@ const AdsSlider = ({ activeAds }) => {
         {activeAds.map((ad) => (
           <div
             key={ad._id}
-            className="relative w-full min-h-[300px] md:min-h-[400px] lg:min-h-[450px] flex items-center justify-center p-4 md:p-8"
+            className={`relative w-full min-h-[300px] md:min-h-[400px] lg:min-h-[450px] flex items-center justify-center p-4 md:p-8`}
           >
             <div
               className={`flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto rounded-xl shadow-lg p-6 md:p-10 gap-6 md:gap-10 ${theme==='dark' ? "category-card" : ""}`}
-              style={dynamicCardStyle}
+              // style={dynamicCardStyle}
             >
               {/* Medicine Photo Section */}
-              <div className="w-full md:w-1/3 flex justify-center items-center">
+              <div className={`w-full md:w-1/3 flex justify-center items-center`}>
                 <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 p-2 overflow-hidden rounded-full border-4 border-blue-200 shadow-md flex items-center justify-center">
                   <img
                     src={

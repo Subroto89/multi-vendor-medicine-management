@@ -4,10 +4,6 @@ import { useTheme } from '../../context/ThemeContext';
 const BlogPostCard = ({ post }) => {
   const {theme} = useTheme();
 
-  const cardStyle = {
-    backgroundColor: theme === 'dark' ? 'var(--card-bg-dark)' : 'var(--card-bg-light)',
-    color: theme === 'dark' ? 'var(--text-color)' : 'var(--text-color-light)',
-  };
   
   const { _id, blogTitle, blogPhoto, shortDescription, author, publishDate } = post || {};
 
@@ -21,7 +17,7 @@ const BlogPostCard = ({ post }) => {
   const placeholderImage = "https://placehold.co/400x250/E0E7FF/4338CA?text=Blog+Image";
 
   return (
-    <div style={cardStyle} className={`bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl ${theme==="dark" ? "category-card" : ""}`}>
+    <div className={`bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl ${theme==="dark" ? "category-card" : ""}`}>
       <img
         src={blogPhoto || placeholderImage}
         alt={blogTitle || "Blog Post"}

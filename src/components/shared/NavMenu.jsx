@@ -2,11 +2,13 @@ import NavMenuButton from "./NavMenuButton";
 import { FaCartArrowDown } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import DigitalClock from "./DigitalClock";
+import { useTheme } from "../../context/ThemeContext";
 
 const NavMenu = ({ toggleLanguage }) => {
   const { user, logOutUser } = useAuth();
+  const {theme} = useTheme();
   return (
-    <div className="flex flex-col md:flex-row  gap:3 md:gap-4 md:bg-transparent rounded-lg">
+    <div className={`flex flex-col md:flex-row  gap:3 md:gap-4 md:bg-transparent rounded-lg`}>
       <DigitalClock/>
       <NavMenuButton address="/" label="Home" />
       <NavMenuButton address="/shop" label="Shop" />

@@ -24,7 +24,7 @@ const DigitalClock = () => {
   });
 
   return (
-    <div className="text-lg font-semibold tracking-wide text-blue-700  px-3 py-1 rounded-md ">
+    <div className="text-lg font-bold tracking-wide  px-3 py-1 rounded-md ">
       {formattedTime}
     </div>
   );

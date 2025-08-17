@@ -27,7 +27,7 @@
   /* Existing styles */
   background-color: var(--card-bg);
   color: var(--text-color);
-  /* color: #FFFFFF; */
+
   
   /* Add a border and shadow for visibility */
   border: 1px solid var(--card-border);

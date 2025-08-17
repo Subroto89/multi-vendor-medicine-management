@@ -7,15 +7,17 @@ import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../LoadingSpinner";
 import useUserRole from "../../../hooks/useUserRole";
 import DigitalClock from "../DigitalClock";
-import { FaEdit, FaHome, FaSignOutAlt } from "react-icons/fa";
+import { FaEdit, FaHome, FaMoon, FaSignOutAlt, FaSun } from "react-icons/fa";
 import { LuSettings } from "react-icons/lu";
 import { useTheme } from "../../../context/ThemeContext";
 
 const Sidebar = ({ isSideBarOpen, toggleMenu }) => {
-  
-  const {theme} = useTheme();
+  // const {theme} = useTheme();
+
   const { user, logOutUser } = useAuth();
   const navigate = useNavigate();
+
+  const {theme, toggleTheme} = useTheme()
 
   const { loading: authLoading } = useAuth();
   const { userRole, userRoleLoading } = useUserRole();
@@ -75,10 +77,21 @@ const Sidebar = ({ isSideBarOpen, toggleMenu }) => {
               Update Profile
             </Link>
             <div className="flex items-center gap-4">
-              <LuSettings
+              {/* <LuSettings
                 size={24}
                 className="cursor-pointer hover:scale-110"
-              />
+              /> */}
+              
+                 {/* -----------------------------------------------------------------------
+                          Theme Toggler Icon
+                          ----------------------------------------------------------------------- */}
+                          <div onClick={()=>toggleTheme()}>
+                            {
+                            theme === 'dark' ? <FaSun size="18"/> : <FaMoon size="18"/>
+                          }
+                          </div>
+
+
               <button
                 onClick={() => {
                   logOutUser(), navigate("/");

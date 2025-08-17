@@ -47,8 +47,8 @@ const ManageUsers = () => {
         Avaiable Users
       </h2>
       {users.length > 0 ? (
-        <div className="w-full max-h-[calc(100vh-120px)] overflow-auto rounded-lg shadow-lg border border-gray-200">
-          <table className="min-w-full divide-y divide-gray-200 ">
+        <div className="w-full max-h-[calc(100vh-120px)] overflow-auto rounded-lg shadow-lg">
+          <table className="min-w-full divide-y divide-gray-500 ">
             <thead className={` shadow-lg text-sm sticky top-0 ${theme==="dark" ? "category-card" : "bg-gray-200"}`}>
               <tr>
                 <th

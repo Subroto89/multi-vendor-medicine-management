@@ -28,7 +28,6 @@
   background-color: var(--card-bg);
   color: var(--text-color);
 
-  
   /* Add a border and shadow for visibility */
   border: 1px solid var(--card-border);
   box-shadow: 0 4px 6px -1px var(--card-shadow-color),
@@ -62,3 +61,6 @@ body {
   background-color: var(--bg-color);
 }
 
+.light-bg{
+  background-color: var(--light-bg-color);
+}

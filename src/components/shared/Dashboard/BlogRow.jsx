@@ -1,8 +1,11 @@
 import React from 'react';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa'; // Icons for actions
+import { useTheme } from '../../../context/ThemeContext';
 
 const BlogRow = ({ blog, handleDeleteBlog, handleEditBlog, handleViewBlogDetails }) => {
   const placeholderImage = "https://placehold.co/50x50/E0E7FF/4338CA?text=Blog"; // Small placeholder
+
+  const {theme} = useTheme();
 
   // Format publish date for display
   const formattedDate = blog.publishDate
@@ -14,7 +17,7 @@ const BlogRow = ({ blog, handleDeleteBlog, handleEditBlog, handleViewBlogDetails
     : "N/A";
 
   return (
-    <tr className="hover:bg-gray-50 h-content">
+    <tr className={`h-content ${theme==="dark" ? "category-card text-white" : "light-bg"}`}>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
         <img
           src={blog.blogPhoto || placeholderImage} 
@@ -23,13 +26,13 @@ const BlogRow = ({ blog, handleDeleteBlog, handleEditBlog, handleViewBlogDetails
           onError={(e) => { e.target.onerror = null; e.target.src = placeholderImage; }}
         />
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 line-clamp-2">
+      <td className="px-6 py-4 whitespace-nowrap text-sm line-clamp-2">
         {blog.blogTitle || "Untitled"}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+      <td className="px-6 py-4 whitespace-nowrap text-sm">
         {blog.author?.authorName || "N/A"} {/* Access nested authorName */}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+      <td className="px-6 py-4 whitespace-nowrap text-sm">
         {formattedDate}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-center">

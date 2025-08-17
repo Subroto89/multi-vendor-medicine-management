@@ -10,7 +10,7 @@ const AdminPaymentManagementRow = ({
   const {theme} = useTheme();
   return (
     <tr key={payment._id || index} className={`hover:bg-gray-50 ${theme==="dark" ? "category-card text-white" : "bg-secondary"}`}>
-      <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td className="px-4 py-4 whitespace-nowrap text-sm font-medium">
         {index + 1}
       </td>
       <td className="px-4 py-4 max-w-12 truncate whitespace-nowrap text-sm ">

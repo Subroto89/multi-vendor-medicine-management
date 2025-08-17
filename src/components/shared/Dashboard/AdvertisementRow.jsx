@@ -68,7 +68,7 @@ const AdvertisementRow = ({ advertisement, refetch, handleBannerAdModal, setPart
       }
 
   return (
-    <tr className="hover:bg-blue-50">
+    <tr className="">
       <td className="px-5 py-2">
         <img src={mediPhoto} alt="medicine photo" className="w-16 h-16" />
       </td>

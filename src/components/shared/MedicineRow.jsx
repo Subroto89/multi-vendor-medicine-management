@@ -4,6 +4,7 @@ import { MdAdd, MdDelete, MdVisibility } from "react-icons/md";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useTheme } from "../../context/ThemeContext";
 
 const MedicineRow = ({
   medicine,
@@ -12,6 +13,8 @@ const MedicineRow = ({
   setParticularMedicine,
   handleMedicineStatus
 }) => {
+
+  const {theme} = useTheme();
   const axiosSecure = useAxiosSecure();
   const {
     _id,
@@ -77,7 +80,7 @@ const MedicineRow = ({
 //   };
 
   return (
-    <tr className="hover:bg-blue-50">
+    <tr className={`${theme==="dark" ? "category-card" : ""}`}>
       <td className="px-5 py-2">
         <img src={mediPhoto} alt="medicine photo" className="w-16 h-16" />
       </td>

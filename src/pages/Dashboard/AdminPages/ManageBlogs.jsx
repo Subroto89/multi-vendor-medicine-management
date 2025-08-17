@@ -6,10 +6,13 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import BlogTable from "../../../components/BlogTable";
 import { TabTitle } from "../../../utilities/utilities";
+import {useTheme} from "../../../context/ThemeContext";
 
 const ManageBlogs = () => {
   TabTitle('Manage Blogs');
-    const axiosSecure = useAxiosSecure();
+
+  const {theme} = useTheme();
+  const axiosSecure = useAxiosSecure();
   const [isAddBlogModal, setIsAddBlogModal] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -80,13 +83,13 @@ const ManageBlogs = () => {
   }
 
   return (
-    <div className="text-gray-700 min-h-screen">
-      <Container>
+    <div className={`w-full min-h-screen ${theme==="dark" ? "bg-secondary" : "light-bg"}`}>
+      <div className={`w-11/12 mx-auto min-h-screen ${theme==="dark" ? "bg-secondary" : "light-bg"}`}>
         {/* ---------------------------------------------------------------------------
                 Header Part (Included Add New Blog) 
                 --------------------------------------------------------------------------- */}
         <div className="flex items-center justify-between mb-6 pt-10">
-          <h2 className="text-xl md:text-2xl font-bold pt-4">Manage Blogs</h2>
+          <h2 className={`text-xl md:text-2xl font-bold pt-4 ${theme==="dark" ? "text-white" : "text-gray-800"}`}>Manage Blogs</h2>
           <button
             onClick={handleAddBlogModal}
             className="flex items-center gap-2 border border-gray-500 px-4 py-1 font-bold rounded-lg hover:bg-green-600 hover:text-white "
@@ -122,7 +125,7 @@ const ManageBlogs = () => {
         {isAddBlogModal && (
             <AddBlogModal handleAddBlogModal={handleAddBlogModal} refetch={refetch}/>
         )}
-      </Container>
+      </div>
     </div>
   );
 };

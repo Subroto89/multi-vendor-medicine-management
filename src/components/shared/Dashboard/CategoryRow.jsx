@@ -8,7 +8,7 @@ const CategoryRow = ({ category, handleCategoryDelete, handleUpdateCategoryModal
 
   }
   return (
-    <tr className="border-b-1 border-gray-300">
+    <tr className="border-b border-gray-500">
       <td className="py-2 w-12 h-12 overflow-hidden">
         <img
           src={categoryPhoto}

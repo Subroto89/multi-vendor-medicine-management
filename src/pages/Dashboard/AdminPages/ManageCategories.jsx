@@ -90,7 +90,7 @@ const ManageCategories = () => {
         <div>
           {categories.length > 0 ? (
             <div className="w-full max-h-[calc(100vh-150px)] overflow-auto rounded-lg mt-10 shadow-lg">
-              <table className={`w-full divider-y divider-gray-300 ${theme==="dark" ? "category-card" : ""}`}>
+              <table className={`w-full divider-y divider-gray-500 ${theme==="dark" ? "category-card" : ""}`}>
                 <thead className={`h-4 bg-gray-200 uppercase text-sm font-semibold sticky top-0 ${theme==="dark" ? "category-card" : ""}`}>
                   <tr className="text-left">
                     <th className="py-2 px-20">Photo</th>

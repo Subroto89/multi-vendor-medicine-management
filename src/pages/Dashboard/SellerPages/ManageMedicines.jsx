@@ -13,9 +13,12 @@ import MedicineDetailsModal from "../../../components/modals/MedicineDetailsModa
 import MedicineRestockModal from "../../../components/modals/MedicineRestockModal";
 import MedicineEditModal from "../../../components/modals/MedicineEditModal";
 import { TabTitle } from "../../../utilities/utilities";
+import { useTheme } from "../../../context/ThemeContext";
 
 const ManageMedicines = () => {
   TabTitle('Manage Medicines');
+
+  const {theme} = useTheme();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   // ---------------------------------------------------------------------------------------
@@ -128,7 +131,7 @@ const ManageMedicines = () => {
 
   return (
     <div className="relative w-full">
-      <div className="w-11/12 mx-auto">
+      <div className="w-8/12 mx-auto">
         {/* --------------------------------------------------------------------------------
             Button To Open Add New Medicine Modal 
             -------------------------------------------------------------------------------- */}
@@ -148,7 +151,7 @@ const ManageMedicines = () => {
         {/* --------------------------------------------------------------------------------
             All the Added Medicine Display Table
             -------------------------------------------------------------------------------- */}
-        <div className="my-4">
+        <div className="">
           <ParticularSellerMedicines
             medicines={medicines}
             refetch={refetch}

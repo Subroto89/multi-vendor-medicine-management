@@ -1,6 +1,7 @@
 import DataNotFound from './shared/DataNotFound';
 import BlogRow from '../components/shared/Dashboard/BlogRow'
 import { FaTools, FaAngleLeft, FaAngleRight } from 'react-icons/fa'; 
+import { useTheme } from '../context/ThemeContext';
 
 const BlogTable = ({
   blogPosts,
@@ -14,13 +15,15 @@ const BlogTable = ({
   handleEditBlog,
   handleViewBlogDetails
 }) => {
+  const {theme} = useTheme();
+
   return (
     <div className="w-full max-h-[calc(100vh-160px)] flex flex-col justify-between">
       {totalCount > 0 ? (
         <>
-          <div className="w-full max-h-[calc(100vh-100px)] rounded-lg overflow-auto shadow-lg border border-gray-200">
+          <div className="w-full max-h-[calc(100vh-100px)] rounded-lg overflow-auto shadow-lg">
             <table className="w-full divide-y divide-gray-200 bg-white">
-              <thead className="bg-gray-50 text-gray-700 text-sm font-semibold uppercase tracking-wider sticky top-0">
+              <thead className={`text-sm font-semibold uppercase tracking-wider sticky top-0 ${theme==="dark" ? "category-card" : ""}`}>
                 <tr>
                   <th scope="col" className="w-1/12 text-left px-6 py-3">Image</th>
                   <th scope="col" className="w-3/12 text-left px-6 py-3">Title</th>
@@ -47,7 +50,7 @@ const BlogTable = ({
           </div>
 
           {/* Pagination Controls */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-4 py-3 bg-white rounded-lg shadow-md">
+          <div className={`flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-4 py-3 rounded-lg shadow-md ${theme==="dark" ? "category-card" : ""}`}>
             {/* Items Per Page Selector */}
             <div className="flex items-center gap-2">
               <label htmlFor="blogItemsPerPage" className="text-sm text-gray-700">Blogs per page:</label>
@@ -97,7 +100,7 @@ const BlogTable = ({
                 <FaAngleRight />
               </button>
             </div>
-            <span className="text-sm text-gray-700">Page {currentPage} of {totalPages} ({totalCount} posts)</span>
+            <span className={`text-sm ${theme==="dark" ? "text-white" : "text-gray-700"}`}>Page {currentPage} of {totalPages} ({totalCount} posts)</span>
           </div>
         </>
       ) : (

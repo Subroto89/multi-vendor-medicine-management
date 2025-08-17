@@ -25,7 +25,7 @@ const Sidebar = ({ isSideBarOpen, toggleMenu }) => {
   return (
     <div>
       <div
-        className={`absolute w-56 md:w-64  inset-y-0 ${theme==="dark" ? "category-card" : "bg-secondary"} flex flex-col gap-20 md:fixed   md:translate-x-0 transform ${
+        className={`absolute w-56 md:w-64  inset-y-0 ${theme==="dark" ? "dark-bg border-r border-gray-600 shadow-4xl" : "bg-secondary"} flex flex-col gap-20 md:fixed   md:translate-x-0 transform ${
           !isSideBarOpen && "-translate-x-full"
         }  transition duration-200 ease-in-out z-10`}
       >

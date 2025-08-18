@@ -1,5 +1,3 @@
-
-
 import useAuth from '../../hooks/useAuth';
 import LoadingSpinner from '../../components/shared/LoadingSpinner';
 import SellerDashboardHome from './SellerPages/SellerDashboardHome'; // Import the seller home content
@@ -16,7 +14,6 @@ const DashboardHome = () => {
   if (loading || userRoleLoading) {
     return <LoadingSpinner />;
   }
-console.log(userRole)
   if (!user) {
     return <div className="text-center py-20">Please log in to view your dashboard.</div>;
   }

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 const DigitalClock = () => {
   const [time, setTime] = useState(new Date());
+  const {theme} = useTheme();
 
   useEffect(() => {
     
@@ -24,7 +26,7 @@ const DigitalClock = () => {
   });
 
   return (
-    <div className="text-lg font-bold tracking-wide  px-3 py-1 rounded-md ">
+    <div className={`text-lg font-bold tracking-wide  px-3 py-1 rounded-md ${theme==="dark" ? "text-white" : "text-blue-600"}`}>
       {formattedTime}
     </div>
   );

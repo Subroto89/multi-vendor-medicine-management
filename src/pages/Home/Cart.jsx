@@ -230,7 +230,7 @@ const handleRemoveItem = async (medicineId, itemName) => {
                   <div>
                     <div className={`max-h-[calc(100vh-280px)] overflow-auto rounded-xl shadow-xl`}>
                     <table className='w-full divider-y divider-gray-200'>
-                      <thead className={`bg-gray-100 text-md font-semibold text-gray-700 sticky top-0 w-full divider-y divider-gray-200 ${theme==="dark" ? "category-card" : ""}`}>
+                      <thead className={`bg-gray-100 text-md font-semibold text-gray-700 sticky top-0 w-full divider-y divider-gray-200 ${theme==="dark" ? "category-card" : "text-gray-700"}`}>
                          <th className='px-4 py-2 text-sm font-semibold text-center uppercase'>
                         <input
                           type="checkbox"

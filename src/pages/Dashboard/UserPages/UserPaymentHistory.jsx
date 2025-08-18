@@ -8,9 +8,11 @@ import UserPaymentRow from "../../../components/UserPaymentRow";
 import ReviewModal from "../../../components/modals/ReviewModal";
 import { useState } from "react";
 import {TabTitle} from "../../../utilities/utilities";
+import { useTheme } from "../../../context/ThemeContext";
 
 const UserPaymentHistory = () => {
   TabTitle('Payment History');
+  const {theme} = useTheme();
   const [isReviewModal, setIsReviewModal] = useState(false);
   const [orderDetails, setOrderDetails] = useState(null);
 
@@ -61,44 +63,44 @@ const UserPaymentHistory = () => {
   }
 
   return (
-    <div className="px-4 bg-gray-100 min-h-screen">
-      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-xl pt-14 md:p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+    <div className="bg-gray-100 min-h-screen">
+      <div className={`w-full mx-auto min-h-screen rounded-lg shadow-xl py-16 md:py-8 ${theme==="dark" ? "dark-bg-body" : "light-bg-body"}`}>
+        <h1 className={`text-3xl font-bold mb-2 text-center ${theme==="dark" ? "text-white" : "text-gray-800"}`}>
           Your Payment History
         </h1>
-        <p className="text-lg text-gray-600 text-center mb-8">
+        <p className={`text-lg text-center mb-8 ${theme==="dark" ? "text-white" : "text-gray-600"}`}>
           Total payments:{" "}
-          <span className="font-semibold text-blue-700">
+          <span className={`font-semibold ${theme==="dark" ? "text-amber-400" : "text-blue-700"}`}>
             {userPaymentHistory.length}
           </span>
         </p>
 
         {userPaymentHistory.length > 0 ? (
-          <div className="max-h-[calc(100vh-190px)] overflow-auto rounded-lg shadow-lg border border-gray-200">
+          <div className={`w-11/12 mx-auto max-h-[calc(100vh-190px)] overflow-auto rounded-lg shadow-lg border ${theme==="dark" ? "border-none" : "border-gray-200"}`}>
             <table className="min-w-full divide-y divide-gray-200 bg-white">
-              <thead className="bg-gray-50 sticky top-0">
+              <thead className={`sticky top-0 ${theme==="dark" ? "dark-category-card" : "light-category-card"}`}>
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                     #
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                     Transaction ID
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                     Amount
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                     Date
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider">
                     Give Review
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white divide-y divide-gray-500">
                 {userPaymentHistory.map((payment, index) => (
                   <UserPaymentRow
                     payment={payment}

@@ -26,7 +26,7 @@ const CartDataRow = ({
   return (
     <tr
       className={` border-b border-white hover:bg-green-100 ${
-        theme === "dark" ? "category-card" : "bg-gray-50"
+        theme === "dark" ? "category-card" : "bg-gray-50 text-gray-700"
       }`}
     >
       <td className="px-4 py-3 text-center">

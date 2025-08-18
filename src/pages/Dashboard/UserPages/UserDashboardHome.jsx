@@ -12,9 +12,12 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
+import { useTheme } from "../../../context/ThemeContext";
 
 const UserDashboardHome = () => {
   TabTitle("Dashboard Home");
+
+  const {theme} = useTheme();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
@@ -111,21 +114,22 @@ const UserDashboardHome = () => {
   };
 
   return (
-    <div className="px-4 bg-gray-100 min-h-screen">
-      <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center mt-8 md:mt-0">
+    <div className="bg-gray-100 min-h-screen">
+      <div className={`w-full min-h-screen mx-auto bg-white rounded-lg shadow-xl pt-8 ${theme==="dark" ? "dark-bg-body" : "light-bg-body"}`}>
+        <div className="w-11/12 mx-auto">
+          <h1 className={`text-3xl font-bold mb-2 text-center mt-8 md:mt-0 ${theme==="dark" ? "text-white" : "text-gray-800"}`}>
           Your Dashboard
         </h1>
-        <p className="text-lg text-gray-600 text-center mb-2">
+        <p className={`text-lg text-center mb-8 ${theme==="dark" ? "text-white" : "text-gray-600"}`}>
           Welcome,
-          <span className="font-semibold text-blue-700">
+          <span className={`font-semibold ${theme==="dark" ? "text-amber-400" : "text-blue-700"}`}>
             {user?.displayName || user?.email}!
           </span>{" "}
           Here's an overview of your activity.
         </p>
 
         {/* --- Total Spending Summary --- */}
-        <div className="bg-green-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center mb-2">
+        <div className="bg-green-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center mb-8">
           <h3 className="text-xl font-semibold text-green-800 mb-2">
             Total Spending Across All Orders
           </h3>
@@ -138,7 +142,7 @@ const UserDashboardHome = () => {
         </div>
 
         {/* --- Spending Distribution by Category Pie Chart --- */}
-        <div className="bg-indigo-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center min-h-[400px] mt-2">
+        <div className="bg-indigo-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center min-h-[calc(100vh-350px)] mt-2">
           <h3 className="text-xl md:text-2xl font-semibold text-indigo-800 mb-3">
             Your Spending by Medicine Category
           </h3>
@@ -179,7 +183,8 @@ const UserDashboardHome = () => {
             </div>
           )}
         </div>
-        {/* --- End Spending Distribution by Category Pie Chart --- */}
+
+        </div>        
       </div>
     </div>
   );

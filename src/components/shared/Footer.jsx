@@ -4,7 +4,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/f
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-gray-300 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-8">
+      <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-8">
         {/* Company Info / Logo */}
         <div className="col-span-1 md:col-span-1">
           <h3 className="text-2xl font-bold text-white mb-4">MediMart Store</h3>
@@ -12,16 +12,16 @@ const Footer = () => {
             Your trusted partner for all your pharmaceutical needs. Providing quality medicines with care.
           </p>
           <div className="flex space-x-4 mt-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200" aria-label="Facebook">
+            <a href="https://www.facebook.com/" className="text-gray-400 hover:text-white transition-colors duration-200" aria-label="Facebook">
               <FaFacebookF size={20} />
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200" aria-label="Twitter">
+            <a href="https://www.twitter.com" className="text-gray-400 hover:text-white transition-colors duration-200" aria-label="Twitter">
               <FaTwitter size={20} />
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200" aria-label="Instagram">
+            <a href="https://www.instagram.com" className="text-gray-400 hover:text-white transition-colors duration-200" aria-label="Instagram">
               <FaInstagram size={20} />
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com" className="text-gray-400 hover:text-white transition-colors duration-200" aria-label="LinkedIn">
               <FaLinkedinIn size={20} />
             </a>
           </div>
@@ -36,21 +36,18 @@ const Footer = () => {
               <a href="/" className="text-sm hover:text-white transition-colors duration-200">Home</a>
             </li>
             <li>
-              <a href="/categories" className="text-sm hover:text-white transition-colors duration-200">Categories</a>
+              <a href="#categories" className="text-sm hover:text-white transition-colors duration-200">Categories</a>
             </li>
             <li>
-              <a href="/discounted-products" className="text-sm hover:text-white transition-colors duration-200">Discounts</a>
+              <a href="#discountSection" className="text-sm hover:text-white transition-colors duration-200">Discounts</a>
             </li>
             <li>
-              <a href="/about" className="text-sm hover:text-white transition-colors duration-200">About Us</a>
-            </li>
-            <li>
-              <a href="/contact" className="text-sm hover:text-white transition-colors duration-200">Contact Us</a>
+              <a href="/contact-us" className="text-sm hover:text-white transition-colors duration-200">Contact Us</a>
             </li>
           </ul>
         </div>
 
-        {/* Services */}
+        {/* Services
         <div className="col-span-1 md:col-span-1">
           <h4 className="text-lg font-semibold text-white mb-4">Our Services</h4>
           <ul className="space-y-2">
@@ -70,7 +67,7 @@ const Footer = () => {
               <a href="#" className="text-sm hover:text-white transition-colors duration-200">Wholesale Orders</a>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Contact Info */}
         <div className="col-span-1 md:col-span-1">

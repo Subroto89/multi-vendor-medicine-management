@@ -5,9 +5,11 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../components/shared/LoadingSpinner'; 
 import DataNotFound from '../../components/shared/DataNotFound'; 
 import { FaCalendarAlt, FaUserCircle, FaEnvelope } from 'react-icons/fa'; 
+import { useTheme } from '../../context/ThemeContext';
 
 const BlogDetails = () => {
   const { id } = useParams(); 
+  const {theme} = useTheme();
   const axiosSecure = useAxiosSecure();
 
   // Fetch single blog post data
@@ -72,9 +74,9 @@ const BlogDetails = () => {
   const placeholderImage = "https://placehold.co/1200x600/E0E7FF/4338CA?text=Blog+Image";
 
   return (
-    <div className="py-12 bg-gray-50 min-h-screen">
-      <Container>
-        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+    <div className={`py-40 min-h-screen ${theme==="dark" ? "dark-bg-body" : "light-bg-body"}`}>
+      <div>
+        <div className={`max-w-5xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden ${theme==="dark" ? "dark-category-card" : "light-category-card"}`}>
           {/* Blog Post Image */}
           <div className="relative h-96 overflow-hidden">
             <img
@@ -87,35 +89,35 @@ const BlogDetails = () => {
 
           <div className="p-8 md:p-10">
             {/* Blog Title */}
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
               {blogTitle || "Untitled Blog Post"}
             </h1>
 
             {/* Author and Date Metadata */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-gray-600 text-sm mb-8 border-b pb-6 border-gray-200">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm mb-8 border-b pb-6 border-gray-200">
               <div className="flex items-center gap-2">
-                <FaUserCircle className="text-blue-500 text-lg" />
+                <FaUserCircle className={` text-lg ${theme==="dark" ? "text-white" : "text-blue-500"}`} />
                 <span className="font-semibold">{author?.authorName || "Unknown Author"}</span>
               </div>
               <div className="flex items-center gap-2">
-                <FaEnvelope className="text-blue-500 text-lg" />
+                <FaEnvelope className={`text-lg ${theme==="dark" ? "text-white" : "text-blue-500"}`} />
                 <span>{author?.authorEmail || "N/A"}</span>
               </div>
               <div className="flex items-center gap-2">
-                <FaCalendarAlt className="text-blue-500 text-lg" />
+                <FaCalendarAlt className={`text-lg ${theme==="dark" ? "text-white" : "text-blue-500"}`} />
                 <span>{formattedDate}</span>
               </div>
             </div>
 
             {/* Short Description (Introduction) */}
             {shortDescription && (
-              <p className="text-lg text-gray-700 mb-8 leading-relaxed italic">
+              <p className={`text-lg mb-8 leading-relaxed italic ${theme==="dark" ? "text-white" : "text-gray-700"}`}>
                 "{shortDescription}"
               </p>
             )}
 
             {/* Full Content */}
-            <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+            <div className={`prose prose-lg max-w-none leading-relaxed ${theme==="dark" ? "text-white" : "text-gray-800"}`}>
               
               {fullContent ? (
                 // If fullContent is plain text, render as paragraphs
@@ -130,7 +132,7 @@ const BlogDetails = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

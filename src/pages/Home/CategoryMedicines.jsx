@@ -9,8 +9,10 @@ import { FaTools, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import CatMedicineRow from "../../components/shared/CatMedicineRow";
 import SingleMedicineModal from "../../components/modals/SingleMedicineModal";
 import useAddToCart from "../../hooks/useAddToCart";
+import { useTheme } from "../../context/ThemeContext";
 
 const CategoryMedicines = () => {
+  const {theme} = useTheme();
   const { catName } = useParams();
   const handleAddToCart = useAddToCart();
 
@@ -97,12 +99,12 @@ const CategoryMedicines = () => {
   }
 
   return (
-    <div className="py-8"> 
-      <Container>
+    <div className="pt-20 dark-bg-body min-h-screen"> 
+      <div className="w-11/12 mx-auto">
         {/* --------------------------------------------------------------------------------------
         Category Heading Section
         -------------------------------------------------------------------------------------- */}
-        <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center"> 
+        <h2 className={`text-2xl font-bold mb-4 text-center ${theme==="dark" ? "text-white" : "text-blue-900"}`}> 
           {catName} Collection
         </h2>
         {/* --------------------------------------------------------------------------------------
@@ -110,9 +112,9 @@ const CategoryMedicines = () => {
         -------------------------------------------------------------------------------------- */}
         <div>
           {medicines.length > 0 ? ( 
-            <div className="w-full rounded-lg overflow-auto shadow-lg">
+            <div className={`w-full min-h-[calc(100vh-250px)] rounded-lg overflow-auto shadow-lg ${theme==="dark" ? "dark-category-card" : "light-category-card"}`}>
               <table className="w-full divider-y divider-gray-300">
-                <thead className="bg-gray-50 text-gray-700 text-md font-semibold">
+                <thead className={`bg-gray-50 text-gray-700 text-md font-semibold ${theme==="dark" ? "dark-category-card" : "light-cateogry-card"}`}>
                   <tr>
                     <th className="px-5 py-2 text-left">Medicine Name</th>
                     <th className="px-5 py-2 text-left">Generic Name</th>
@@ -148,7 +150,7 @@ const CategoryMedicines = () => {
 
         
         {totalCount > 0 && ( 
-          <div className="flex flex-col md:flex-row justify-between items-center mt-8 px-4 py-3 bg-white rounded-lg shadow-md">
+          <div className={`flex flex-col md:flex-row justify-between items-center mt-8 px-4 py-3 rounded-lg shadow-md ${theme==="dark" ? "dark-category-card" : "light-category-card"}`}>
             {/* Items Per Page Selector */}
             <div className="flex items-center gap-2">
               <label htmlFor="itemsPerPage" className="text-sm text-gray-700">Medicines per page:</label>
@@ -202,7 +204,7 @@ const CategoryMedicines = () => {
                 <FaAngleRight />
               </button>
             </div>
-            <span className="text-sm text-gray-700">Page {currentPage} of {totalPages}</span>
+            <span className={`text-sm ${theme==="dark" ? "text-white" : "text-gray-700"}`}>Page {currentPage} of {totalPages}</span>
           </div>
         )}
 
@@ -218,7 +220,7 @@ const CategoryMedicines = () => {
             />
           )}
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

@@ -30,7 +30,7 @@ const DiscountProductSlider = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <section className="mt-24">
+    <section id="discountSection" className="mt-24">
       <div className="w-11/12 mx-auto">
         <h2 className={`text-4xl font-extrabold text-center text-gray-900 mb-10 ${theme==='dark' ? 'text-white' : ""}`}>
           Special Offers & Discounts

@@ -129,21 +129,21 @@ const UserDashboardHome = () => {
         </p>
 
         {/* --- Total Spending Summary --- */}
-        <div className="bg-green-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center mb-8">
-          <h3 className="text-xl font-semibold text-green-800 mb-2">
+        <div className={` p-6 rounded-lg shadow-md flex flex-col items-center justify-center mb-8 ${theme==="dark" ? "dark-category-card" : "bg-green-50"}`}>
+          <h3 className={`text-xl font-semibold  mb-2 ${theme==="dark" ? "text-white" : "text-green-800"}`}>
             Total Spending Across All Orders
           </h3>
-          <p className="text-4xl font-extrabold text-green-600">
+          <p className={`text-4xl font-extrabold ${theme==="dark" ? "text-white" : "text-green-600"}`}>
             ${totalSpending.toFixed(2)}
           </p>
-          <p className="text-sm text-gray-600 mt-2">
+          <p className={`text-sm mt-2 ${theme==="dark" ? "text-white" : "text-gray-600"}`}>
             Sum of all your paid orders
           </p>
         </div>
 
         {/* --- Spending Distribution by Category Pie Chart --- */}
-        <div className="bg-indigo-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center min-h-[calc(100vh-350px)] mt-2">
-          <h3 className="text-xl md:text-2xl font-semibold text-indigo-800 mb-3">
+        <div className={`p-6 rounded-lg shadow-md flex flex-col items-center justify-center min-h-[calc(100vh-350px)] mt-2 ${theme==="dark" ? "dark-category-card" : "bg-indigo-50"}`}>
+          <h3 className={`text-xl md:text-2xl font-semibold mb-3 ${theme==="dark" ? "text-white" : "text-indigo-800"}`}>
             Your Spending by Medicine Category
           </h3>
           {userSpendingByCategory.length > 0 ? (

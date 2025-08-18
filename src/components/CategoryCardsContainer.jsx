@@ -24,7 +24,7 @@ const CategoryCardsContainer = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="w-full bg-secondary mt-24">
+    <div id="categories" className="w-full bg-secondary mt-24">
       <div className="w-11/12 mx-auto">
         <h2
           className={`text-4xl mb-10 font-bold text-center ${

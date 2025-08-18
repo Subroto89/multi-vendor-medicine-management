@@ -1,6 +1,8 @@
 import { MdVisibility } from "react-icons/md";
+import { useTheme } from "../../context/ThemeContext";
 
 const CatMedicineRow = ({ medicine, handleModalView, handleAddToCart }) => {
+  const {theme} = useTheme();
   const {
     _id,
     medicineName,
@@ -11,7 +13,7 @@ const CatMedicineRow = ({ medicine, handleModalView, handleAddToCart }) => {
     perUnitPrice,
   } = medicine;
   return (
-    <tr className="border-b-1 border-gray-300">
+    <tr className={`border-b-1 border-gray-300 ${theme==="dark" ? "dark-category-card" : "light-category-card"}`}>
       <td className="text-sm text-left px-5 py-1">{medicineName}</td>
       <td className="text-sm text-left px-5 py-1">{genericName}</td>
       <td className="text-sm text-left px-5 py-1">{company}</td>

@@ -30,6 +30,7 @@ import BlogDetails from "../pages/Home/BlogDetails";
 import UpdateProfilePage from "../pages/Home/UpdateProfilePage";
 import ObserveMedicines from "../pages/Dashboard/AdminPages/ObserveMedicines";
 import ErrorPage from "../pages/ErrorPage";
+import ContactUs from "../pages/ContactUs";
 
 const router = createBrowserRouter([
   // ---------------------------------
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "/update-profile/:email",
         Component: UpdateProfilePage
+      },
+      {
+        path: "/contact-us",
+        Component: ContactUs
       },
       {
         path: "/*",

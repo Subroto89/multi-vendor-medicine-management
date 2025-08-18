@@ -9,9 +9,14 @@
 :root {
   --navbar-color: #c5cfd5;
   --light-bg-color: #f0f4f8;
-  --text-color: #263238;
+  --light-text-color: #263238;
   --accent-color: #239ba7;
   --hover-color: #3ab4c2;
+
+   /* Card and Table Styles for Light Mode */
+  --card-bg: #FFFFFF; /* pure white for cards to stand out on the light gray background */
+  --card-border: #E2E8F0; /* A very light gray border */
+  --card-shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 /* Dark Theme */
@@ -33,6 +38,7 @@
   box-shadow: 0 4px 6px -1px var(--card-shadow-color),
               0 2px 4px -1px var(--card-shadow-color);
 }
+
 
 /* Base styles that use the variables */
 body {
@@ -63,4 +69,44 @@ body {
 
 .light-bg{
   background-color: var(--light-bg-color);
+}
+
+/* new combination */
+.light-bg-nav{
+  background-color: var(--navbar-color);
+  color: var(--light-text-color);
+}
+
+.light-bg-body{
+  background-color: var(--light-bg-color);
+  color: var(--light-text-color);
+}
+
+
+.light-category-card{
+  --card-bg: #FFFFFF;
+  --card-border: #E2E8F0; 
+  --card-shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+
+.dark-bg-nav{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.dark-bg-body{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.dark-category-card {
+  /* Existing styles */
+  background-color: var(--card-bg);
+  color: var(--text-color);
+
+  /* Add a border and shadow for visibility */
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 6px -1px var(--card-shadow-color),
+              0 2px 4px -1px var(--card-shadow-color);
 }

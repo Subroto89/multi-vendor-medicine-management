@@ -12,9 +12,12 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
+import { useTheme } from "../../../context/ThemeContext";
 
 const SellerDashboardHome = () => {
   TabTitle("Seller-Dashboard Home");
+  const { theme } = useTheme();
+
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
@@ -134,93 +137,119 @@ const SellerDashboardHome = () => {
   };
 
   return (
-    <div className=" px-4 bg-gray-100 min-h-screen">
-      {" "}
+    <div className={`w-full bg-gray-100 min-h-screen`}>
       {/* Added bg-gray-100 and min-h-screen for consistent layout */}
-      <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center mt-8 md:mt-0">
-          Your Sales Overview
-        </h1>
-        <p className="text-lg text-gray-600 text-center mb-3">
-          Welcome,{" "}
-          <span className="font-semibold text-blue-700">
-            {user?.displayName || user?.email}!
-          </span>{" "}
-          Here's an overview of your sales.
-        </p>
+      <div
+        className={`min-h-screen w-full mx-auto shadow-xl ${
+          theme === "dark" ? "dark-bg-body" : "light-bg-body"
+        }`}
+      >
+        <div className="w-11/12 mx-auto">
+          <h1
+            className={`text-3xl font-bold mb-2 text-center pt-8 ${
+              theme === "dark" ? "text-white" : "text-gray-800"
+            }`}
+          >
+            Your Sales Overview
+          </h1>
+          <p
+            className={`text-lg text-center pb-8 ${
+              theme === "dark" ? "text-white" : "text-gray-600"
+            }`}
+          >
+            Welcome,{" "}
+            <span
+              className={`font-semibold ${
+                theme === "dark" ? "text-amber-500" : "text-blue-700"
+              }`}
+            >
+              {user?.displayName || user?.email}!
+            </span>{" "}
+            Here's an overview of your sales.
+          </p>
 
-        {/* --- Sales Revenue Section --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-          {/* Card for Total Paid Revenue */}
-          <div className="bg-blue-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
-            <h3 className="text-xl font-semibold text-blue-800 mb-2">
-              Total Paid Revenue
-            </h3>
-            <p className="text-4xl font-extrabold text-blue-600">
-              ${salesSummary.paidTotal.toFixed(2)}
-            </p>
-            <p className="text-sm text-gray-600 mt-2">
-              All successfully paid sales
-            </p>
-          </div>
-          {/* Card for Total Pending Revenue */}
-          <div className="bg-yellow-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
-            <h3 className="text-xl font-semibold text-yellow-800 mb-2">
-              Total Pending Revenue
-            </h3>
-            <p className="text-4xl font-extrabold text-yellow-600">
-              ${salesSummary.pendingTotal.toFixed(2)}
-            </p>
-            <p className="text-sm text-gray-600 mt-2">
-              Cash on Delivery & unconfirmed payments
-            </p>
-          </div>
-        </div>
-        {/* --- End Sales Revenue Section --- */}
-
-        {/* --- Sales Distribution by Category Pie Chart for Seller --- */}
-        <div className="bg-purple-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center min-h-[400px] mt-3">
-          <h3 className="text-xl md:text-2xl font-semibold text-purple-800 mb-3">
-            Your Sales Distribution by Medicine Category
-          </h3>
-          {sellerCategorySales.length > 0 ? (
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={sellerCategorySales}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={renderCustomizedLabel}
-                  outerRadius={120}
-                  fill="#8884d8"
-                  dataKey="value"
-                  nameKey="name"
-                >
-                  {sellerCategorySales.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip
-                  formatter={(value, name) => [`$${value.toFixed(2)}`, name]}
-                />
-                <Legend
-                  layout="horizontal"
-                  align="center"
-                  verticalAlign="bottom"
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          ) : (
-            <div className="text-gray-500 text-center">
-              No sales data available for your medicine categories yet.
+          {/* --- Sales Revenue Section --- */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            {/* Card for Total Paid Revenue */}
+            <div
+              className={`p-6 rounded-lg flex flex-col items-center justify-center ${
+                theme === "dark"
+                  ? "dark-category-card"
+                  : "light-category-card bg-blue-50 text-blue-600 shadow-md"
+              }`}
+            >
+              <h3 className="text-xl font-semibold mb-2">Total Paid Revenue</h3>
+              <p className="text-4xl font-extrabold">
+                ${salesSummary.paidTotal.toFixed(2)}
+              </p>
+              <p className="text-sm mt-2">All successfully paid sales</p>
             </div>
-          )}
+            {/* Card for Total Pending Revenue */}
+            <div
+              className={`p-6 rounded-lg flex flex-col items-center justify-center ${
+                theme === "dark"
+                  ? "dark-category-card"
+                  : "light-category-card bg-yellow-50 text-yellow-800 shadow-md"
+              }`}
+            >
+              <h3 className="text-xl font-semibold mb-2">
+                Total Pending Revenue
+              </h3>
+              <p className="text-4xl font-extrabold">
+                ${salesSummary.pendingTotal.toFixed(2)}
+              </p>
+              <p className="text-sm mt-2">
+                Cash on Delivery & unconfirmed payments
+              </p>
+            </div>
+          </div>
+          {/* --- End Sales Revenue Section --- */}
+
+          {/* --- Sales Distribution by Category Pie Chart for Seller --- */}
+          <div
+            className={`bg-purple-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center min-h-[calc(100vh-350px)] mt-3 ${theme==="dark" ? "dark-category-card" : ""}`}
+          >
+            <h3 className={`text-xl md:text-2xl font-semibold mb-3 ${theme==="dark" ? "text-white" : "text-purple-800"}`}>
+              Your Sales Distribution by Medicine Category
+            </h3>
+            {sellerCategorySales.length > 0 ? (
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={sellerCategorySales}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={renderCustomizedLabel}
+                    outerRadius={120}
+                    fill="#8884d8"
+                    dataKey="value"
+                    nameKey="name"
+                  >
+                    {sellerCategorySales.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(value, name) => [`$${value.toFixed(2)}`, name]}
+                  />
+                  <Legend
+                    layout="horizontal"
+                    align="center"
+                    verticalAlign="bottom"
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="text-gray-500 text-center">
+                No sales data available for your medicine categories yet.
+              </div>
+            )}
+          </div>
         </div>
-        {/* --- End Sales Distribution by Category Pie Chart --- */}
       </div>
     </div>
   );

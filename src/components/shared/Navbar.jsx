@@ -46,21 +46,15 @@ const Navbar = () => {
              <Link to="/"><Logo/></Link>
           </div>
 
-          {/* -----------------------------------------------------------------------
-          Theme Toggler Icon
-          ----------------------------------------------------------------------- */}
-          <div onClick={()=>toggleTheme()}>
-            {
-            theme === 'dark' ? <FaSun size="18"/> : <FaMoon size="18"/>
-          }
-          </div>
+        
 
 
 
         {/* -------------------------------------------------------------------------
           Navigation Link Section
           --------------------------------------------------------------------- */}
-        <div className="flex items-center justify-between gap-10">
+        <div className="flex items-center justify-between gap-10">        
+          
           {/* Links on Desktop Mode Section --------------------------------------*/}
           <div className="hidden md:block">
             <NavMenu toggleLanguage={() => (toggleLanguage(), closeMenu())} />

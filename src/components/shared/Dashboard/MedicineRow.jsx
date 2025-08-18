@@ -1,5 +1,6 @@
 import React from "react";
 import { FaBoxes, FaEdit, FaInfoCircle, FaTrashAlt } from "react-icons/fa";
+import { useTheme } from "../../../context/ThemeContext";
 
 const MedicineRow = ({
   medicine,
@@ -9,6 +10,7 @@ const MedicineRow = ({
   handleRestockModal,
   handleMedicineEditModal
 }) => {
+  const {theme} = useTheme();
   const {
     _id,
     mediPhoto,
@@ -21,7 +23,7 @@ const MedicineRow = ({
   } = medicine;
 
   return (
-    <tr className="min-w-full divide-y divide-gray-200 text-gray-700 text-sm font-normal hover:bg-blue-50 transition-color duration-300">
+    <tr className={`min-w-full divide-y divide-gray-500 text-sm font-normal transition-color duration-300 ${theme==="dark" ? "dark-category-card" : "light-category-card"}`}>
       <td className="px-5 py-2 w-12 h-12 overflow-hidden">
         <img src={mediPhoto} alt="medicine photo" className="w-12 h-12" />
       </td>

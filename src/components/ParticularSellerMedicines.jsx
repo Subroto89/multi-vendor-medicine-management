@@ -2,6 +2,7 @@ import { useState } from "react";
 import DataNotFound from "./shared/DataNotFound";
 import MedicineRow from "./shared/Dashboard/medicineRow";
 import { FaTools } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 
 const ParticularSellerMedicines = ({
   medicines,
@@ -11,6 +12,7 @@ const ParticularSellerMedicines = ({
   handleRestockModal,
   handleMedicineEditModal
 }) => {
+  const {theme} = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(7);
 
@@ -32,22 +34,22 @@ const ParticularSellerMedicines = ({
         <>
           {/* Table */}
           <div className="max-h-[calc(100vh-174px)] overflow-x-auto rounded-lg shadow-lg">
-            <table className="w-full divide-y divide-gray-200 bg-white">
-              <thead className="bg-gray-200 text-sm font-semibold sticky top-0">
+            <table className="w-full divide-y divide-gray-500">
+              <thead className={`text-sm font-semibold sticky top-0 ${theme==="dark" ? "dark-category-card" : "light-category-card"}`}>
                 <tr>
-                  <th className="w-1/12 text-gray-800 text-center px-5 py-3">Photo</th>
-                  <th className="w-2/12 text-gray-800 text-center py-3">Medicine Name</th>
-                  <th className="w-1/12 text-gray-800 text-center px-5 py-3">Category</th>
-                  <th className="w-2/12 text-gray-800 text-center px-5 py-3">Generic Name</th>
-                  <th className="w-1/12 text-gray-800 text-center px-5 py-3">Company</th>
-                  <th className="w-1/12 text-gray-800 text-center px-5 py-3">Stock</th>
-                  <th className="w-1/12 text-gray-800 text-center px-5 py-3">Status</th>
-                  <th className="text-gray-800 text-center px-5 py-3 flex items-center justify-center gap-2">
+                  <th className="w-1/12 text-center px-5 py-3">Photo</th>
+                  <th className="w-2/12 text-center py-3">Medicine Name</th>
+                  <th className="w-1/12 text-center px-5 py-3">Category</th>
+                  <th className="w-2/12 text-center px-5 py-3">Generic Name</th>
+                  <th className="w-1/12 text-center px-5 py-3">Company</th>
+                  <th className="w-1/12 text-center px-5 py-3">Stock</th>
+                  <th className="w-1/12 text-center px-5 py-3">Status</th>
+                  <th className="text-center px-5 py-3 flex items-center justify-center gap-2">
                     <FaTools /> Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-500">
                 {currentMedicines.map((medicine) => (
                   <MedicineRow
                     key={medicine._id}
@@ -101,15 +103,15 @@ const ParticularSellerMedicines = ({
             </div>
 
             {/* Items per page dropdown */}
-            <div className="flex items-center gap-2 text-sm">
-              <label htmlFor="itemsPerPage" className="text-gray-700 font-medium">
+            <div className={`flex items-center gap-2 text-sm ${theme==="dark" ? "text-white" : "text-gray-700"}`}>
+              <label htmlFor="itemsPerPage" className=" font-medium">
                 Items per page:
               </label>
               <select
                 id="itemsPerPage"
                 value={itemsPerPage}
                 onChange={handleItemsPerPageChange}
-                className="border border-gray-700 rounded px-2 py-1"
+                className="border rounded px-2 py-1"
               >
                 <option value={5}>5</option>
                 <option value={10}>10</option>

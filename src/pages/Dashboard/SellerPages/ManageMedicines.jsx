@@ -16,9 +16,9 @@ import { TabTitle } from "../../../utilities/utilities";
 import { useTheme } from "../../../context/ThemeContext";
 
 const ManageMedicines = () => {
-  TabTitle('Manage Medicines');
+  TabTitle("Manage Medicines");
 
-  const {theme} = useTheme();
+  const { theme } = useTheme();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   // ---------------------------------------------------------------------------------------
@@ -131,94 +131,87 @@ const ManageMedicines = () => {
 
   return (
     <div className="relative w-full">
-      <div className="w-8/12 mx-auto">
-        {/* --------------------------------------------------------------------------------
+      <div
+        className={`min-h-screen w-full mx-auto ${theme === "dark" ? "dark-bg-body" : "light-bg-body"}`}
+      >
+        <div className={`w-11/12 mx-auto`}>
+          {/* --------------------------------------------------------------------------------
             Button To Open Add New Medicine Modal 
             -------------------------------------------------------------------------------- */}
-        <div className="flex items-center justify-between pt-12 md:pt-1">
-          <h2 className="text-lg font-bold text-gray-700">
-            Manage Your Medicine
-          </h2>
-          <Link
-            onClick={handleAddMedicineModal}
-            className="btn rounded-lg shadow-lg flex items-center gap-2 bg-green-500"
-          >
-            <FaPlus size={20} />
-            Add New Medicine
-          </Link>
-        </div>
+          <div className="flex items-center justify-between py-8">
+            <h2 className="text-2xl font-bold text-gray-700">
+              Manage Your Medicine
+            </h2>
+            <Link
+              onClick={handleAddMedicineModal}
+              className="btn rounded-lg shadow-lg flex items-center gap-2 bg-green-500"
+            >
+              <FaPlus size={20} />
+              Add New Medicine
+            </Link>
+          </div>
 
-        {/* --------------------------------------------------------------------------------
+          {/* --------------------------------------------------------------------------------
             All the Added Medicine Display Table
             -------------------------------------------------------------------------------- */}
-        <div className="">
-          <ParticularSellerMedicines
-            medicines={medicines}
-            refetch={refetch}
-            handleDeleteMedicine={handleDeleteMedicine}
-            handleMedicineDetailsModal={handleMedicineDetailsModal}
-            setParticularMedicine={setParticularMedicine}
-            handleRestockModal={handleRestockModal}
-            handleRestock={handleRestock}
-            handleMedicineEditModal={handleMedicineEditModal}
-          />
-        </div>
-        {/* All The Modals Below ----------------------------------------------------------- */}
-        {/* --------------------------------------------------------------------------------
+          <div className="">
+            <ParticularSellerMedicines
+              medicines={medicines}
+              refetch={refetch}
+              handleDeleteMedicine={handleDeleteMedicine}
+              handleMedicineDetailsModal={handleMedicineDetailsModal}
+              setParticularMedicine={setParticularMedicine}
+              handleRestockModal={handleRestockModal}
+              handleRestock={handleRestock}
+              handleMedicineEditModal={handleMedicineEditModal}
+            />
+          </div>
+          {/* All The Modals Below ----------------------------------------------------------- */}
+          {/* --------------------------------------------------------------------------------
             Add New Medicine Modal
             -------------------------------------------------------------------------------- */}
-        {isAddMedicineModal && (
-          <AddMedicineModal
-            handleAddMedicineModal={handleAddMedicineModal}
-            refetch={refetch}
-          />
-        )}
+          {isAddMedicineModal && (
+            <AddMedicineModal
+              handleAddMedicineModal={handleAddMedicineModal}
+              refetch={refetch}
+            />
+          )}
 
-        {/* --------------------------------------------------------------------------------
+          {/* --------------------------------------------------------------------------------
             Medicine Details Modal
             -------------------------------------------------------------------------------- */}
-        {isMedicineDetailsModal && (
-          <MedicineDetailsModal
-            particularMedicine={particularMedicine}
-            handleMedicineDetailsModal={handleMedicineDetailsModal}
-          />
-        )}
+          {isMedicineDetailsModal && (
+            <MedicineDetailsModal
+              particularMedicine={particularMedicine}
+              handleMedicineDetailsModal={handleMedicineDetailsModal}
+            />
+          )}
 
-        {/* --------------------------------------------------------------------------------
+          {/* --------------------------------------------------------------------------------
             Medicine Restock Modal
             -------------------------------------------------------------------------------- */}
-        {isRestockModal && (
-          <MedicineRestockModal
-            particularMedicine={particularMedicine}
-            handleRestockModal={handleRestockModal}
-            handleRestock={handleRestock}
-          />
-        )}
+          {isRestockModal && (
+            <MedicineRestockModal
+              particularMedicine={particularMedicine}
+              handleRestockModal={handleRestockModal}
+              handleRestock={handleRestock}
+            />
+          )}
 
-        {/* --------------------------------------------------------------------------------
+          {/* --------------------------------------------------------------------------------
             Medicine Edit Modal
             -------------------------------------------------------------------------------- */}
-        {isMedicineEditModal && (
-          <MedicineEditModal
-            handleMedicineEditModal={handleMedicineEditModal}
-            refetch={refetch}
-            particularMedicine={particularMedicine}
-          />
-        )}
+          {isMedicineEditModal && (
+            <MedicineEditModal
+              handleMedicineEditModal={handleMedicineEditModal}
+              refetch={refetch}
+              particularMedicine={particularMedicine}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
 export default ManageMedicines;
-
-
-
-
-
-
-
-
-
-
-

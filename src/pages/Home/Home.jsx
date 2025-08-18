@@ -10,6 +10,7 @@ import DataNotFound from "../../components/shared/DataNotFound";
 import HealthBlogPost from "../../components/shared/HealthBlogPost";
 import ReviewSection from "../../components/ReviewSection";
 import {TabTitle} from "../../utilities/utilities";
+import LatestArrivals from "../../components/LatestArivals";
 
 const Home = () => {
   TabTitle('Home');
@@ -41,6 +42,9 @@ const Home = () => {
                 Medicine Categories Cards 
         ------------------------------------------------------- */}
         <CategoryCardsContainer />
+
+
+        <LatestArrivals/>
 
         {/* ------------------------------------------------------
                 Discounted Medicines Slider 

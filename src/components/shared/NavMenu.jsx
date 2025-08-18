@@ -1,15 +1,18 @@
 import NavMenuButton from "./NavMenuButton";
-import { FaCartArrowDown } from "react-icons/fa";
+import { FaCartArrowDown, FaMoon, FaSun } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import DigitalClock from "./DigitalClock";
 import { useTheme } from "../../context/ThemeContext";
 
 const NavMenu = ({ toggleLanguage }) => {
   const { user, logOutUser } = useAuth();
-  const {theme} = useTheme();
+  const { theme, toggleTheme } = useTheme();
   return (
-    <div className={`flex flex-col md:flex-row  gap:3 md:gap-4 md:bg-transparent rounded-lg`}>
-      <DigitalClock/>
+    <div
+      className={`flex flex-col items-center md:flex-row  gap:3 md:gap-4 md:bg-transparent rounded-lg`}
+    >
+      <DigitalClock />
+
       <NavMenuButton address="/" label="Home" />
       <NavMenuButton address="/shop" label="Shop" />
       <NavMenuButton address="/cart" label="Cart" icon={FaCartArrowDown} />
@@ -17,10 +20,17 @@ const NavMenu = ({ toggleLanguage }) => {
 
       <div className="hidden md:block">
         {user ? (
-          <NavMenuButton label="LogOut" onClick={logOutUser}/>
+          <NavMenuButton label="LogOut" onClick={logOutUser} />
         ) : (
           <NavMenuButton address="/auth/joinUs" label="Join Us" />
         )}
+      </div>
+
+      {/* -----------------------------------------------------------------------
+                Theme Toggler Icon
+                ----------------------------------------------------------------------- */}
+      <div onClick={() => toggleTheme()}>
+        {theme === "dark" ? <FaSun size="22" /> : <FaMoon size="22" />}
       </div>
       <div className="md:hidden">
         <hr className="border-1 border-gray-300 mx-8 my-2" />
